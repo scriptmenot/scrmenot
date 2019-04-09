@@ -15,6 +15,8 @@ npm install -g node
 zaciągnięcie dependencji wymaganych w projekcie:
 npm install
 
+persystowanie modelu w bazie danych:
+sequelize db:migrate
 
 *DODATKOWE:*
 
