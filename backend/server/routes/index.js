@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const userRouter = require('./user');
+const domainRouter = require('./domain');
 
 router.get('/', function(req, res) {
         res.status(200).send({message: 'Api placeholder'});
 });
 
-router.use('/user', userRouter);
+router.use('/domain', domainRouter);
 
 module.exports = router;

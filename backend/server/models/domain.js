@@ -1,14 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Domain = sequelize.define('Domain', {
+  const Domain = sequelize.define('domain', {
       id: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true
-      },
-      additionDate: {
-          type: DataTypes.DATE,
-          allowNull: false
       },
       isAccepted: {
           type: DataTypes.BOOLEAN,
