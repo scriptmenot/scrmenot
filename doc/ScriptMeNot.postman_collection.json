@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "8f3ce2f3-d9dd-4529-b12e-e1785e5423ef",
+		"name": "ScriptMeNot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "domain",
+			"item": [
+				{
+					"name": "getAllDomains",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/api/domain",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"domain"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addDomain",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"uri\": \"agh.edu.pl\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/domain",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"domain"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "apiPlaceholder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/api",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
