@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css?family=Cinzel');
+$font: 'Cinzel', serif;
+$light-to-dark-green-gradient: linear-gradient(to right top, #044603, #057005, #059d06, #04cd04, #02ff00);
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    height: 100vh;
+}
+
+.App{
+    min-width: 300px;
+    height: 100vh;
+    background-color:  rgb(247, 247, 247);
+    padding: 3%;
+    box-sizing: border-box;
+
+    .TopLayer{
+        
+        padding:0;
+        height: 90vh;
+        border-radius: 10%;
+        display: grid;
+        grid-template-columns:  50%  50%;
+        grid-template-rows: 100%;
+        grid-template-areas: "firstHalf secondHalf";
+        justify-content: space-around;
+        min-height: 300px;
+
+        .firstHalf{
+            position: relative;
+            box-shadow: 0 5px 20px 0 #000;
+            border-top-left-radius: 10%;
+            border-bottom-left-radius: 10%;
+            grid-area: firstHalf;
+
+            p{
+                color: #117A10;
+                font-size: 4vw;
+                text-align: center;
+                font-family: $font;
+                padding: 5%;
+            }
+            input{
+                display: block;
+                margin-right: auto;
+                margin-left: auto;
+                width: 50%;
+                height: 5vh;
+                border: none; 
+                outline: none;
+                border:solid 1px rgb(18, 190, 15);
+                border-radius: 20px;
+                text-align: center;
+                font-family: $font;
+                font-size: 1.3vw;
+            }
+                #lock{
+                    position: absolute;
+                    margin: auto;
+                    left: 0;
+                    right: 0;
+                    bottom: 10%;
+                    text-align: center;
+                    z-index: 1;
+                    width: 40%;
+                }
+        }
+        
+        .secondHalf{    
+           
+           box-shadow: 0 1px 15px 4px #3b3b3b;  
+            border-top-right-radius: 10%;
+            border-bottom-right-radius: 10%;
+            grid-area: secondHalf;
+            background-image: $light-to-dark-green-gradient;
+
+            .menuBar {
+                ul{
+                    list-style-type: none;
+                    margin: auto;
+                    display: flex;
+                    justify-content: center;
+                    overflow: hidden;
+                }
+
+                li{
+                    float: left;
+                    flex-wrap: wrap;
+
+                    a{
+                        display: block;
+                        color: rgb(0, 0, 0);
+                        padding: 5vh;
+                        text-decoration: none;
+                        font-family: $font;
+                        font-size: 3vh;
+                    }
+                }
+
+            }
+            
+            p{
+                font-family: $font;
+                font-size: 5.2vh;
+                color:rgb(213, 240, 207);
+                text-align: center;
+                margin-top: 5%;
+            }
+            .TopDomains{
+
+                ul{
+                    list-style-type: none;
+                    margin: auto;
+                    justify-content: center;
+                    overflow: hidden;
+
+                    li{
+
+                        padding-top: 5%;
+                        padding-left: 20%;
+                        text-decoration: none;
+                        font-family: $font;
+                        font-size: 3.2vh;
+                        color: rgb(0, 0, 0);
+                        
+                    }
+                }
+
+            }
+
+
+        }
+    }
+
+}
+
