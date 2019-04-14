@@ -14,5 +14,16 @@ module.exports = {
                 })
             .then(obj => res.status(201).send(obj))
             .catch(err => res.status(400).send(err));
+    },
+
+    retrieve(req, res) {
+
+        return Domain
+            .findAll({
+                attributes: ['id', 'isAccepted', 'safety', 'uri'],
+                order: [['id']]
+            })
+            .then(domains => res.status(200).send(domains))
+            .catch(error => res.status(400).send(error));//TODO: better error handling, error handling with next
     }
 };

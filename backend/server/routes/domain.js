@@ -3,9 +3,7 @@ const router = express.Router();
 
 const domainController = require('../controllers').Domain;
 
-router.get('/', function(req, res) {
-  res.status(200).send({message: 'respond with a resource'});
-});
+router.get('/', domainController.retrieve);
 
 router.post('/', domainController.create);
 
