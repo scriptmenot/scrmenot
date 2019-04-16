@@ -33,6 +33,15 @@ module.exports = {
             .catch(err => res.status(400).send(err))
     },
     retrieveRelatedToDomain(req, res) {
+        const domainId = req.params.domainId;
+
+        return Opinion
+            .findAll({
+                where: {'domainId' : domainId},
+                order: [['createdAt', 'DESC']]
+            })
+            .then(opinions => res.status(200).send(opinions))
+            .catch(error => res.status(400).send(error));
 
     }
 };

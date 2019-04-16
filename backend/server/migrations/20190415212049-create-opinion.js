@@ -33,9 +33,6 @@ module.exports = {
           onUpdate: 'CASCADE',
           onDelete: 'SET NULL'
       }
-    },
-{
-        freezeTableName: true
     });
   },
   down: (queryInterface, Sequelize) => {

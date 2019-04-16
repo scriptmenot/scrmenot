@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   Domain.associate = function(models) {
       Domain.hasMany(models.opinion, {
           as: 'opinion',
-          foreignKey: 'opinionId'
+          foreignKey: 'domainId'
       })
   };
   return Domain;
