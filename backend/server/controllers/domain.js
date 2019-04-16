@@ -34,5 +34,15 @@ module.exports = {
             )
             .then(domain => res.status(200).send(domain))
             .catch(error => res.status(400).send(error));//TODO: better error handling, error handling with next
+    },
+    update(req, res, next) {  //TODO: refactor this one and upper. Does it handle case when article doesnt exist
+        Domain.update(
+            req.body,
+            {returning: true, where: {id: req.params.id}}
+        )
+            .then(function([ rowsUpdate, [updatedDomain] ]) {
+                res.status(200).send(updatedDomain);
+            })
+            .catch(next)
     }
 };
