@@ -23,10 +23,10 @@ module.exports = {
                     where: {id: opinionId}
                 })
             .then(function(rowsDeleted) {
-                if(rowsDeleted == 1) {
+                if(rowsDeleted === 1) {
                     res.status(204).send({message: "deleted"});
                 }
-                else if(rowsDeleted == 0) {
+                else if(rowsDeleted === 0) {
                     res.status(404).send({message: "not found"});
                 }
             })
