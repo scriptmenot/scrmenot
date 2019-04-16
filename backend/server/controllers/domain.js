@@ -25,5 +25,14 @@ module.exports = {
             })
             .then(domains => res.status(200).send(domains))
             .catch(error => res.status(400).send(error));//TODO: better error handling, error handling with next
+    },
+
+    retrieveById(req, res) {//TODO: redirect 404 if not found
+        return Domain
+            .findByPk(req.params.id,
+                {attributes: ['id', 'isAccepted', 'safety', 'uri']}
+            )
+            .then(domain => res.status(200).send(domain))
+            .catch(error => res.status(400).send(error));//TODO: better error handling, error handling with next
     }
 };
