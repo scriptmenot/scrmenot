@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       }
   }, {});
   Domain.associate = function(models) {
-    // associations can be defined here
+      Domain.hasMany(models.opinion, {
+          as: 'opinion',
+          foreignKey: 'domainId'
+      })
   };
   return Domain;
 };
