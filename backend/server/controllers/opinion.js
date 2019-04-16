@@ -16,10 +16,7 @@ module.exports = {
             .catch(err => res.status(400).send(err));
     },
     delete(req, res) {
-
         const opinionId = req.params.id;
-
-        console.log(opinionId);
 
         return Opinion.
             destroy({
@@ -34,5 +31,8 @@ module.exports = {
                 }
             })
             .catch(err => res.status(400).send(err))
+    },
+    retrieveRelatedToDomain(req, res) {
+
     }
 };
