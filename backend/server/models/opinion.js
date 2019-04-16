@@ -1,10 +1,25 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const opinion = sequelize.define('opinion', {
-    id: DataTypes.INTEGER
+  const Opinion = sequelize.define('opinion', {
+      id: {
+          type: DataTypes.INTEGER,
+          primaryKey: true,
+          autoIncrement: true
+      },
+      title: {
+          type: DataTypes.STRING,
+          allowNull: false
+      },
+      content: {
+          type: DataTypes.TEXT,
+          allowNull: false
+      }
   }, {});
-  opinion.associate = function(models) {
-    // associations can be defined here
+  Opinion.associate = function(models) {
+      Opinion.belongsTo(models.domain, {
+          foreignKey: 'domainId',
+          onDelete: 'cascade'
+      })
   };
-  return opinion;
+  return Opinion;
 };

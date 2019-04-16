@@ -8,8 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id: {
-        type: Sequelize.INTEGER
+      title: {
+          type: Sequelize.STRING,
+          allowNull: false,
+      },
+      content: {
+          type: Sequelize.TEXT,
+          allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -18,7 +23,19 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      domainId: {
+          type: Sequelize.INTEGER,
+          references: {
+              model: 'domains',
+              key: 'id'
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL'
       }
+    },
+{
+        freezeTableName: true
     });
   },
   down: (queryInterface, Sequelize) => {
