@@ -10,4 +10,6 @@ router.post('/', domainController.create);
 
 router.put('/:id/', domainController.update);
 
+router.delete('/:id/', domainController.destroy);
+
 module.exports = router;
