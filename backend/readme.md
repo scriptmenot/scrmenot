@@ -1,5 +1,8 @@
 # Podstawowe
 
+sposób na uruchomienie lokalnie:
+heroku local web
+
 dane do bazy danych(należy ją najpierw utworzyć lokalnie!):
 "username": "postgres",
 "password": 123,
@@ -18,7 +21,7 @@ npm install
 persystowanie modelu w bazie danych:
 sequelize db:migrate
 
-*DODATKOWE:*
+##DODATKOWE:
 
 
 wersja node:

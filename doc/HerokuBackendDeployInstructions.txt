@@ -1,0 +1,48 @@
+https://devcenter.heroku.com/articles/deploying-nodejs#prerequisites
+
+uruchomienie lokalnie:
+heroku local web
+
+heroku login
+heroku create - tylko raz
+
+https://fathomless-brushlands-42192.herokuapp.com/ | https://git.heroku.com/fathomless-brushlands-42192.git
+
+listowanie appek w heroku:
+heroku list
+
+dodanie remote'a pod appkę heroku
+heroku git:remote -a fathomless-brushlands-42192 -r heroku
+
+
+śledzenie logów:
+heroku logs --tail
+
+deploy katalogu backend
+git subtree push --prefix backend heroku master
+
+niech działa przynajmniej jedna instancja:
+heroku ps:scale web=1
+
+dodanie postgresa
+heroku addons:add heroku-postgresql
+
+sprawdzanie adresu db
+heroku config:get DATABASE_URL
+
+to w pliku config/config.json ponoć wystarczy do połączenia z bazą
+"production": {
+  "use_env_variable": "DATABASE_URL"
+}
+
+później odpalić
+$ heroku run bash
+$ sequelize db:migrate
+
+powinno być wszystko git
+
+coś się sypie?
+heroku restart
+
+dostęp do postgres:
+heroku pq:psql
