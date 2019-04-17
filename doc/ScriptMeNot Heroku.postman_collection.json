@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "8f3ce2f3-d9dd-4529-b12e-e1785e5423ef",
-		"name": "ScriptMeNot",
+		"_postman_id": "bee8af57-97d1-43a2-8b88-425ac84ba601",
+		"name": "ScriptMeNot Heroku",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -18,11 +18,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8001/api/domain",
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
 							],
-							"port": "8001",
 							"path": [
 								"api",
 								"domain"
@@ -48,11 +50,13 @@
 							"raw": "{\n\t\"uri\": \"agh.edu.pl\"\n}"
 						},
 						"url": {
-							"raw": "localhost:8001/api/domain",
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
 							],
-							"port": "8001",
 							"path": [
 								"api",
 								"domain"
@@ -76,11 +80,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8001/api/opinion/domain/1",
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion/domain/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
 							],
-							"port": "8001",
 							"path": [
 								"api",
 								"opinion",
@@ -108,11 +114,13 @@
 							"raw": "{\n\t\"content\": \"This site is quite safe in my opinion\",\n\t\"domainId\": 2,\n\t\"title\": \"Not true\"\n}"
 						},
 						"url": {
-							"raw": "localhost:8001/api/opinion",
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
 							],
-							"port": "8001",
 							"path": [
 								"api",
 								"opinion"
@@ -138,11 +146,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8001/api/opinion/1",
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
 							],
-							"port": "8001",
 							"path": [
 								"api",
 								"opinion",
@@ -164,11 +174,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:8001/api",
+					"raw": "https://fathomless-brushlands-42192.herokuapp.com/api",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"fathomless-brushlands-42192",
+						"herokuapp",
+						"com"
 					],
-					"port": "8001",
 					"path": [
 						"api"
 					]
