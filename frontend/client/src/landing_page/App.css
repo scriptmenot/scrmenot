@@ -11,17 +11,12 @@ body .App {
   display: grid;
   grid-template-columns: 12% 76% 12%;
   grid-template-rows: 60% 40% 90% 30% 30%;
-  grid-template-areas: "margin welcome margin" "margin description margin" "margin container margin" "margin grade margin" "margin footer margin";
 }
-body .TopWelcome {
-  grid-area: 1/2;
-  background-color: #fda791;
-}
-body .Description {
+body .App .Description {
   grid-area: 2/2/3/3;
   background-color: #F6FAF9;
 }
-body .BlocksContainer {
+body .App .BlocksContainer {
   grid-area: 3/2/4/3;
   background-color: #F6FAF9;
   display: grid;
@@ -32,27 +27,27 @@ body .BlocksContainer {
   min-height: 0;
   list-style-type: none;
 }
-body .BlocksContainer .AddDomainBlock {
+body .App .BlocksContainer .AddDomainBlock {
   grid-area: 2/2/3/3;
   background-color: #B4838D;
 }
-body .BlocksContainer .SearchDomainBlock {
+body .App .BlocksContainer .SearchDomainBlock {
   grid-area: 2/3/3/5;
   background-color: #E5989B;
 }
-body .BlocksContainer .BrowseCatalogueBlock {
+body .App .BlocksContainer .BrowseCatalogueBlock {
   grid-area: 3/2/4/4;
   background-color: #BACEE3;
 }
-body .BlocksContainer .TopDomains {
+body .App .BlocksContainer .TopDomains {
   grid-area: 3/4/4/5;
   background-color: #B4838D;
 }
-body .GradeDomain {
+body .App .GradeDomain {
   grid-area: 4/2/5/3;
   background-color: #F6FAF9;
 }
-body .Footer {
+body .App .Footer {
   grid-area: 5/2/6/3;
   background-color: #6D6875;
 }
