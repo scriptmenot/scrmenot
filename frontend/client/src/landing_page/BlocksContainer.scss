@@ -9,9 +9,30 @@
     min-height: 0;
     list-style-type: none;
 
+
     .AddDomainBlock{
         grid-area: 2/2/3/3;
         background-color: #B4838D;
+        position: relative;
+        transition: opacity 0.4s;
+
+        img{
+            position: absolute;
+            width: 60%;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+        }
+
+       .Modal h4{
+            color: #E5989B;
+        }
+
+
+    }
+    .AddDomainBlock:hover{
+        cursor: pointer;
+        opacity: 0.7;
     }
 
     .SearchDomainBlock{
