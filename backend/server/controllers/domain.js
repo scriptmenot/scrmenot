@@ -17,11 +17,10 @@ module.exports = {
     },
 
     retrieve(req, res) {
-
         return Domain
             .findAll({
-                attributes: ['id', 'isAccepted', 'safety', 'uri'],
-                order: [['id']]
+                attributes: ['id', 'isAccepted', 'safety', 'uri', 'createdAt'],
+                order: [['createdAt', 'DESC']]
             })
             .then(domains => res.status(200).send(domains))
             .catch(error => res.status(400).send(error));
@@ -35,6 +34,7 @@ module.exports = {
             .then(domain => res.status(200).send(domain))
             .catch(error => res.status(400).send(error));
     },
+
     update(req, res, next) { 
         Domain.update(
             req.body,
@@ -45,18 +45,18 @@ module.exports = {
             })
             .catch(next)
     },
+    
     destroy(req, res, next) {
         Domain.
-            destroy(
-                {where: {id: req.params.id}})
-                .then(function(rowsDeleted) {
-                    if(rowsDeleted == 1) {
-                        res.status(204).send({message: "deleted"});
-                    }
-                    else if(rowsDeleted == 0) {
-                        res.status(404).send({message: "not found"});
-                    }
-                })
-                .catch(next)
-}
+            destroy({where: {id: req.params.id}})
+            .then(function(rowsDeleted) {
+                if(rowsDeleted === 1) {
+                    res.status(204).send({message: "deleted"});
+                }
+                else if(rowsDeleted === 0) {
+                    res.status(404).send({message: "not found"});
+                }
+            })  
+            .catch(err => res.status(400).send(err))
+    }
 };
