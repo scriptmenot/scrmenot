@@ -5,7 +5,36 @@ import Modal from 'react-responsive-modal';
 class AddDomain extends React.Component {
   state = {
     open: false,
+    name: "",
+    comment: ""
   };
+
+  handleNameChange = (e) => {
+    this.setState({name: e.target.value});
+ };
+
+ handleCommentChange = (e) => {
+  this.setState({comment: e.target.value});
+};
+
+handleAdding = (e) => {
+  e.preventDefault();
+  console.log("name: " + this.state.name);
+  console.log("comment: " + this.state.comment);
+
+  const data = {"uri": "agh.edu.pl"};
+
+  fetch("https://fathomless-brushlands-42192.herokuapp.com/api/domain", {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
+}
 
   onOpenModal = () => {
     this.setState({ open: true });
@@ -82,10 +111,10 @@ class AddDomain extends React.Component {
             <form id="addDomainForm" style={formStyles}>
 
               <h4 style={firstHeaderStyles}>Type a name of potentially dangerous domain</h4>
-              <input style={domainNameStyles} type="text" id="newDomainURL"/>
+              <input style={domainNameStyles} type="text" id="newDomainURL" value={this.state.name} onChange={this.handleNameChange}/>
               <h4 style={secondHeaderStyles}>Why do you find it dangerous?</h4>
-              <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment'></textarea>
-              <input type="submit" style={submitStyles}/>
+              <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment' value={this.state.comment} onChange={this.handleCommentChange}></textarea>
+              <input type="submit" style={submitStyles} onClick={this.handleAdding}/>
 
             </form>
 
@@ -104,8 +133,8 @@ class SearchDomain extends React.Component {
         <form className="SearchForm">
 
           <input type="search" placeholder="Search domain" id="searchInput"/>
-          <img src={require('./magnifying-glass.png')} id="searchButton"/>
-          
+          <img src={require('./magnifying-glass.png')} alt="maginifying-glass" id="searchButton"/>
+
         </form>
 
       </li>

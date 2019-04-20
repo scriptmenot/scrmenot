@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TopWelcome from './TopWelcome.js'
 import Description from './Description.js'
 import BlocksContainer from './BlocksContainer.js'

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Description.scss';
 
 class Description extends React.Component {
