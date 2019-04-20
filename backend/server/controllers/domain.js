@@ -17,11 +17,10 @@ module.exports = {
     },
 
     retrieve(req, res) {
-
         return Domain
             .findAll({
-                attributes: ['id', 'isAccepted', 'safety', 'uri'],
-                order: [['id']]
+                attributes: ['id', 'isAccepted', 'safety', 'uri', 'createdAt'],
+                order: [['createdAt', 'DESC']]
             })
             .then(domains => res.status(200).send(domains))
             .catch(error => res.status(400).send(error));
