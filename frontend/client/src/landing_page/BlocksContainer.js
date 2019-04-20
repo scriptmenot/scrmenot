@@ -2,8 +2,7 @@ import React from 'react';
 import './BlocksContainer.scss';
 import Modal from 'react-responsive-modal';
 
-
-class BlocksContainer extends React.Component {
+class AddDomain extends React.Component {
   state = {
     open: false,
   };
@@ -71,36 +70,78 @@ class BlocksContainer extends React.Component {
         marginLeft:'-10vw', 
         width: '6vw'
       }
+      return (
+        <React.Fragment>
 
+          <li className="AddDomainBlock" onClick={this.onOpenModal}>
+                <img src={require('./plus.png')} alt="plus"/>
+          </li>
+
+          <Modal open={open} onClose={this.onCloseModal}  styles={modalStyles} little>
+
+            <form id="addDomainForm" style={formStyles}>
+
+              <h4 style={firstHeaderStyles}>Type a name of potentially dangerous domain</h4>
+              <input style={domainNameStyles} type="text" id="newDomainURL"/>
+              <h4 style={secondHeaderStyles}>Why do you find it dangerous?</h4>
+              <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment'></textarea>
+              <input type="submit" style={submitStyles}/>
+
+            </form>
+
+          </Modal>
+          
+        </React.Fragment>
+      )
+  }
+}
+
+class SearchDomain extends React.Component {
+  render(){
+    return (
+      <li className="SearchDomainBlock"> 
+
+        <form className="SearchForm">
+
+          <input type="search" placeholder="Search domain" id="searchInput"/>
+          <img src={require('./magnifying-glass.png')} id="searchButton"/>
+          
+        </form>
+
+      </li>
+    )
+  }
+}
+
+class TopDomains extends React.Component {
+  render(){
+    return (
+      <li className="TopDomains">
+        <img src={require('./five.png')} alt="folder"/>
+      </li>
+    )
+  }
+}
+
+class BrowseCatalogue extends React.Component {
+  render(){
+    return (
+      <li className="BrowseCatalogueBlock">
+        <img src={require('./folder.png')} alt="folder"/>
+      </li>
+    )
+  }
+}
+
+
+class BlocksContainer extends React.Component {
+    render(){
       return (
           <ul className="BlocksContainer">
-            <li className="AddDomainBlock" onClick={this.onOpenModal}>
-              <img src={require('./plus.png')} alt="plus"/>
-            </li>
-
-            <Modal open={open} onClose={this.onCloseModal}  styles={modalStyles} little>
-              <form id="addDomainForm" style={formStyles}>
-                <h4 style={firstHeaderStyles}>Type a name of potentially dangerous domain</h4>
-                <input style={domainNameStyles} type="text" id="newDomainURL"/>
-                <h4 style={secondHeaderStyles}>Why do you find it dangerous?</h4>
-                <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment'></textarea>
-                <input type="submit" style={submitStyles}/>
-              </form>
-            </Modal>
-
-            <li className="SearchDomainBlock">
-            <form className="SearchForm">
-              <input type="search" placeholder="Search domain" id="searchInput"/>
-              <img src={require('./magnifying-glass.png')} id="searchButton"/>
-              </form>
-            </li>
-
-            <li className="TopDomains">
-              <img src={require('./five.png')} alt="folder"/>
-            </li>
-            <li className="BrowseCatalogueBlock">
-              <img src={require('./folder.png')} alt="folder"/>
-              </li>
+            <AddDomain/>
+            <SearchDomain/>
+            <TopDomains/>
+            <BrowseCatalogue/>
           </ul>
       )
 
