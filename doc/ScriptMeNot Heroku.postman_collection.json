@@ -64,6 +64,72 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "editDomainById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"uri\": \"updateUri\",\n\t\"isAccepted\": false\n}"
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain/1",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDomainById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain/1",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
