@@ -96,14 +96,35 @@
 
     }
 
-    .BrowseCatalogueBlock{
+    .TopDomains{
         grid-area: 3/2/4/4;
         background-color: #BACEE3;
+        position: relative;
+        img{
+            position: absolute;
+            width: 30%;
+            top: 20%;
+            left:5%;
+        }
     }
 
-    .TopDomains{
+    .BrowseCatalogueBlock{
         grid-area: 3/4/4/5;
         background-color: #B4838D;
+        position: relative;
+        transition: opacity 0.4s;
+
+        img{
+            position: absolute;
+            width: 55%;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    .BrowseCatalogueBlock:hover{
+        cursor: pointer;
+        opacity: 0.7;
     }
 
 }

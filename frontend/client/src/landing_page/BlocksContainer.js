@@ -94,9 +94,13 @@ class BlocksContainer extends React.Component {
               <img src={require('./magnifying-glass.png')} id="searchButton"/>
               </form>
             </li>
-            
-            <li className="BrowseCatalogueBlock"></li>
-            <li className="TopDomains"></li>
+
+            <li className="TopDomains">
+              <img src={require('./five.png')} alt="folder"/>
+            </li>
+            <li className="BrowseCatalogueBlock">
+              <img src={require('./folder.png')} alt="folder"/>
+              </li>
           </ul>
       )
 
