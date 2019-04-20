@@ -77,6 +77,7 @@ class BlocksContainer extends React.Component {
             <li className="AddDomainBlock" onClick={this.onOpenModal}>
               <img src={require('./plus.png')} alt="plus"/>
             </li>
+
             <Modal open={open} onClose={this.onCloseModal}  styles={modalStyles} little>
               <form id="addDomainForm" style={formStyles}>
                 <h4 style={firstHeaderStyles}>Type a name of potentially dangerous domain</h4>
@@ -86,7 +87,14 @@ class BlocksContainer extends React.Component {
                 <input type="submit" style={submitStyles}/>
               </form>
             </Modal>
-            <li className="SearchDomainBlock"></li>
+
+            <li className="SearchDomainBlock">
+            <form className="SearchForm">
+              <input type="search" placeholder="Search domain" id="searchInput"/>
+              <img src={require('./magnifying-glass.png')} id="searchButton"/>
+              </form>
+            </li>
+            
             <li className="BrowseCatalogueBlock"></li>
             <li className="TopDomains"></li>
           </ul>
