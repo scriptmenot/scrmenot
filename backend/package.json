@@ -1,7 +1,6 @@
 {
   "name": "SciptMeNot",
   "version": "0.0.5",
-
   "main": "app.js",
   "engines": {
     "node": "11.x"
@@ -12,6 +11,7 @@
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
