@@ -132,7 +132,7 @@ class SearchDomain extends React.Component {
 
         <form className="SearchForm">
 
-          <input type="search" placeholder="Search domain" id="searchInput"/>
+          <input type="search" placeholder=" Search domain" id="searchInput"/>
           <img src={require('./magnifying-glass.png')} alt="maginifying-glass" id="searchButton"/>
 
         </form>
