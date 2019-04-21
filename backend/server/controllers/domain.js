@@ -37,13 +37,16 @@ module.exports = {
 
     update(req, res, next) { 
         Domain.update(
-            req.body,
+            {
+                "isAccepted": req.body.isAccepted,
+                "uri": req.body.uri
+            },
             {returning: true, where: {id: req.params.id}}
         )
             .then(function([ rowsUpdate, [updatedDomain] ]) {
                 res.status(200).send(updatedDomain);
             })
-            .catch(next)
+            .catch(err => res.status(400).send(err))
     },
     
     destroy(req, res, next) {

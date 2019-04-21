@@ -43,5 +43,18 @@ module.exports = {
             .then(opinions => res.status(200).send(opinions))
             .catch(error => res.status(400).send(error));
 
-    }
+    },
+    update(req, res, next) { 
+        Opinion.update(
+            {
+                "title":  req.body.title,
+                "content": req.body.content
+            },
+            {returning: true, where: {id: req.params.id}}
+        )
+            .then(function([ rowsUpdate, [updatedDomain] ]) {
+                res.status(200).send(updatedDomain);
+            })
+            .catch(next)
+    },
 };

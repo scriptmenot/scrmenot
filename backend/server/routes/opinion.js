@@ -13,4 +13,6 @@ router.post('/', opinionController.create);
 
 router.delete('/:id', opinionController.delete);
 
+router.put('/:id', opinionController.update)
+
 module.exports = router;
