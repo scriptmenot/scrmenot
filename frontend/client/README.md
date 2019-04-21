@@ -16,3 +16,6 @@ Odpala testy.
 
  - `npm run build`
 Buduje wersję produkcyjną.
+
+ - `sass --watch file.scss file.css`
+Kompiluje plik scss i obserwuje zmiany
