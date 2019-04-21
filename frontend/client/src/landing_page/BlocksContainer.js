@@ -22,7 +22,7 @@ handleAdding = (e) => {
   console.log("name: " + this.state.name);
   console.log("comment: " + this.state.comment);
 
-  const data = {"uri": "agh.edu.pl"};
+  const data = {"uri": this.state.name};
 
   fetch("https://fathomless-brushlands-42192.herokuapp.com/api/domain", {
     method: 'POST',
@@ -108,13 +108,13 @@ handleAdding = (e) => {
 
           <Modal open={open} onClose={this.onCloseModal}  styles={modalStyles} little>
 
-            <form id="addDomainForm" style={formStyles}>
+            <form id="addDomainForm" style={formStyles}  onSubmit={this.handleAdding}>
 
               <h4 style={firstHeaderStyles}>Type a name of potentially dangerous domain</h4>
-              <input style={domainNameStyles} type="text" id="newDomainURL" value={this.state.name} onChange={this.handleNameChange}/>
+              <input style={domainNameStyles} type="text" id="newDomainURL" value={this.state.name} onChange={this.handleNameChange} required/>
               <h4 style={secondHeaderStyles}>Why do you find it dangerous?</h4>
-              <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment' value={this.state.comment} onChange={this.handleCommentChange}></textarea>
-              <input type="submit" style={submitStyles} onClick={this.handleAdding}/>
+              <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment' value={this.state.comment} onChange={this.handleCommentChange} required></textarea>
+              <input type="submit" style={submitStyles}/>
 
             </form>
 
