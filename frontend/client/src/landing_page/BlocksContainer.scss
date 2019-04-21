@@ -12,7 +12,7 @@
 
     .AddDomainBlock{
         grid-area: 2/2/3/3;
-        background-color: #B4838D;
+        background-color: #fdedb3;
         position: relative;
         transition: opacity 0.4s;
 
@@ -33,7 +33,7 @@
 
     .SearchDomainBlock{
         grid-area: 2/3/3/5;
-        background-color: #E5989B;
+        background-color: #4a9578;
         text-align: center;
 
         .SearchForm{
@@ -90,7 +90,7 @@
         }
         
         .SearchForm:hover #searchButton{
-            background: #E5989B;
+            background: #4a9578;
             color: white;
         }
 
@@ -98,7 +98,7 @@
 
     .TopDomains{
         grid-area: 3/2/4/4;
-        background-color: #BACEE3;
+        background-color: #2c8956;
         position: relative;
         img{
             position: absolute;
@@ -110,7 +110,7 @@
 
     .BrowseCatalogueBlock{
         grid-area: 3/4/4/5;
-        background-color: #B4838D;
+        background-color: #c69b24;
         position: relative;
         transition: opacity 0.4s;
 

@@ -1,4 +1,85 @@
+$light-green: #4e987c;
+$green: #227e5b;
+
 .TopWelcome{
     grid-area: 1/2;
-    background-color: rgb(253, 167, 145);
+    background-color: $green;
+    display: grid;
+    grid-template-columns: 1fr 4fr 4fr 1fr;
+    grid-template-rows: 1fr 4fr 1fr;
+    min-width: 0;
+    min-height: 0;
+    list-style-type: none;
+
+    .logo {
+        grid-column: 3;
+        position: relative;
+
+        img {
+            position: absolute;
+            width: 85%;
+            transform: translate(0%, 15%);
+        }
+    }
+
+    .logoText {
+        grid-column: 2;
+        position: relative;
+
+        h1 {
+            position: absolute;
+            font-size: 450%;
+            width: 100%;
+            transform: translate(0%, 200%);
+        }
+
+        .titleDescription {
+            position: absolute;
+            font-size: 180%;
+            width: 100%;
+            transform: translate(0%, 750%);
+            color: white;
+        }
+    }
+
+    .loginButton {
+        grid-column: 4;
+        grid-row: 1;
+        box-sizing: border-box;
+        appearance: none;
+        background-color: transparent;
+        border: 2px solid $light-green;
+        border-radius: 0.6em;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-self: center;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1;
+        margin: 20px;
+        padding: 0.8em 2em;
+        text-decoration: none;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 550; 
+        height: 50%;
+        border-color: $light-green;
+        color: #fff;
+        border-radius: 3em;
+        white-space: nowrap;
+        
+        background: {
+            image: linear-gradient(45deg, $light-green 50%, transparent 50%);
+            position: 100%;
+            size: 400%;
+        }
+
+        transition: background 400ms ease-in-out;
+  
+        &:hover {
+            background-position: 0;
+        }
+    }
+
 }
