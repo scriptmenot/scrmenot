@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       Opinion.belongsTo(models.domain, {
           foreignKey: 'domainId',
           onDelete: 'cascade'
+      });
+      Opinion.hasMany(models.comment, {
+          as: 'comment',
+          foreignKey: 'opinionId'
       })
   };
   return Opinion;
