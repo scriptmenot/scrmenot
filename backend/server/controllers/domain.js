@@ -1,10 +1,9 @@
 const Domain = require('../models/').domain;
+const Op = require('sequelize').Op; //TODO: might be useful to think of way to import it to every controller at once
 
 module.exports = {
     create(req, res) {
         const payload = req.body;
-
-        console.log("Creating");
 
         return Domain
             .create({
@@ -21,6 +20,19 @@ module.exports = {
             .findAll({
                 attributes: ['id', 'isAccepted', 'safety', 'uri', 'createdAt'],
                 order: [['createdAt', 'DESC']]
+            })
+            .then(domains => res.status(200).send(domains))
+            .catch(error => res.status(400).send(error));
+    },
+
+    retrieveByUri(req, res) {
+        const uriName = req.params.uri;
+
+        return Domain
+            .findAll({
+                where: {
+                    uri: { [Op.iLike]: '%' + uriName + '%' }
+                }
             })
             .then(domains => res.status(200).send(domains))
             .catch(error => res.status(400).send(error));

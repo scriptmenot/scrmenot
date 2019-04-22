@@ -34,6 +34,59 @@
 					"response": []
 				},
 				{
+					"name": "getDomainByUri",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain/uri/agh",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"uri",
+								"agh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDomainById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain/2",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "addDomain",
 					"request": {
 						"method": "POST",
