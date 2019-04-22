@@ -284,6 +284,70 @@
 			]
 		},
 		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "getCommentByOpinionId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/comment/opinion/3",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"comment",
+								"opinion",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addComment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"That's bollocks!\",\n\t\"opinionId\": 3\n}"
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/comment",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "apiPlaceholder",
 			"request": {
 				"method": "GET",
