@@ -5,9 +5,6 @@ module.exports = {
     create(req, res) {
         const payload = req.body;
 
-        //TODO: remove it
-        console.log("Creating");
-
         return Domain
             .create({
                     'isAccepted': true, //TODO: when we will include voting for reliability, we should set it to false and start voting
