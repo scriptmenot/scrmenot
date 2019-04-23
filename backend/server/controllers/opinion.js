@@ -1,6 +1,8 @@
 const Models = require('../models/')
 const Opinion = Models.opinion;
 const VoteOpinion = Models.voteOpinion;
+const Fn = require('sequelize').fn;
+const Col = require('sequelize').col;
 
 module.exports = {
     create(req, res) {
@@ -36,8 +38,24 @@ module.exports = {
         const domainId = req.params.domainId;
         return Opinion
             .findAll({
+                attributes: ['id',
+                    'title',
+                    'content',
+                    'createdAt',
+                    'updatedAt',
+                    'domainId',
+                    [Fn('SUM', Col('voteOpinion.value')), 'rate']
+                    ],
                 where: {'domainId' : domainId},
-                include: [{model: VoteOpinion, as: 'voteOpinion'}],
+                group: ['opinion.id'],
+                include: [
+                    {
+                        model: VoteOpinion,
+                        as: 'voteOpinion',
+                        attributes: [
+                        ]
+                    }
+                    ],
                 order: [['createdAt', 'DESC']]
             })
             .then(opinions => res.status(200).send(opinions))
