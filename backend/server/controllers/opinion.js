@@ -34,10 +34,10 @@ module.exports = {
     },
     retrieveRelatedToDomain(req, res) {
         const domainId = req.params.domainId;
-
         return Opinion
             .findAll({
                 where: {'domainId' : domainId},
+                include: [{model: VoteOpinion, as: 'voteOpinion'}],
                 order: [['createdAt', 'DESC']]
             })
             .then(opinions => res.status(200).send(opinions))
