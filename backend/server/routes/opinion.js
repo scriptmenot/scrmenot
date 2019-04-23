@@ -6,6 +6,7 @@ const opinionController = require('../controllers').Opinion;
 router.get('/domain/:domainId', opinionController.retrieveRelatedToDomain);
 
 router.post('/', opinionController.create);
+router.post('/vote', opinionController.vote);
 
 router.delete('/:id', opinionController.delete);
 
