@@ -249,6 +249,39 @@
 					"response": []
 				},
 				{
+					"name": "vote",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isUpvote\": true,\n\t\"opinionId\": 1\n}"
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion/vote",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"opinion",
+								"vote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "deleteOpinionById",
 					"request": {
 						"method": "DELETE",

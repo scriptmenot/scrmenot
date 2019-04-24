@@ -1,10 +1,12 @@
-const Opinion = require('../models/').opinion;
+const Models = require('../models/')
+const Opinion = Models.opinion;
+const VoteOpinion = Models.voteOpinion;
+const Fn = require('sequelize').fn;
+const Col = require('sequelize').col;
 
 module.exports = {
     create(req, res) {
         const payload = req.body;
-
-        console.log("Creating");
 
         return Opinion
             .create({
@@ -34,10 +36,26 @@ module.exports = {
     },
     retrieveRelatedToDomain(req, res) {
         const domainId = req.params.domainId;
-
         return Opinion
             .findAll({
+                attributes: ['id',
+                    'title',
+                    'content',
+                    'createdAt',
+                    'updatedAt',
+                    'domainId',
+                    [Fn('SUM', Col('voteOpinion.value')), 'rate']
+                    ],
                 where: {'domainId' : domainId},
+                group: ['opinion.id'],
+                include: [
+                    {
+                        model: VoteOpinion,
+                        as: 'voteOpinion',
+                        attributes: [
+                        ]
+                    }
+                    ],
                 order: [['createdAt', 'DESC']]
             })
             .then(opinions => res.status(200).send(opinions))
@@ -57,4 +75,25 @@ module.exports = {
             })
             .catch(next)
     },
+    vote(req, res) {
+        const isUpvote = req.body.isUpvote;
+        const opinionId = req.body.opinionId;
+
+        let upvoteMultiplier;
+
+        if(isUpvote) {
+            upvoteMultiplier = 1;
+        }
+        else {
+            upvoteMultiplier = -1;
+        }
+
+        return VoteOpinion
+            .create({
+                'value': upvoteMultiplier * 1, //TODO: in future it will be somehow multiplied by user reputation
+                'opinionId': opinionId
+            })
+            .then(obj => res.status(201).send(obj))
+            .catch(err => res.status(400).send(err));
+    }
 };
