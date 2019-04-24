@@ -16,10 +16,6 @@ module.exports = {
             allowNull: false,
             type: Sequelize.BOOLEAN
         },
-        safety: {
-            allowNull: false,
-            type: Sequelize.INTEGER
-        },
         createdAt: {
             allowNull: false,
             type: Sequelize.DATE

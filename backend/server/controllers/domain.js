@@ -1,5 +1,10 @@
-const Domain = require('../models/').domain;
+const Models = require('../models/')
+const Domain = Models.domain;
+const Opinion = Models.opinion;
+const VoteOpinion = Models.voteOpinion;
 const Op = require('sequelize').Op; //TODO: might be useful to think of way to import it to every controller at once
+const Fn = require('sequelize').fn;
+const Col = require('sequelize').col;
 
 module.exports = {
     create(req, res) {
@@ -8,7 +13,6 @@ module.exports = {
         return Domain
             .create({
                     'isAccepted': true, //TODO: when we will include voting for reliability, we should set it to false and start voting
-                    'safety': 0,
                     'uri': payload.uri
                 })
             .then(obj => res.status(201).send(obj))
@@ -18,11 +22,53 @@ module.exports = {
     retrieve(req, res) {
         return Domain
             .findAll({
-                attributes: ['id', 'isAccepted', 'safety', 'uri', 'createdAt'],
+                attributes: ['id',
+                    'isAccepted',
+                    'uri',
+                    [Fn('SUM', Col('opinion->voteOpinion.value')), 'safety'],
+                    'createdAt'],
+                group: ['domain.id'],
+                include: [
+                    {
+                        model: Opinion,
+                        as: 'opinion',
+                        attributes: [],
+                        include: [
+                            {
+                                model: VoteOpinion,
+                                as: 'voteOpinion',
+                                attributes: [
+                                ]
+                            }
+                        ]
+                    }
+                ],
                 order: [['createdAt', 'DESC']]
             })
             .then(domains => res.status(200).send(domains))
             .catch(error => res.status(400).send(error));
+
+        /*
+                        attributes: ['id',
+                    'title',
+                    'content',
+                    'createdAt',
+                    'updatedAt',
+                    'domainId',
+                    [Fn('SUM', Col('voteOpinion.value')), 'rate']
+                    ],
+                where: {'domainId' : domainId},
+                group: ['opinion.id'],
+                include: [
+                    {
+                        model: VoteOpinion,
+                        as: 'voteOpinion',
+                        attributes: [
+                        ]
+                    }
+                    ],
+                order: [['createdAt', 'DESC']]
+         */
     },
 
     retrieveByUri(req, res) {
@@ -41,7 +87,7 @@ module.exports = {
     retrieveById(req, res) {
         return Domain
             .findByPk(req.params.id,
-                {attributes: ['id', 'isAccepted', 'safety', 'uri']}
+                {attributes: ['id', 'isAccepted', 'uri']}
             )
             .then(domain => res.status(200).send(domain))
             .catch(error => res.status(400).send(error));

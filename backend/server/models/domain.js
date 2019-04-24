@@ -10,10 +10,6 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.BOOLEAN,
           allowNull: false
       },
-      safety: {
-          type: DataTypes.INTEGER,
-          allowNull: false
-      },
       uri: {
           type: DataTypes.STRING,
           allowNull: false
