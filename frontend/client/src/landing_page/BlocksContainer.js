@@ -47,11 +47,11 @@ handleAdding = (e) => {
       const { open } = this.state;
       const modalStyles = {
         overlay: {
-          backgroundColor: 'rgba(255, 255, 255, 0.75)'
+          backgroundColor: 'rgba(0, 0, 0, 0.75)'
         },
         modal: {
-          border: '1px solid #ccc',
-          background: '#fff',
+          border: 'none',
+          background: '#297058',
           width: '70vw',
           height: '50vh',
           textAlign: 'center',
@@ -91,13 +91,17 @@ handleAdding = (e) => {
         bottom: '10px', 
         display:'block', 
         marginLeft:'auto', 
-        marginRight:'auto'
+        marginRight:'auto',
+        fontFamily: 'Raleway'
       }
 
       const submitStyles = {
         gridArea: '6/3/7/4', 
-        marginLeft:'-10vw', 
-        width: '6vw'
+        marginLeft:'-8vw', 
+        width: '6vw',
+        backgroundColor: '#fdedb3',
+        border: 'none',
+        cursor: 'pointer'
       }
       return (
         <React.Fragment>
@@ -114,7 +118,7 @@ handleAdding = (e) => {
               <input style={domainNameStyles} type="text" id="newDomainURL" value={this.state.name} onChange={this.handleNameChange} required/>
               <h4 style={secondHeaderStyles}>Why do you find it dangerous?</h4>
               <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment' value={this.state.comment} onChange={this.handleCommentChange} required></textarea>
-              <input type="submit" style={submitStyles}/>
+              <input type="submit" style={submitStyles} value="Add"/>
 
             </form>
 
@@ -126,15 +130,45 @@ handleAdding = (e) => {
 }
 
 class SearchDomain extends React.Component {
+  state = {
+      name: "",
+      domains: []
+  };
+
+  getSearchedNames = () => {
+
+    fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/domain/uri/${this.state.name}`)
+    .then(resp => resp.json())
+      .then(resp => {
+        this.setState({domains: Array.from(resp)});
+        const regex = new RegExp(this.state.name, 'gi');
+        this.setState({domains: this.state.domains.filter(el => el.uri.startsWith(this.state.name))});
+      })
+  }
+
+  handleNameChange = (e) => {
+    this.setState({name: e.target.value}, () => {
+      if(this.state.name !== "")
+        this.getSearchedNames();
+      else
+        this.setState({domains: []});
+    });
+
+  }
+
   render(){
     return (
       <li className="SearchDomainBlock"> 
 
         <form className="SearchForm">
 
-          <input type="search" placeholder=" Search domain" id="searchInput"/>
+          <input type="search" placeholder=" Search domain" id="searchInput" onChange={this.handleNameChange.bind(this)}/>
           <img src={require('./magnifying-glass.png')} alt="maginifying-glass" id="searchButton"/>
-
+          <ul className="Suggestions" >          
+              {this.state.domains.map((domain, i) => 
+              <li key={i}>{domain.uri}</li>
+            )}
+          </ul>
         </form>
 
       </li>
