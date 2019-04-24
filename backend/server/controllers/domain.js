@@ -6,6 +6,31 @@ const Op = require('sequelize').Op; //TODO: might be useful to think of way to i
 const Fn = require('sequelize').fn;
 const Col = require('sequelize').col;
 
+const retrieveDomainQuery = {
+    attributes: ['id',
+        'isAccepted',
+        'uri',
+        [Fn('SUM', Col('opinion->voteOpinion.value')), 'safety'],
+        'createdAt'],
+    group: ['domain.id'],
+    include: [
+        {
+            model: Opinion,
+            as: 'opinion',
+            attributes: [],
+            include: [
+                {
+                    model: VoteOpinion,
+                    as: 'voteOpinion',
+                    attributes: [
+                    ]
+                }
+            ]
+        }
+    ],
+    order: [['createdAt', 'DESC']]
+};
+
 module.exports = {
     create(req, res) {
         const payload = req.body;
@@ -21,54 +46,9 @@ module.exports = {
 
     retrieve(req, res) {
         return Domain
-            .findAll({
-                attributes: ['id',
-                    'isAccepted',
-                    'uri',
-                    [Fn('SUM', Col('opinion->voteOpinion.value')), 'safety'],
-                    'createdAt'],
-                group: ['domain.id'],
-                include: [
-                    {
-                        model: Opinion,
-                        as: 'opinion',
-                        attributes: [],
-                        include: [
-                            {
-                                model: VoteOpinion,
-                                as: 'voteOpinion',
-                                attributes: [
-                                ]
-                            }
-                        ]
-                    }
-                ],
-                order: [['createdAt', 'DESC']]
-            })
+            .findAll(retrieveDomainQuery)
             .then(domains => res.status(200).send(domains))
             .catch(error => res.status(400).send(error));
-
-        /*
-                        attributes: ['id',
-                    'title',
-                    'content',
-                    'createdAt',
-                    'updatedAt',
-                    'domainId',
-                    [Fn('SUM', Col('voteOpinion.value')), 'rate']
-                    ],
-                where: {'domainId' : domainId},
-                group: ['opinion.id'],
-                include: [
-                    {
-                        model: VoteOpinion,
-                        as: 'voteOpinion',
-                        attributes: [
-                        ]
-                    }
-                    ],
-                order: [['createdAt', 'DESC']]
-         */
     },
 
     retrieveByUri(req, res) {
@@ -76,6 +56,7 @@ module.exports = {
 
         return Domain
             .findAll({
+                ...retrieveDomainQuery,
                 where: {
                     uri: { [Op.iLike]: '%' + uriName + '%' }
                 }
@@ -86,9 +67,7 @@ module.exports = {
 
     retrieveById(req, res) {
         return Domain
-            .findByPk(req.params.id,
-                {attributes: ['id', 'isAccepted', 'uri']}
-            )
+            .findByPk(req.params.id, retrieveDomainQuery)
             .then(domain => res.status(200).send(domain))
             .catch(error => res.status(400).send(error));
     },
