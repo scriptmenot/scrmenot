@@ -10,7 +10,7 @@ body {
         height: 100vh;
         display: grid;
         grid-template-columns: 12% 76% 12%;
-        grid-template-rows: 60% 60% 30%; 
+        grid-template-rows: 60% 80% 30%; 
         .Footer {
             grid-area: 3/2/4/3;
         }
@@ -19,7 +19,7 @@ body {
             grid-area: 2/2/3/3;
             display: grid;
             grid-template-columns: 12% 76% 12%;
-            grid-template-rows: 10% 20% 40% 10%; 
+            grid-template-rows: 10% 20% 80% 10%; 
             h1{
                 grid-area: 2/2/3/3;
                 text-align: center;
@@ -27,9 +27,14 @@ body {
             .Opinions{
                 grid-area: 3/2/4/3;
                 text-align: center;
+                
+                img {
+                    width: 7%;
+                }
                 p{
                     padding: 3%;
                 }
+
             }
             
     }

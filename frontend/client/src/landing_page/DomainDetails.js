@@ -5,19 +5,20 @@ import BrowseList from './BrowseList.js'
 import Footer from './Footer.js'
 import './App2.scss';
 import './DomainDetails.scss';
+import './BrowseList.js';
 
 
 class Details extends React.Component{
-
-  
 
     render() {
         return (
         <div className="Details" >
         <h1>agh.edu.pl</h1>
         <div className="Opinions">
+            <img src={require('./user.png')}/>
             <h4>Not recommended</h4>
             <p>I don't trust this domain. It looks suspicious for me.</p>
+            <img src={require('./user.png')}/>
             <h4>Spy content</h4>
             <p>Be careful! It contains some spying stuff.</p>
         </div>
