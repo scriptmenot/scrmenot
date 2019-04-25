@@ -11,7 +11,7 @@ class Browse extends React.Component {
         <div className="Browse">
           <TopWelcome/>
           <DescriptionBrowse/>
-          <BrowseList/>
+          <BrowseList {...this.props}/>
           <Footer/>
         </div>
       );

@@ -115,12 +115,12 @@ handleAdding(e){
 
           <Modal open={open} onClose={this.onCloseModal.bind(this)}  styles={modalStyles} little>
 
-            <form id="addDomainForm" style={formStyles}  onSubmit={this.handleAdding}>
+            <form id="addDomainForm" style={formStyles}  onSubmit={this.handleAdding.bind(this)}>
 
               <h4 style={firstHeaderStyles}>Type domain address</h4>
-              <input style={domainNameStyles} type="text" id="newDomainURL" value={this.state.name} onChange={this.handleNameChange} required/>
+              <input style={domainNameStyles} type="text" id="newDomainURL" value={this.state.name} onChange={this.handleNameChange.bind(this)} required/>
               <h4 style={secondHeaderStyles}>Why do you find it dangerous?</h4>
-              <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment' value={this.state.comment} onChange={this.handleCommentChange} required></textarea>
+              <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment' value={this.state.comment} onChange={this.handleCommentChange.bind(this)} required></textarea>
               <input type="submit" style={submitStyles} value="Add"/>
 
             </form>
