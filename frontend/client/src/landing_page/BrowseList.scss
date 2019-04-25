@@ -8,8 +8,47 @@
      grid-area: 2/2/3/3;
     text-align: center;
     }
-}
+
 
 ul {
-list-style-type: none;
+  font-family: monospace;
+  font-size: 2em;
+  list-style: none;
+  margin: 2em;
+  padding: 0;
+  
+ li {
+    margin: 0;
+    margin-bottom: 1em;
+    padding-left: 1.5em;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: 600;
+    background-color: transparent;
+    border: 3px solid #3D9970;
+    color: black;
+    border-radius: 50px;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+   
+  }
+  
+}
+
+li:hover {
+  animation: pulse 1s infinite;
+  transition: .3s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(.9);
+  }
+    100% {
+    transform: scale(1);
+  }
+}
 }
