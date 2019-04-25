@@ -1,4 +1,62 @@
+$light-gray: #c6c3b9;
+
 .Footer{
     grid-area: 5/2/6/3;
-    background-color: #6D6875;
+    background-color: #6a6862;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns:  1fr 10fr 10fr 10fr 10fr 1fr;
+    grid-template-rows: 1fr 4fr 2fr 1fr;
+    color: #353431;
+
+    .social {
+        grid-area: 2/5;
+
+        .logo {
+            img {
+                height: 3vw;
+                float: left;
+            }
+
+            .title {
+                font-size: 2vw;
+            }
+
+            .desc {
+                font-size: 1vw;
+                color: $light-gray;
+            }
+        }
+
+        .socialMedia {
+            margin-left: 25%;
+
+            img {
+                height: 2vw;
+                padding: 2%;
+            }
+        }
+    }
+
+    .about {
+        grid-area: 2/2;
+
+        .aboutTitle {
+            font-size: 1.5vw;
+            margin-bottom: 5%;
+        }
+
+        .aboutDesc {
+            font-size: 0.8vw;
+            color: $light-gray;
+        }
+    }
+
+    .copyright {
+        grid-area: 3/2/4/6;
+        border-top: 1px solid black;
+        padding: 1%; 
+        font-size: 0.8vw;
+        float: left;
+    }
 }
