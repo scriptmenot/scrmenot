@@ -1,6 +1,9 @@
 import React from 'react';
 import './BlocksContainer.scss';
 import Modal from 'react-responsive-modal';
+import { Redirect, Link, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Browse from './Browse';
 
 class AddDomain extends React.Component {
   state = {
@@ -9,15 +12,15 @@ class AddDomain extends React.Component {
     comment: ""
   };
 
-  handleNameChange = (e) => {
+  handleNameChange(e){
     this.setState({name: e.target.value});
  };
 
- handleCommentChange = (e) => {
+ handleCommentChange(e){
   this.setState({comment: e.target.value});
 };
 
-handleAdding = (e) => {
+handleAdding(e){
   e.preventDefault();
   console.log("name: " + this.state.name);
   console.log("comment: " + this.state.comment);
@@ -36,11 +39,11 @@ handleAdding = (e) => {
     .catch(error => console.log(error));
 }
 
-  onOpenModal = () => {
+  onOpenModal(){
     this.setState({ open: true });
   };
 
-  onCloseModal = () => {
+  onCloseModal(){
     this.setState({ open: false });
   };
     render() {
@@ -114,7 +117,7 @@ handleAdding = (e) => {
 
             <form id="addDomainForm" style={formStyles}  onSubmit={this.handleAdding}>
 
-              <h4 style={firstHeaderStyles}>Type a name of potentially dangerous domain</h4>
+              <h4 style={firstHeaderStyles}>Type domain address</h4>
               <input style={domainNameStyles} type="text" id="newDomainURL" value={this.state.name} onChange={this.handleNameChange} required/>
               <h4 style={secondHeaderStyles}>Why do you find it dangerous?</h4>
               <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment' value={this.state.comment} onChange={this.handleCommentChange} required></textarea>
@@ -135,7 +138,7 @@ class SearchDomain extends React.Component {
       domains: []
   };
 
-  getSearchedNames = () => {
+  getSearchedNames() {
 
     fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/domain/uri/${this.state.name}`)
     .then(resp => resp.json())
@@ -146,7 +149,7 @@ class SearchDomain extends React.Component {
       })
   }
 
-  handleNameChange = (e) => {
+  handleNameChange(e) {
     this.setState({name: e.target.value}, () => {
       if(this.state.name !== "")
         this.getSearchedNames();
@@ -162,7 +165,7 @@ class SearchDomain extends React.Component {
 
         <form className="SearchForm">
 
-          <input type="search" placeholder=" Search domain" id="searchInput" onChange={this.handleNameChange.bind(this)}/>
+          <input type="search" placeholder="Search domain" id="searchInput" onChange={this.handleNameChange.bind(this)}/>
           <img src={require('./magnifying-glass.png')} alt="maginifying-glass" id="searchButton"/>
           <ul className="Suggestions" >          
               {this.state.domains.map((domain, i) => 
@@ -186,11 +189,32 @@ class TopDomains extends React.Component {
   }
 }
 
+
+
 class BrowseCatalogue extends React.Component {
+
+  state = {
+    navigate: false
+  }
+
+  handlePageChange = () => {
+    // this.setState({ navigate: true});
+    // this.props.history.push('/browse');
+    this.props.history.push(`/browse`)
+    return <Redirect to='/browse' />
+  }
+
   render(){
     return (
-      <li className="BrowseCatalogueBlock">
+      <li className="BrowseCatalogueBlock" onClick={this.handlePageChange} >
+
+        
+      {/* <Router>
+        <Link to="/browse"> */}
         <img src={require('./folder.png')} alt="folder"/>
+        {/* </Link>
+      </Router> */}
+      
       </li>
     )
   }
@@ -204,7 +228,7 @@ class BlocksContainer extends React.Component {
             <AddDomain/>
             <SearchDomain/>
             <TopDomains/>
-            <BrowseCatalogue/>
+            <BrowseCatalogue {...this.props}/>
           </ul>
       )
 

@@ -53,7 +53,7 @@
 
             & > .Suggestions li{
                 width: 0;
-                color: transparent;
+                overflow: hidden;
                 transition: all 1s;
             } 
             #searchInput{
@@ -94,8 +94,6 @@
         .SearchForm:hover{
             width: 200px;
             cursor: pointer;
-
-
         }
 
         
@@ -138,7 +136,6 @@
         }
         .SearchForm:hover > .Suggestions li{
             width: 165px;
-            color:black;
         }
 
     }
