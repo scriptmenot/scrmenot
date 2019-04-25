@@ -109,11 +109,11 @@ handleAdding(e){
       return (
         <React.Fragment>
 
-          <li className="AddDomainBlock" onClick={this.onOpenModal}>
+          <li className="AddDomainBlock" onClick={this.onOpenModal.bind(this)}>
                 <img src={require('./plus.png')} alt="plus"/>
           </li>
 
-          <Modal open={open} onClose={this.onCloseModal}  styles={modalStyles} little>
+          <Modal open={open} onClose={this.onCloseModal.bind(this)}  styles={modalStyles} little>
 
             <form id="addDomainForm" style={formStyles}  onSubmit={this.handleAdding}>
 
@@ -198,22 +198,15 @@ class BrowseCatalogue extends React.Component {
   }
 
   handlePageChange = () => {
-    // this.setState({ navigate: true});
-    // this.props.history.push('/browse');
-    this.props.history.push(`/browse`)
+    this.props.history.push('/browse');
     return <Redirect to='/browse' />
   }
 
   render(){
     return (
       <li className="BrowseCatalogueBlock" onClick={this.handlePageChange} >
-
-        
-      {/* <Router>
-        <Link to="/browse"> */}
+      
         <img src={require('./folder.png')} alt="folder"/>
-        {/* </Link>
-      </Router> */}
       
       </li>
     )

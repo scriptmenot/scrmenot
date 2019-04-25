@@ -1,16 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import TopWelcome from './TopWelcome.js'
+import DescriptionBrowse from './DescriptionBrowse.js'
+import BrowseList from './BrowseList.js'
+import Footer from './Footer.js'
+import './App2.scss';
 
 class Browse extends React.Component {
     render() {
       return (
         <div className="Browse">
-          <h1>Hello</h1>
+          <TopWelcome/>
+          <DescriptionBrowse/>
+          <BrowseList/>
+          <Footer/>
         </div>
       );
     }
   }
 
 
-
 export default Browse;
+

@@ -1,0 +1,15 @@
+.BrowseList{
+    grid-template-columns: 12% 76% 12%;
+    grid-template-rows: 10% 40% 10%; 
+    display:grid;
+    grid-area: 3/2/4/3;
+    background-color: #F6FAF9;
+    .DomainsList{
+     grid-area: 2/2/3/3;
+    text-align: center;
+    }
+}
+
+ul {
+list-style-type: none;
+}
