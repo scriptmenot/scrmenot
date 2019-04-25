@@ -18,7 +18,9 @@ $green: #227e5b;
         img {
             position: absolute;
             width: 85%;
-            transform: translate(0%, 15%);
+            top: 20%;
+            right: 10%;
+            transform: translate(10%, 15%);
         }
     }
 
@@ -28,17 +30,21 @@ $green: #227e5b;
 
         h1 {
             position: absolute;
-            font-size: 450%;
+            font-size: 4.5vw;
             width: 100%;
-            transform: translate(0%, 200%);
+            top: 90%;
+            left: 5%;
+            transform: translate(-5%, 90%);
         }
 
         .titleDescription {
             position: absolute;
-            font-size: 180%;
-            width: 100%;
-            transform: translate(0%, 750%);
+            font-size: 2vw;
             color: white;
+            width: 100%;
+            top: 190%;
+            left: 5%;
+            transform: translate(-5%, 190%);
         }
     }
 
