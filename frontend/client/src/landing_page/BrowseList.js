@@ -1,6 +1,7 @@
 import React from 'react';
 import './BrowseList.scss';
-import { Redirect, Link, withRouter } from 'react-router-dom';
+import './DomainDetails.js'
+import { withRouter } from "react-router";
 
 class BrowseList extends React.Component {
  state = {
@@ -10,13 +11,11 @@ class BrowseList extends React.Component {
 
   details(domain){
    
-      this.props.history.push('/details');
-      return <Redirect to={{
+    this.props.history.push({
         pathname: '/details',
-        state: {dom: "test"}
-    }}/>
-      //console.log(domain);
-    
+        state: { dom: domain }
+      });
+
   }
 
     componentDidMount() {
@@ -24,7 +23,6 @@ class BrowseList extends React.Component {
     .then(resp => resp.json())
       .then(resp => {
         this.setState({domains: Array.from(resp)});
-        console.log(this.state.domains);
       })
   }
 
@@ -34,7 +32,7 @@ class BrowseList extends React.Component {
       <div className="BrowseList">
         <ul className="DomainsList" on={this.getSearchedNames}> 
               {this.state.domains.map((domain, i) => 
-              <li key={i} onClick={()=>this.details(domain)}>{domain.uri}</li>
+              <li key={i} onClick={this.details.bind(this, domain)}>{domain.uri}</li>
             )}
           </ul>
       </div>
@@ -42,4 +40,4 @@ class BrowseList extends React.Component {
   }
 }
 
-export default BrowseList;
+export default withRouter(BrowseList);

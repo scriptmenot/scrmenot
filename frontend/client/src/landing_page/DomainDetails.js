@@ -1,26 +1,45 @@
 import React from 'react';
 import TopWelcome from './TopWelcome.js'
-import DescriptionBrowse from './DescriptionBrowse.js'
-import BrowseList from './BrowseList.js'
 import Footer from './Footer.js'
 import './App2.scss';
 import './DomainDetails.scss';
-import './BrowseList.js';
-
 
 class Details extends React.Component{
+
+  constructor(props) {
+    super(props);
+    this.state = {    
+      domainUri: this.props.location.state.dom.uri,
+      domainId: this.props.location.state.dom.id,
+      opinions:[]
+    };
+  }
+
+  componentDidMount() {
+    fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/opinion/domain/${this.props.location.state.dom.id}`)
+   .then(resp => resp.json())
+     .then(resp => {
+      this.setState({ opinions: Array.from(resp) });
+        });
+  }
 
     render() {
         return (
         <div className="Details" >
-        <h1>agh.edu.pl</h1>
+        <h1>{this.state.domainUri}</h1>
         <div className="Opinions">
-            <img src={require('./user.png')}/>
-            <h4>Not recommended</h4>
-            <p>I don't trust this domain. It looks suspicious for me.</p>
-            <img src={require('./user.png')}/>
-            <h4>Spy content</h4>
-            <p>Be careful! It contains some spying stuff.</p>
+
+          {this.state.opinions.length ?
+            this.state.opinions.map((opinion, index) => {
+            return <div>
+                  <img src={require('./user.png')} alt="user" />
+                  <h4>{opinion.title}</h4>
+                  <p key={index}>{opinion.content}</p>
+                  </div>;
+          }) :
+            <p>This domain has no opinion so far</p>
+
+          }
         </div>
         </div>
         )
@@ -32,10 +51,10 @@ class DomainDetails extends React.Component {
       return (
         <div className="DomainDetails">
           <TopWelcome/>
-          <Details/>
+          <Details {...this.props}/>
           <Footer/>
         </div>
-      );
+      )
     }
   }
 

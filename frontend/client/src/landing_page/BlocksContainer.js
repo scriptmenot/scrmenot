@@ -1,9 +1,7 @@
 import React from 'react';
 import './BlocksContainer.scss';
 import Modal from 'react-responsive-modal';
-import { Redirect, Link, withRouter } from 'react-router-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
-import Browse from './Browse';
+import { Redirect } from 'react-router-dom';
 
 class AddDomain extends React.Component {
   state = {
@@ -144,7 +142,6 @@ class SearchDomain extends React.Component {
     .then(resp => resp.json())
       .then(resp => {
         this.setState({domains: Array.from(resp)});
-        const regex = new RegExp(this.state.name, 'gi');
         this.setState({domains: this.state.domains.filter(el => el.uri.startsWith(this.state.name))});
       })
   }
