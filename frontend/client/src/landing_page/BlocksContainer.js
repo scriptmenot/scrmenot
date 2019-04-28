@@ -1,9 +1,7 @@
 import React from 'react';
 import './BlocksContainer.scss';
 import Modal from 'react-responsive-modal';
-import { Redirect, Link, withRouter } from 'react-router-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
-import Browse from './Browse';
+import { Redirect } from 'react-router-dom';
 
 class AddDomain extends React.Component {
   state = {
@@ -115,12 +113,12 @@ handleAdding(e){
 
           <Modal open={open} onClose={this.onCloseModal.bind(this)}  styles={modalStyles} little>
 
-            <form id="addDomainForm" style={formStyles}  onSubmit={this.handleAdding}>
+            <form id="addDomainForm" style={formStyles}  onSubmit={this.handleAdding.bind(this)}>
 
               <h4 style={firstHeaderStyles}>Type domain address</h4>
-              <input style={domainNameStyles} type="text" id="newDomainURL" value={this.state.name} onChange={this.handleNameChange} required/>
+              <input style={domainNameStyles} type="text" id="newDomainURL" value={this.state.name} onChange={this.handleNameChange.bind(this)} required/>
               <h4 style={secondHeaderStyles}>Why do you find it dangerous?</h4>
-              <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment' value={this.state.comment} onChange={this.handleCommentChange} required></textarea>
+              <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment' value={this.state.comment} onChange={this.handleCommentChange.bind(this)} required></textarea>
               <input type="submit" style={submitStyles} value="Add"/>
 
             </form>
@@ -144,7 +142,6 @@ class SearchDomain extends React.Component {
     .then(resp => resp.json())
       .then(resp => {
         this.setState({domains: Array.from(resp)});
-        const regex = new RegExp(this.state.name, 'gi');
         this.setState({domains: this.state.domains.filter(el => el.uri.startsWith(this.state.name))});
       })
   }

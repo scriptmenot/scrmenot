@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './landing_page/index.css';
 import App from './landing_page/App';
 import * as serviceWorker from './serviceWorker';
-import { Redirect, Link } from 'react-router-dom';
 import { BrowserRouter, Route } from 'react-router-dom'
 import Browse from './landing_page/Browse'
+import Details from './landing_page/DomainDetails'
 
 ReactDOM.render(         
     <BrowserRouter>
@@ -16,6 +16,10 @@ ReactDOM.render(
         <Route 
         path='/browse'
          render={ props => <Browse {...props} />}
+         />
+        <Route 
+        path='/details'
+         render={ props => <Details {...props} />}
          />
    </BrowserRouter>, 
 //<App/>,

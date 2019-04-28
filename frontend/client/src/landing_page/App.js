@@ -4,7 +4,6 @@ import Description from './Description.js'
 import BlocksContainer from './BlocksContainer.js'
 import GradeDomain from './GradeDomain.js'
 import Footer from './Footer.js'
-import { BrowserRouter, Route } from 'react-router-dom';
 
 
 import './App.scss';
