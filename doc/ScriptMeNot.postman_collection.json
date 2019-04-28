@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8f3ce2f3-d9dd-4529-b12e-e1785e5423ef",
+		"_postman_id": "1989cd23-c94c-4265-9f5b-79e3a8bca2b6",
 		"name": "ScriptMeNot",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -85,7 +85,7 @@
 							"port": "8001",
 							"path": [
 								"api",
-								"opinion",
+								"domain",
 								"1"
 							]
 						}
@@ -93,7 +93,7 @@
 					"response": []
 				},
 				{
-					"name": "editeDomainById",
+					"name": "editDomainById",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -106,18 +106,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"uri\": \"uj.edu.pl\",\n\t\"isAccepted\" : false\n}"
 						},
 						"url": {
-							"raw": "localhost:8001/api/domain/1",
+							"raw": "localhost:8001/api/domain/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8001",
 							"path": [
 								"api",
-								"opinion",
-								"1"
+								"domain",
+								"2"
 							]
 						}
 					},
@@ -132,13 +132,20 @@
 					"name": "getOpinionByDomainId",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8001/api/opinion/domain/1",
+							"raw": "localhost:8001/api/opinion/domain/2",
 							"host": [
 								"localhost"
 							],
@@ -147,7 +154,7 @@
 								"api",
 								"opinion",
 								"domain",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -208,6 +215,169 @@
 							"path": [
 								"api",
 								"opinion",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editOpinionById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\" : \"edited title\",\n\t\"content\" : \"edited content\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8001/api/opinion/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"opinion",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "getCommentByOpinionId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8001/api/comment/opinion/2",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"comment",
+								"opinion",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addComment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"That's bollocks!\",\n\t\"opinionId\": 2\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:8001/api/comment",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editCommentById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"edited content\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:8001/api/comment/1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"comment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCommentById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "127.0.0.1:8001/api/comment/1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"comment",
 								"1"
 							]
 						}
