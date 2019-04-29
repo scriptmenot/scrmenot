@@ -133,7 +133,8 @@ handleAdding(e){
 class SearchDomain extends React.Component {
   state = {
       name: "",
-      domains: []
+      domains: [], 
+      dom: ""
   };
 
   getSearchedNames() {
@@ -156,6 +157,13 @@ class SearchDomain extends React.Component {
 
   }
 
+  chooseDomain(domain) {
+    this.props.history.push({
+      pathname: '/details',
+      state: { dom: domain }
+    });
+  }
+
   render(){
     return (
       <li className="SearchDomainBlock"> 
@@ -166,7 +174,7 @@ class SearchDomain extends React.Component {
           <img src={require('./magnifying-glass.png')} alt="maginifying-glass" id="searchButton"/>
           <ul className="Suggestions" >          
               {this.state.domains.map((domain, i) => 
-              <li key={i}>{domain.uri}</li>
+              <li key={i} onClick={this.chooseDomain.bind(this, domain)}>{domain.uri}</li>
             )}
           </ul>
         </form>
@@ -216,7 +224,7 @@ class BlocksContainer extends React.Component {
       return (
           <ul className="BlocksContainer">
             <AddDomain/>
-            <SearchDomain/>
+            <SearchDomain {...this.props}/>
             <TopDomains/>
             <BrowseCatalogue {...this.props}/>
           </ul>
