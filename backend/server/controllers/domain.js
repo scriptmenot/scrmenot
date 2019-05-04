@@ -18,10 +18,12 @@ const retrieveDomainQuery = {
             model: Opinion,
             as: 'opinion',
             attributes: [],
+            order: [['createdAt','DESC']],
             include: [
                 {
                     model: VoteOpinion,
                     as: 'voteOpinion',
+                    order: [['createdAt', 'DESC']],
                     attributes: [
                     ]
                 }
@@ -65,13 +67,38 @@ module.exports = {
             .catch(error => res.status(400).send(error));
     },
 
+
     retrieveById(req, res) {
         return Domain
             .findByPk(req.params.id, retrieveDomainQuery)
             .then(domain => res.status(200).send(domain))
             .catch(error => res.status(400).send(error));
     },
+    retrieveFiveMostDangerous(req, res){
+        function GetSortOrder(prop) {  
+            return function(a, b) {  
+                if (a[prop] > b[prop]) {  
+                    return 1;  
+                } else if (a[prop] < b[prop]) {  
+                 return -1;  
+                 }  
+                return 0;  
+            }
+        }
 
+        return Domain
+            .findAll(retrieveDomainQuery)
+            .then(function(domains){
+                arr = [];
+                for (var i in domains){
+                    arr.push(domains[i]['dataValues']);
+                }
+                arr.sort(GetSortOrder('safety'));
+                arr = arr.slice(0,5);
+                res.status(200).json({arr});
+            })
+            .catch(error => res.status(400).send(error));
+    },
     update(req, res, next) { 
         Domain.update(
             {
