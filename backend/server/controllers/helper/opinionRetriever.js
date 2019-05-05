@@ -6,7 +6,6 @@ const Col = require('sequelize').col;
 
 module.exports = {
     retrieveByDomainId(domainId) {
-
         return Opinion
             .findAll({
                 attributes: ['id',

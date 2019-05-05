@@ -1,7 +1,8 @@
 const Models = require('../models/');
 const Domain = Models.domain;
 const Op = require('sequelize').Op; //TODO: might be useful to think of way to import it to every controller at once
-const OpinionRetriever = require('./helper/opinionRetriever');
+const SafetyCalculator = require('./helper/safetyCalculator');
+
 
 const retrieveDomainQuery = {
     attributes: ['id',
@@ -30,6 +31,7 @@ module.exports = {
             .then(domains => {
                 domains.forEach(domain => {
                     const id = domain.id;
+                    SafetyCalculator.calculateSafetyForDomainId(id);
 
                     console.log(domain.get({plain: true})); });
                 res.status(200).send(domains)
