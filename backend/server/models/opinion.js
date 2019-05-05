@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       content: {
           type: DataTypes.TEXT,
           allowNull: false
+      },
+      isSafe: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false
       }
   }, {});
   Opinion.associate = function(models) {

@@ -1,35 +1,13 @@
-const Models = require('../models/')
+const Models = require('../models/');
 const Domain = Models.domain;
-const Opinion = Models.opinion;
-const VoteOpinion = Models.voteOpinion;
 const Op = require('sequelize').Op; //TODO: might be useful to think of way to import it to every controller at once
-const Fn = require('sequelize').fn;
-const Col = require('sequelize').col;
+const OpinionRetriever = require('./helper/opinionRetriever');
 
 const retrieveDomainQuery = {
     attributes: ['id',
         'isAccepted',
         'uri',
-        [Fn('SUM', Col('opinion->voteOpinion.value')), 'safety'],
         'createdAt'],
-    group: ['domain.id'],
-    include: [
-        {
-            model: Opinion,
-            as: 'opinion',
-            attributes: [],
-            order: [['createdAt','DESC']],
-            include: [
-                {
-                    model: VoteOpinion,
-                    as: 'voteOpinion',
-                    order: [['createdAt', 'DESC']],
-                    attributes: [
-                    ]
-                }
-            ]
-        }
-    ],
     order: [['createdAt', 'DESC']]
 };
 
@@ -49,7 +27,13 @@ module.exports = {
     retrieve(req, res) {
         return Domain
             .findAll(retrieveDomainQuery)
-            .then(domains => res.status(200).send(domains))
+            .then(domains => {
+                domains.forEach(domain => {
+                    const id = domain.id;
+
+                    console.log(domain.get({plain: true})); });
+                res.status(200).send(domains)
+            })
             .catch(error => res.status(400).send(error));
     },
 

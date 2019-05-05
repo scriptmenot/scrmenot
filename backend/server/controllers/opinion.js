@@ -1,8 +1,7 @@
-const Models = require('../models/')
+const Models = require('../models/');
 const Opinion = Models.opinion;
 const VoteOpinion = Models.voteOpinion;
-const Fn = require('sequelize').fn;
-const Col = require('sequelize').col;
+const OpinionRetriever = require('./helper/opinionRetriever');
 
 module.exports = {
     create(req, res) {
@@ -12,7 +11,8 @@ module.exports = {
             .create({
                     'content': payload.content,
                     'domainId': payload.domainId,
-                    'title': payload.title
+                    'title': payload.title,
+                    'isSafe': payload.isSafe
                 })
             .then(obj => res.status(201).send(obj))
             .catch(err => res.status(400).send(err));
@@ -36,28 +36,7 @@ module.exports = {
     },
     retrieveRelatedToDomain(req, res) {
         const domainId = req.params.domainId;
-        return Opinion
-            .findAll({
-                attributes: ['id',
-                    'title',
-                    'content',
-                    'createdAt',
-                    'updatedAt',
-                    'domainId',
-                    [Fn('SUM', Col('voteOpinion.value')), 'rate']
-                    ],
-                where: {'domainId' : domainId},
-                group: ['opinion.id'],
-                include: [
-                    {
-                        model: VoteOpinion,
-                        as: 'voteOpinion',
-                        attributes: [
-                        ]
-                    }
-                    ],
-                order: [['createdAt', 'DESC']]
-            })
+        return OpinionRetriever.retrieveByDomainId(domainId)
             .then(opinions => res.status(200).send(opinions))
             .catch(error => res.status(400).send(error));
 
@@ -66,7 +45,8 @@ module.exports = {
         Opinion.update(
             {
                 "title":  req.body.title,
-                "content": req.body.content
+                "content": req.body.content,
+                "isSafe": req.body.isSafe
             },
             {returning: true, where: {id: req.params.id}}
         )
