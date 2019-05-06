@@ -17,8 +17,10 @@ const calculateOpinionValue = function(reliability, isSafe) {
 };
 
 module.exports = {
-    calculateSafetyForDomainId(domainId) {
-        OpinionRetriever.retrieveByDomainId(domainId)
+    appendSafetyToDomain(domain) {
+        const domainId = domain.id;
+
+        return OpinionRetriever.retrieveByDomainId(domainId)
             .then(opinions => {
                 let safetySum = 0;
 
@@ -33,7 +35,9 @@ module.exports = {
                     safetySum += opinionValue;
                 });
 
-                return safetySum;
+                let siteSafety = Math.round(safetySum * 1000) / 1000;
+
+                return Promise.resolve({...domain.get({plain: true}), safety: siteSafety});
             });
     }
 };

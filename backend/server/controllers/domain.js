@@ -29,13 +29,16 @@ module.exports = {
         return Domain
             .findAll(retrieveDomainQuery)
             .then(domains => {
-                domains.forEach(domain => {
-                    const id = domain.id;
-                    SafetyCalculator.calculateSafetyForDomainId(id);
+                let promisesToAwait = [];
 
-                    console.log(domain.get({plain: true})); });
-                res.status(200).send(domains)
+                domains.forEach(domain => {
+                    let promise = SafetyCalculator.appendSafetyToDomain(domain);
+                    promisesToAwait.push(promise);
+                });
+
+                return Promise.all(promisesToAwait);
             })
+            .then(s => res.status(200).send(s))
             .catch(error => res.status(400).send(error));
     },
 
