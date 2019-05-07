@@ -12,6 +12,22 @@ const retrieveDomainQuery = {
     order: [['createdAt', 'DESC']]
 };
 
+function includeSafetyToQueryResult(domain) {
+    let promise = SafetyCalculator.appendSafetyToDomain(domain);
+    return Promise.resolve(promise);
+}
+
+function includeSafetyToQueryResults(domains) {
+    let promisesToAwait = [];
+
+    domains.forEach(domain => {
+        let promise = SafetyCalculator.appendSafetyToDomain(domain);
+        promisesToAwait.push(promise);
+    });
+
+    return Promise.all(promisesToAwait);
+}
+
 module.exports = {
     create(req, res) {
         const payload = req.body;
@@ -28,16 +44,7 @@ module.exports = {
     retrieve(req, res) {
         return Domain
             .findAll(retrieveDomainQuery)
-            .then(domains => {
-                let promisesToAwait = [];
-
-                domains.forEach(domain => {
-                    let promise = SafetyCalculator.appendSafetyToDomain(domain);
-                    promisesToAwait.push(promise);
-                });
-
-                return Promise.all(promisesToAwait);
-            })
+            .then(includeSafetyToQueryResults)
             .then(s => res.status(200).send(s))
             .catch(error => res.status(400).send(error));
     },
@@ -52,6 +59,7 @@ module.exports = {
                     uri: { [Op.iLike]: '%' + uriName + '%' }
                 }
             })
+            .then(includeSafetyToQueryResults)
             .then(domains => res.status(200).send(domains))
             .catch(error => res.status(400).send(error));
     },
@@ -60,6 +68,7 @@ module.exports = {
     retrieveById(req, res) {
         return Domain
             .findByPk(req.params.id, retrieveDomainQuery)
+            .then(includeSafetyToQueryResult)
             .then(domain => res.status(200).send(domain))
             .catch(error => res.status(400).send(error));
     },
@@ -77,6 +86,7 @@ module.exports = {
 
         return Domain
             .findAll(retrieveDomainQuery)
+            .then(includeSafetyToQueryResults)
             .then(function(domains){
                 arr = [];
                 for (var i in domains){
