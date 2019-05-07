@@ -64,7 +64,6 @@ module.exports = {
             .catch(error => res.status(400).send(error));
     },
 
-
     retrieveById(req, res) {
         return Domain
             .findByPk(req.params.id, retrieveDomainQuery)
@@ -72,6 +71,7 @@ module.exports = {
             .then(domain => res.status(200).send(domain))
             .catch(error => res.status(400).send(error));
     },
+
     retrieveFiveMostDangerous(req, res){
         function GetSortOrder(prop) {  
             return function(a, b) {  
@@ -88,9 +88,9 @@ module.exports = {
             .findAll(retrieveDomainQuery)
             .then(includeSafetyToQueryResults)
             .then(function(domains){
-                arr = [];
-                for (var i in domains){
-                    arr.push(domains[i]['dataValues']);
+                let arr = [];
+                for (let i in domains){
+                    arr.push(domains[i]);
                 }
                 arr.sort(GetSortOrder('safety'));
                 arr = arr.slice(0,5);
