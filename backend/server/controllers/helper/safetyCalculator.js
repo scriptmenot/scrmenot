@@ -27,7 +27,11 @@ module.exports = {
                 opinions.forEach(opinion => {
                     const opinionPayload = opinion.get({plain: true});
                     const isSafe = opinionPayload.isSafe;
-                    const rate = parseInt(opinionPayload.rate);
+                    let rate = parseInt(opinionPayload.rate);
+
+                    if(isNaN(rate)) {
+                        rate = 0;
+                    }
 
                     const opinionReliability = calculateOpinionReliability(rate);
                     const opinionValue = calculateOpinionValue(opinionReliability, isSafe);
