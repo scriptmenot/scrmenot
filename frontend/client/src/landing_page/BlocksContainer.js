@@ -20,8 +20,6 @@ class AddDomain extends React.Component {
 
 handleAdding(e){
   e.preventDefault();
-  console.log("name: " + this.state.name);
-  console.log("comment: " + this.state.comment);
 
   const data = {"uri": this.state.name};
 
@@ -117,7 +115,7 @@ handleAdding(e){
 
               <h4 style={firstHeaderStyles}>Type domain address</h4>
               <input style={domainNameStyles} type="text" id="newDomainURL" value={this.state.name} onChange={this.handleNameChange.bind(this)} required/>
-              <h4 style={secondHeaderStyles}>Why do you find it dangerous?</h4>
+              <h4 style={secondHeaderStyles}>What do you find about it?</h4>
               <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment' value={this.state.comment} onChange={this.handleCommentChange.bind(this)} required></textarea>
               <input type="submit" style={submitStyles} value="Add"/>
 
