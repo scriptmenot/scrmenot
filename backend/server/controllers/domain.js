@@ -1,37 +1,32 @@
-const Models = require('../models/')
+const Models = require('../models/');
 const Domain = Models.domain;
-const Opinion = Models.opinion;
-const VoteOpinion = Models.voteOpinion;
 const Op = require('sequelize').Op; //TODO: might be useful to think of way to import it to every controller at once
-const Fn = require('sequelize').fn;
-const Col = require('sequelize').col;
+const SafetyCalculator = require('./helper/safetyCalculator');
+
 
 const retrieveDomainQuery = {
     attributes: ['id',
         'isAccepted',
         'uri',
-        [Fn('SUM', Col('opinion->voteOpinion.value')), 'safety'],
         'createdAt'],
-    group: ['domain.id'],
-    include: [
-        {
-            model: Opinion,
-            as: 'opinion',
-            attributes: [],
-            order: [['createdAt','DESC']],
-            include: [
-                {
-                    model: VoteOpinion,
-                    as: 'voteOpinion',
-                    order: [['createdAt', 'DESC']],
-                    attributes: [
-                    ]
-                }
-            ]
-        }
-    ],
     order: [['createdAt', 'DESC']]
 };
+
+function includeSafetyToQueryResult(domain) {
+    let promise = SafetyCalculator.appendSafetyToDomain(domain);
+    return Promise.resolve(promise);
+}
+
+function includeSafetyToQueryResults(domains) {
+    let promisesToAwait = [];
+
+    domains.forEach(domain => {
+        let promise = SafetyCalculator.appendSafetyToDomain(domain);
+        promisesToAwait.push(promise);
+    });
+
+    return Promise.all(promisesToAwait);
+}
 
 module.exports = {
     create(req, res) {
@@ -49,7 +44,8 @@ module.exports = {
     retrieve(req, res) {
         return Domain
             .findAll(retrieveDomainQuery)
-            .then(domains => res.status(200).send(domains))
+            .then(includeSafetyToQueryResults)
+            .then(s => res.status(200).send(s))
             .catch(error => res.status(400).send(error));
     },
 
@@ -63,17 +59,19 @@ module.exports = {
                     uri: { [Op.iLike]: '%' + uriName + '%' }
                 }
             })
+            .then(includeSafetyToQueryResults)
             .then(domains => res.status(200).send(domains))
             .catch(error => res.status(400).send(error));
     },
 
-
     retrieveById(req, res) {
         return Domain
             .findByPk(req.params.id, retrieveDomainQuery)
+            .then(includeSafetyToQueryResult)
             .then(domain => res.status(200).send(domain))
             .catch(error => res.status(400).send(error));
     },
+
     retrieveFiveMostDangerous(req, res){
         function GetSortOrder(prop) {  
             return function(a, b) {  
@@ -88,10 +86,11 @@ module.exports = {
 
         return Domain
             .findAll(retrieveDomainQuery)
+            .then(includeSafetyToQueryResults)
             .then(function(domains){
-                arr = [];
-                for (var i in domains){
-                    arr.push(domains[i]['dataValues']);
+                let arr = [];
+                for (let i in domains){
+                    arr.push(domains[i]);
                 }
                 arr.sort(GetSortOrder('safety'));
                 arr = arr.slice(0,5);
