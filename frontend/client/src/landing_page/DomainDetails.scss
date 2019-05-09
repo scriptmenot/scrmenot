@@ -48,6 +48,7 @@ body {
                     background-color: rgb(239, 240, 236);
                 }
                 
+                
                 img {
                     width: 7%;
                 }
@@ -60,6 +61,7 @@ body {
                     padding-right: 2%;
                     cursor: pointer;
                 }
+<<<<<<< HEAD
                 
                 .editingOperations{
                    transform: translateY(-65%);
@@ -78,6 +80,19 @@ body {
                             opacity: 0.7;
                         }
                     }
+=======
+                .voteCounter{
+                    float: right;
+                    margin-left: 20px;
+                    padding-left: 1em;
+                    padding-right: 1em;
+                    position: relative;
+                    font-weight: 600;
+                    background-color: transparent;
+                    border: 3px solid #3D9970;
+                    color: black;
+                    border-radius: 50%;
+>>>>>>> c2841bf622e6669195d972e6a4f105b7211ad93e
                 }
 
             }
