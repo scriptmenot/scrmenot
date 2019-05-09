@@ -25,6 +25,15 @@ class Details extends React.Component{
       this.setState({ opinions: Array.from(resp) });
         });
   }
+
+  componentDidUpdate() {
+    fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/opinion/domain/${this.props.location.state.dom.id}`)
+   .then(resp => resp.json())
+     .then(resp => {
+      this.setState({ opinions: Array.from(resp) });
+        });
+  }
+
   handleOpinionTitleChange(e){
     this.setState({opinionTitle: e.target.value});
   };
@@ -48,18 +57,23 @@ class Details extends React.Component{
       "title": this.state.opinionTitle,
       "isSafe": this.state.isSafe
     };
-
-    console.log(data);
   
     fetch("https://fathomless-brushlands-42192.herokuapp.com/api/opinion", {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+        body: JSON.stringify(data)
       })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        this.setState({
+          opinionTitle: "",
+        opinionContent: ""
+        });
+        this.forceUpdate();
+      })
       .catch(error => console.log(error));
   }
 
