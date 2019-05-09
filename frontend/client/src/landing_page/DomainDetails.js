@@ -11,7 +11,10 @@ class Details extends React.Component{
     this.state = {    
       domainUri: this.props.location.state.dom.uri,
       domainId: this.props.location.state.dom.id,
-      opinions:[]
+      opinions:[],
+      opinionTitle: "",
+      opinionContent: "",
+      isSafe: false
     };
   }
 
@@ -21,6 +24,43 @@ class Details extends React.Component{
      .then(resp => {
       this.setState({ opinions: Array.from(resp) });
         });
+  }
+  handleOpinionTitleChange(e){
+    this.setState({opinionTitle: e.target.value});
+  };
+
+  handleOpinionContentChange(e){
+    this.setState({opinionContent: e.target.value});
+  };
+
+  handleSecurityLevel(e){
+    this.setState({
+        isSafe : e.target.value
+     })
+ } 
+
+  handleAdding(e){
+    e.preventDefault();
+  
+    const data = {
+      "content": this.state.opinionContent,
+      "domainId": this.state.domainId,
+      "title": this.state.opinionTitle,
+      "isSafe": this.state.isSafe
+    };
+
+    console.log(data);
+  
+    fetch("https://fathomless-brushlands-42192.herokuapp.com/api/opinion", {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error));
   }
 
   sendVote(voteData){
@@ -74,12 +114,15 @@ class Details extends React.Component{
 
             }
           </div>
+           
           <div className="addOpinion">
-            <textarea id="opinionTextArea"></textarea>
-            <div className="safeOrDangerous">
-              <label><input type="radio" name="isSafe" /> Safe</label>
-              <label><input type="radio" name="isSafe"/> Dangerous</label>
-              <button id="addOpinionButton">Add </button>
+          <p>Would you like to share Your opinion?</p>
+            <input type="text" placeholder="Type a title of Your opinion" id="opinionTitle" value={this.state.opinionTitle} onChange={this.handleOpinionTitleChange.bind(this)} />
+            <textarea id="opinionTextArea" value={this.state.opinionContent} onChange={this.handleOpinionContentChange.bind(this)}>Type something</textarea>
+            <div className="safeOrDangerous" >
+              <label><input type="radio" name="isSafe" value={true} onChange={this.handleSecurityLevel.bind(this)} required/> Safe</label>
+              <label><input type="radio" name="isSafe" value={false} onChange={this.handleSecurityLevel.bind(this)}/> Dangerous</label>
+              <button id="addOpinionButton" onClick={this.handleAdding.bind(this)}>Add </button>
             </div>
           </div>
         </div>
