@@ -9,7 +9,7 @@ class Browse extends React.Component {
     render() {
       return (
         <div className="Browse">
-          <TopWelcome/>
+          <TopWelcome />
           <DescriptionBrowse/>
           <BrowseList {...this.props}/>
           <Footer/>

@@ -12,12 +12,6 @@ class App extends React.Component {
     render() {
       return (
         <div className="App">
-     {/* <BrowserRouter>
-         <Route 
-        path='/browse'
-         render={ props => <Browse {...props} />}
-         />
-   </BrowserRouter> */}
           <TopWelcome/>
           <Description/>
           <BlocksContainer {...this.props}/>
