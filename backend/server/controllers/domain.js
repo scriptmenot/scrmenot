@@ -36,7 +36,7 @@ const retrieveDomainQuery = {
 module.exports = {
     create(req, res) {
         const payload = req.body;
-
+        
         return Domain
             .create({
                     'isAccepted': true, //TODO: when we will include voting for reliability, we should set it to false and start voting
@@ -74,7 +74,7 @@ module.exports = {
             .then(domain => res.status(200).send(domain))
             .catch(error => res.status(400).send(error));
     },
-    retrieveFiveMostDangerous(req, res){
+    retrieveTop(req, res){
         function GetSortOrder(prop) {  
             return function(a, b) {  
                 if (a[prop] > b[prop]) {  
@@ -94,8 +94,18 @@ module.exports = {
                     arr.push(domains[i]['dataValues']);
                 }
                 arr.sort(GetSortOrder('safety'));
-                arr = arr.slice(0,5);
-                res.status(200).json({arr});
+                
+                if (req.query.safe == 'true'){
+                    arr.reverse();
+                }
+
+                if (req.query.count === 'undefined'){
+                    arr = arr.slice(0,5)
+                }
+                else{
+                     arr = arr.slice(0,req.query.count);
+                }
+                res.status(200).json(arr);
             })
             .catch(error => res.status(400).send(error));
     },
