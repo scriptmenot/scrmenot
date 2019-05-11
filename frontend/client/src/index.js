@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './landing_page/index.css';
-import App from './landing_page/App';
+import App from './LandingPage/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route } from 'react-router-dom'
-import Browse from './landing_page/Browse'
-import Details from './landing_page/DomainDetails'
+import Browse from './DomainLists/Browse'
+import Details from './DomainDetails/DomainDetails'
 
 ReactDOM.render(         
     <BrowserRouter>
@@ -22,6 +21,5 @@ ReactDOM.render(
          render={ props => <Details {...props} />}
          />
    </BrowserRouter>, 
-//<App/>,
   document.getElementById('root'));
 serviceWorker.unregister();

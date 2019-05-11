@@ -1,5 +1,5 @@
 import React from 'react';
-import './Description.scss';
+import '../LandingPage/PageParts/Description.scss';
 
 class DescriptionBrowse extends React.Component {
   render() {

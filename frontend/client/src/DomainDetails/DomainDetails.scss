@@ -55,11 +55,14 @@ body {
                     padding: 3%;
                 }
                 
-                #voteSign{
+                .voteSign{
                     width: 3%;
                     float: right;
-                    padding-right: 2%;
-                    cursor: pointer;
+                    padding: 1%;
+
+                    &:hover{
+                        cursor: pointer;
+                    }
                 }
 
                 .voteCounter{
@@ -96,7 +99,7 @@ body {
 
             }
 
-            .addOpinion{
+            .AddOpinion{
                 grid-area: 4/2/5/4;
                 text-align: center;
                 display: grid;

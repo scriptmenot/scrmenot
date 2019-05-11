@@ -1,9 +1,9 @@
 import React from 'react';
-import TopWelcome from './TopWelcome.js'
-import Description from './Description.js'
-import BlocksContainer from './BlocksContainer.js'
-import GradeDomain from './GradeDomain.js'
-import Footer from './Footer.js'
+import TopWelcome from './PageParts/TopWelcome.js'
+import Description from './PageParts/Description.js'
+import BlocksContainer from './BlocksCointainer/BlocksContainer.js'
+import GradeDomain from './PageParts/GradeDomain.js'
+import Footer from './PageParts/Footer.js'
 
 
 import './App.scss';

@@ -1,6 +1,6 @@
 import React from 'react';
 import './BrowseList.scss';
-import './DomainDetails.js'
+import '../DomainDetails/DomainDetails.js'
 import { withRouter } from "react-router";
 
 class BrowseList extends React.Component {

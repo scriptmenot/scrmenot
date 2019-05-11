@@ -1,7 +1,6 @@
 import React from 'react';
 import './BlocksContainer.scss';
 import Modal from 'react-responsive-modal';
-import { Redirect } from 'react-router-dom';
 
 class AddDomain extends React.Component {
   state = {
@@ -106,7 +105,7 @@ handleAdding(e){
         <React.Fragment>
 
           <li className="AddDomainBlock" onClick={this.onOpenModal.bind(this)}>
-                <img src={require('./plus.png')} alt="plus"/>
+                <img src={require('./images/plus.png')} alt="plus"/>
           </li>
 
           <Modal open={open} onClose={this.onCloseModal.bind(this)}  styles={modalStyles} little>
@@ -128,109 +127,4 @@ handleAdding(e){
   }
 }
 
-class SearchDomain extends React.Component {
-  state = {
-      name: "",
-      domains: [], 
-      dom: ""
-  };
-
-  getSearchedNames() {
-
-    fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/domain/uri/${this.state.name}`)
-    .then(resp => resp.json())
-      .then(resp => {
-        this.setState({domains: Array.from(resp)});
-        this.setState({domains: this.state.domains.filter(el => el.uri.startsWith(this.state.name))});
-      })
-  }
-
-  handleNameChange(e) {
-    this.setState({name: e.target.value}, () => {
-      if(this.state.name !== "")
-        this.getSearchedNames();
-      else
-        this.setState({domains: []});
-    });
-
-  }
-
-  chooseDomain(domain) {
-    this.props.history.push({
-      pathname: '/details',
-      state: { dom: domain }
-    });
-  }
-
-  render(){
-    return (
-      <li className="SearchDomainBlock"> 
-
-        <form className="SearchForm">
-
-          <input type="search" placeholder="Search domain" id="searchInput" onChange={this.handleNameChange.bind(this)}/>
-          <img src={require('./magnifying-glass.png')} alt="maginifying-glass" id="searchButton"/>
-          <ul className="Suggestions" >          
-              {this.state.domains.map((domain, i) => 
-              <li key={i} onClick={this.chooseDomain.bind(this, domain)}>{domain.uri}</li>
-            )}
-          </ul>
-        </form>
-
-      </li>
-    )
-  }
-}
-
-class TopDomains extends React.Component {
-  render(){
-    return (
-      <li className="TopDomains">
-        <img src={require('./five.png')} alt="folder"/>
-      </li>
-    )
-  }
-}
-
-
-
-class BrowseCatalogue extends React.Component {
-
-  state = {
-    navigate: false
-  }
-
-  handlePageChange = () => {
-    this.props.history.push('/browse');
-    return <Redirect to='/browse' />
-  }
-
-  render(){
-    return (
-      <li className="BrowseCatalogueBlock" onClick={this.handlePageChange} >
-      
-        <img src={require('./folder.png')} alt="folder"/>
-      
-      </li>
-    )
-  }
-}
-
-
-class BlocksContainer extends React.Component {
-    render(){
-      return (
-          <ul className="BlocksContainer">
-            <AddDomain/>
-            <SearchDomain {...this.props}/>
-            <TopDomains/>
-            <BrowseCatalogue {...this.props}/>
-          </ul>
-      )
-
-    }
-}
-
-
-
-export default BlocksContainer;
+export default AddDomain;
