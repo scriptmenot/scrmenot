@@ -65,7 +65,7 @@ class AddOpinion extends React.Component{
                 <label><input type="radio" name="isSafe" value={true} onChange={this.handleSecurityLevel.bind(this)} required="required"/> Safe</label>
                 <label><input type="radio" name="isSafe" value={false} onChange={this.handleSecurityLevel.bind(this)} checked={true}/> Dangerous</label>
                 <button id="addOpinionButton" onClick={this.handleAdding.bind(this)}>Add </button>
-              </div>
+              </div> 
             </div>
           )
       }
