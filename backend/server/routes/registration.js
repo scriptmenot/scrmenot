@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const jwtSecret = require('../config/jwtConfig').secret;
 
-const authenticationController = require('../controllers').Authentication;
+const registration = require('../controllers').Registration;
 
-router.post('/', authenticationController.login);
+//TODO: should not be allowed when user is already logged in
+router.post('/', registration.register);
 
 module.exports = router;
