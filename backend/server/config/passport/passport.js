@@ -7,6 +7,17 @@ const PassportJwt = require('passport-jwt');
 const JWTStrategy = PassportJwt.Strategy;
 const ExtractJWT = PassportJwt.ExtractJwt;
 
+const serialize = (user, done) => done(null, user.id);
+const deserialize = (id, done) => {
+    user.findByPk(id).then(foundUser => {
+       if(foundUser) {
+           done(null, foundUser.get());
+       }
+       else {
+           done(foundUser.errors, null);
+       }
+    });
+};
 
 const localStrategyOptions = {
     usernameField: 'email',
@@ -82,6 +93,8 @@ const jwtLogin = new JWTStrategy(jwtOptions, (jwtPayload, done) => {
         .catch(err => done(err))
 });
 
+passport.serializeUser(serialize);
+passport.deserializeUser(deserialize);
 passport.use('jwt', jwtLogin);
 passport.use('local-signin', localLogin);
 passport.use('local-signup', localLogin);
