@@ -3,6 +3,7 @@ import './BlocksContainer.scss';
 
 
 class TopDomains extends React.Component {
+
   render(){
     return (
       <li className="TopDomains">
