@@ -45,25 +45,23 @@ module.exports = {
         .then(
             function(domains){
                 if(domains.length == 0){
-                    //
                     return Domain
                         .create({
                         'isAccepted': true, //TODO: when we will include voting for reliability, we should set it to false and start voting
                         'uri': payload.uri
                          })
-                        .then(obj => status(200).send(obj.dataValues))
-                        
-                    
-                   // )
+                        .then(obj => res.status(200).send(obj.dataValues))
                 }
                 else{
-                    return {url : '/api/domain/' + domains[0]['id'], status : 302};
+                    return res.status(400).send({
+                        message : 'This domain already exists.',
+                        url : '/api/domain/' + domains[0]['id']
+
+                    });
                 }
-}                 
-   )
-        .then(
-               //obj => console.log(obj)
-             );
+            }                 
+        )
+        
     },
     
     retrieve(req, res) {
