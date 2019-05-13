@@ -94,17 +94,18 @@ module.exports = {
                     arr.push(domains[i]['dataValues']);
                 }
                 arr.sort(GetSortOrder('safety'));
-                
+                    
                 if (req.query.safe == 'true'){
                     arr.reverse();
                 }
+                if(req.query.count === undefined) {
+                        count = 5}
+                else {
+                     count = req.query.count;
+                }       
 
-                if (req.query.count === 'undefined'){
-                    arr = arr.slice(0,5)
-                }
-                else{
-                     arr = arr.slice(0,req.query.count);
-                }
+                arr = arr.slice(0, count)
+                
                 res.status(200).json(arr);
             })
             .catch(error => res.status(400).send(error));
