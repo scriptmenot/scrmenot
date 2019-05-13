@@ -10,7 +10,7 @@ body {
   .DomainDetails {
         display: grid;
         grid-template-columns: 12% 76% 12%;
-        grid-template-rows: 30% minmax(200px, auto) 200px; 
+        grid-template-rows: 300px auto 200px; 
 
         .Footer {
             grid-area: 3/2/4/3;
@@ -20,7 +20,7 @@ body {
             grid-area: 2/2/3/3;
             display: grid;
             grid-template-columns: 12% 76% 12%;
-            grid-template-rows: 10% 15% minmax(200px, auto) 30% 5%; 
+            grid-template-rows: 100px 100px auto 50px; 
             position: relative;
             h1{
                 grid-area: 2/2/3/3;
