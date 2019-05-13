@@ -5,11 +5,16 @@
 
 body {
   height: 100vh;
-  font-family: 'Raleway'; }
-  body .App, .Browse {
+  font-family: 'Raleway'; 
+  .Browse {
     height: 100vh;
     display: grid;
     grid-template-columns: 12% 76% 12%;
-    grid-template-rows: 60% 40% 90% 30% 30%; }
+      grid-template-rows: 60% 40% 80% 30%; 
+    .Footer {
+        grid-area: 4/2/5/3;
+    }
+    }
+}
 
 /*# sourceMappingURL=App.css.map */

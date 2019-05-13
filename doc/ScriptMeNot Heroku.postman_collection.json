@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ba3d36d8-5c06-45ba-b57d-97fcf5183aba",
+		"_postman_id": "998935bd-8da5-4631-8f5a-d48c251f2655",
 		"name": "ScriptMeNot Heroku",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -28,6 +28,32 @@
 							"path": [
 								"api",
 								"domain"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMostDangerous",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain/mostdangerous",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"mostdangerous"
 							]
 						}
 					},
@@ -217,7 +243,7 @@
 					"response": []
 				},
 				{
-					"name": "addOpinion",
+					"name": "addOpinionSafeSite",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -230,7 +256,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"content\": \"This site is quite safe in my opinion\",\n\t\"domainId\": 2,\n\t\"title\": \"Not true\"\n}"
+							"raw": "{\n\t\"content\": \"This site is quite safe in my opinion\",\n\t\"domainId\": 2,\n\t\"title\": \"Is not a treat\",\n\t\"isSafe\": true\n}"
 						},
 						"url": {
 							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion",
@@ -249,7 +275,7 @@
 					"response": []
 				},
 				{
-					"name": "vote",
+					"name": "addOpinionDangerousSite",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -262,10 +288,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"isUpvote\": true,\n\t\"opinionId\": 1\n}"
+							"raw": "{\n\t\"content\": \"Spying content, hijacking\",\n\t\"domainId\": 3,\n\t\"title\": \"Do not allow!\",\n\t\"isSafe\": false\n}"
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion/vote",
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion",
 							"protocol": "https",
 							"host": [
 								"fathomless-brushlands-42192",
@@ -274,8 +300,7 @@
 							],
 							"path": [
 								"api",
-								"opinion",
-								"vote"
+								"opinion"
 							]
 						}
 					},
@@ -309,6 +334,71 @@
 								"api",
 								"opinion",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editOpinionById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\" : \"edited title\",\n\t\"content\" : \"edited content\"\n}"
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion/1",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"opinion",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vote",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isUpvote\": true,\n\t\"opinionId\": 1\n}"
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion/vote",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"opinion",
+								"vote"
 							]
 						}
 					},
