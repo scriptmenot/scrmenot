@@ -33,14 +33,32 @@ module.exports = {
         const payload = req.body;
         
         return Domain
-            .create({
-                    'isAccepted': true, //TODO: when we will include voting for reliability, we should set it to false and start voting
-                    'uri': payload.uri
-                })
-            .then(obj => res.status(201).send(obj))
-            .catch(err => res.status(400).send(err));
-    },
+        .findAll({
+            attributes: ['id'],
+            where : {uri : payload.uri}
+        })
+        .then(
+            function(domains){
+                if(domains.length == 0){
+                    return Domain
+                        .create({
+                        'isAccepted': true, //TODO: when we will include voting for reliability, we should set it to false and start voting
+                        'uri': payload.uri
+                         })
+                        .then(obj => res.status(200).send(obj.dataValues))
+                }
+                else{
+                    return res.status(400).send({
+                        message : 'This domain already exists.',
+                        url : '/api/domain/' + domains[0]['id']
 
+                    });
+                }
+            }                 
+        )
+        
+    },
+    
     retrieve(req, res) {
         return Domain
             .findAll(retrieveDomainQuery)
