@@ -1,3 +1,6 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 .BlocksContainer{
     grid-area: 3/2/4/3;
     background-color: #F6FAF9;
@@ -144,11 +147,44 @@
         grid-area: 3/2/4/4;
         background-color: #2c8956;
         position: relative;
-        img{
-            position: absolute;
-            width: 30%;
-            top: 20%;
-            left:5%;
+        display: grid;
+        grid-template-columns: 2;
+        grid-template-rows: 2;
+
+        .topPicture {
+            display: grid;
+            grid-column: 1;
+
+            img {
+                position: absolute;
+                width: 30%;
+                top: 25%;
+                left: 15%;
+                transform: translate(-15%, -15%);
+            }
+        }
+
+        .slider {
+            display: grid;
+            grid-column: 2;
+            width: 200px;
+            display: block;
+            margin: auto;
+            margin-top: 10%;
+
+            .topTitle {
+                text-align: center;
+            }
+
+            .topType {
+                margin-top: 5%;
+                text-align: center;
+            }
+
+            ul {
+                list-style-type: none;
+                text-align: center;
+            }
         }
     }
 

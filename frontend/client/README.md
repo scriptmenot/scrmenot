@@ -6,6 +6,7 @@ Aplikacja działa na porcie 3030.
  - npm >= 5.2: npm install -g node
  - zaciągnięcie dependencji: npm install
  - sass: npm install node-sass
+ - react-slick: npm install react-slick --save
 
 ### Komendy
  - `npm start`
