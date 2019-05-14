@@ -4,7 +4,7 @@ const router = express.Router();
 const domainController = require('../controllers').Domain;
 
 router.get('/', domainController.retrieve);
-router.get('/mostdangerous', domainController.retrieveFiveMostDangerous);
+router.get('/topdomains', domainController.retrieveTop);
 
 router.get('/uri/:uri', domainController.retrieveByUri);
 router.get('/:id/', domainController.retrieveById);
