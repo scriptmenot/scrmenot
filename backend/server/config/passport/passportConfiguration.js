@@ -37,7 +37,6 @@ const localLogin =  new LocalStrategy(localStrategyOptions, function(req, email,
                     return done(null, false, 'Password and email does not match');
                 }
                 if(!isValidPassword(retrievedUser.password, password)) {
-                    console.log('Incorrect password');
                     return done(null, false, 'Password and email does not match');
                 }
 

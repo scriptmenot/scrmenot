@@ -1,4 +1,4 @@
-const Authentication = require('./authentication');
+const Authentication = require('./login');
 const Comment = require('./comment');
 const Domain = require('./domain');
 const Opinion = require('./opinion');
