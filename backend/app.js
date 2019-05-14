@@ -5,15 +5,20 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const passportPreparation = require('./server/config/passport/passport');
+const passport = require('passport');
+
 var router = require('./server/routes/index');
 
 var app = express();
-
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(passport.initialize());
+passportPreparation(passport);
 
 const corsOptions = {
     origin: '*',
@@ -22,7 +27,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', router);
+app.use('/api', router(passport));
 
 app.use(function(req, res, next) {
   next(createError(404));

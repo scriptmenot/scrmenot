@@ -1,6 +1,5 @@
 const bCrypt = require('bcrypt');
 const jwtSecret = require('../jwtConfig');
-const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const user = require('../../models/user');
 const PassportJwt = require('passport-jwt');
@@ -8,6 +7,7 @@ const JWTStrategy = PassportJwt.Strategy;
 const ExtractJWT = PassportJwt.ExtractJwt;
 
 const serialize = (user, done) => done(null, user.id);
+
 const deserialize = (id, done) => {
     user.findByPk(id).then(foundUser => {
        if(foundUser) {
@@ -30,18 +30,18 @@ const localLogin =  new LocalStrategy(localStrategyOptions, function(req, email,
         const isValidPassword = (userPassword, password) => bCrypt.compareSync(password, userPassword);
 
         user.findOne({where: {email: email}})
-            .then(function(author) {
-                if(!author) {
+            .then(function(retrievedUser) {
+                if(!retrievedUser) {
                     return done(null, false, 'Password and email does not match');
                 }
-                if(!isValidPassword(author.password, password)) {
+                if(!isValidPassword(retrievedUser.password, password)) {
                     console.log('Incorrect password');
                     return done(null, false, 'Password and email does not match');
                 }
 
-                const userDetails = author.get();
+                const userDetails = retrievedUser.get();
 
-                return done(false, user, 'Signup succesfull');
+                return done(false, userDetails, 'Signup succesfull');
             })
             .catch(err => {
                 return done(err, false, 'Something went wrong with login');
@@ -50,35 +50,34 @@ const localLogin =  new LocalStrategy(localStrategyOptions, function(req, email,
 );
 
 const localRegister = new LocalStrategy(localStrategyOptions, function(req, email, password, done) {
-        const generateHash = password => bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+    console.log("Registration");
 
-        user.findOne({where: {email: email}})
-            .then(function(user) {
-                if(user) {
-                    return done(null, false, 'That email is already taken');
-                }
-                else {
-                    const userPassword = generateHash(password);
+    const generateHash = password => bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
 
-                    const newUser = {
-                        email: email,
-                        password: userPassword,
-                        firstName: req.body.firstName,
-                        surname: req.body.surname,
-                        username: req.body.username,
-                        description: req.body.description
-                    };
+    user.findOne({where: {email: email}})
+        .then(function(user) {
+            if(user) {
+                return done(null, false, 'That email is already taken');
+            }
+            else {
+                const userPassword = generateHash(password);
 
-                    user.create(newUser).then(function(newUser, created) {
-                        if (!newUser) {
-                            return done(true, false, 'An error occured during creating author');
-                        }
-                        if (newUser) {
-                            return done(false, newUser);
-                        }
-                    });
-                }
-            });
+                const newUser = {
+                    email: email,
+                    password: userPassword,
+                    username: req.body.username,
+                };
+
+                user.create(newUser).then(function(newUser, created) {
+                    if (!newUser) {
+                        return done(true, false, 'An error occured during creating user');
+                    }
+                    if (newUser) {
+                        return done(false, newUser);
+                    }
+                });
+            }
+        });
     }
 );
 
@@ -93,8 +92,12 @@ const jwtLogin = new JWTStrategy(jwtOptions, (jwtPayload, done) => {
         .catch(err => done(err))
 });
 
-passport.serializeUser(serialize);
-passport.deserializeUser(deserialize);
-passport.use('jwt', jwtLogin);
-passport.use('local-signin', localLogin);
-passport.use('local-signup', localLogin);
+prepareStrategiesForLoginAndRegistration = passport => {
+        passport.serializeUser(serialize);
+        passport.deserializeUser(deserialize);
+        passport.use('jwt', jwtLogin);
+        passport.use('local-signin', localLogin);
+        passport.use('local-signup', localRegister);
+};
+
+module.exports = prepareStrategiesForLoginAndRegistration;
