@@ -87,6 +87,46 @@
 					"response": []
 				},
 				{
+					"name": "getTopFiveSafest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain/topdomains?count=2&safe=true&time=10",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"topdomains"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "2"
+								},
+								{
+									"key": "safe",
+									"value": "true"
+								},
+								{
+									"key": "time",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "addDomain",
 					"request": {
 						"method": "POST",
