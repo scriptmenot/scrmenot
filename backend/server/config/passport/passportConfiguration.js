@@ -1,15 +1,17 @@
 const bCrypt = require('bcrypt');
 const jwtSecret = require('../jwtConfig');
 const LocalStrategy = require('passport-local').Strategy;
-const user = require('../../models/user');
+const User = require('../../models/').user;
 const PassportJwt = require('passport-jwt');
 const JWTStrategy = PassportJwt.Strategy;
 const ExtractJWT = PassportJwt.ExtractJwt;
 
+const passport = require('passport');
+
 const serialize = (user, done) => done(null, user.id);
 
 const deserialize = (id, done) => {
-    user.findByPk(id).then(foundUser => {
+    User.findByPk(id).then(foundUser => {
        if(foundUser) {
            done(null, foundUser.get());
        }
@@ -29,7 +31,7 @@ const localStrategyOptions = {
 const localLogin =  new LocalStrategy(localStrategyOptions, function(req, email, password, done) {
         const isValidPassword = (userPassword, password) => bCrypt.compareSync(password, userPassword);
 
-        user.findOne({where: {email: email}})
+        User.findOne({where: {email: email}})
             .then(function(retrievedUser) {
                 if(!retrievedUser) {
                     return done(null, false, 'Password and email does not match');
@@ -50,11 +52,9 @@ const localLogin =  new LocalStrategy(localStrategyOptions, function(req, email,
 );
 
 const localRegister = new LocalStrategy(localStrategyOptions, function(req, email, password, done) {
-    console.log("Registration");
-
     const generateHash = password => bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
 
-    user.findOne({where: {email: email}})
+    User.findOne({where: {email: email}})
         .then(function(user) {
             if(user) {
                 return done(null, false, 'That email is already taken');
@@ -68,7 +68,7 @@ const localRegister = new LocalStrategy(localStrategyOptions, function(req, emai
                     username: req.body.username,
                 };
 
-                user.create(newUser).then(function(newUser, created) {
+                User.create(newUser).then(function(newUser, created) {
                     if (!newUser) {
                         return done(true, false, 'An error occured during creating user');
                     }
@@ -77,7 +77,8 @@ const localRegister = new LocalStrategy(localStrategyOptions, function(req, emai
                     }
                 });
             }
-        });
+        })
+        .catch(err => {return done(err, false, 'Something went wrong with registration')});
     }
 );
 
@@ -87,17 +88,13 @@ const jwtOptions = {
 };
 
 const jwtLogin = new JWTStrategy(jwtOptions, (jwtPayload, done) => {
-    user.findOne({where: {email: jwtPayload.email}})
+    User.findOne({where: {email: jwtPayload.email}})
         .then(user => done(false, user))
         .catch(err => done(err))
 });
 
-prepareStrategiesForLoginAndRegistration = passport => {
-        passport.serializeUser(serialize);
-        passport.deserializeUser(deserialize);
-        passport.use('jwt', jwtLogin);
-        passport.use('local-signin', localLogin);
-        passport.use('local-signup', localRegister);
-};
-
-module.exports = prepareStrategiesForLoginAndRegistration;
+passport.serializeUser(serialize);
+passport.deserializeUser(deserialize);
+passport.use('jwt', jwtLogin);
+passport.use('local-signin', localLogin);
+passport.use('local-signup', localRegister);
