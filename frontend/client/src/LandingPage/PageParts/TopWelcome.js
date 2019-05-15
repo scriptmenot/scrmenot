@@ -6,10 +6,6 @@ class TopWelcome extends React.Component {
         return (
             <div className="TopWelcome">
 
-                <p className="btn" id="login">Sign in</p>
-                <p className="btn" id="register">Sign up</p>
-                <p className="btn" id="catalogue">Catalogue</p>
-
                 <div className="logoText">
                     <h1>ScriptMeNot</h1>
                 </div>

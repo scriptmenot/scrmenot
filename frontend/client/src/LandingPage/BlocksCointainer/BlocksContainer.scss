@@ -3,7 +3,7 @@
 $gray: #c2c9bb;
 
 .BlocksContainer{
-    grid-area: 3/2/4/3;
+    grid-area: 4/2/5/3;
     background-color: #F6FAF9;
     display: grid;
     grid-gap: 20px;
@@ -37,7 +37,8 @@ $gray: #c2c9bb;
 
     .SearchDomainBlock{
         grid-area: 2/3/3/5;
-        background-color: #4a9578;
+        background-color: #52a165;
+        z-index: 10;
         text-align: center;
 
         .SearchForm{

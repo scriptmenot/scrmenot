@@ -10,10 +10,14 @@ body {
   .DomainDetails {
         display: grid;
         grid-template-columns: 12% 76% 12%;
-        grid-template-rows: 300px auto 200px; 
+        grid-template-rows: 4% auto 242px;
 
         .Footer {
             grid-area: 3/2/4/3;
+        }
+
+        .NavBar {
+            grid-area: 1/2/2/3;
         }
 
         .Details{
@@ -22,6 +26,8 @@ body {
             grid-template-columns: 12% 76% 12%;
             grid-template-rows: 100px 100px auto 50px; 
             position: relative;
+            background-color: #F6FAF9;
+            
             h1{
                 grid-area: 2/2/3/3;
                 text-align: center;
