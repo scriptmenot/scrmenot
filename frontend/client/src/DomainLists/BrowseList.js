@@ -30,7 +30,7 @@ class BrowseList extends React.Component {
   render() {
     return (
       <div className="BrowseList">
-        <ul className="DomainsList" on={this.getSearchedNames}> 
+        <ul className="DomainsList"> 
               {this.state.domains.map((domain, i) => 
               <li key={i} onClick={this.details.bind(this, domain)}>{domain.uri}</li>
             )}

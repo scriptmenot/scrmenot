@@ -30,7 +30,16 @@ handleAdding(e){
     body: JSON.stringify(data)
 })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data);
+
+      this.setState({
+        name: "",
+        comment: ""
+      });
+      
+      this.onCloseModal();
+    })
     .catch(error => console.log(error));
 }
 
