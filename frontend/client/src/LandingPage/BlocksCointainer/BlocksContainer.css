@@ -131,6 +131,10 @@
       .BlocksContainer .TopDomains .slider ul {
         list-style-type: none;
         text-align: center; }
+    .BlocksContainer .TopDomains li:hover {
+      color: #c2c9bb;
+      transition-duration: 0.1s;
+      cursor: pointer; }
   .BlocksContainer .BrowseCatalogueBlock {
     grid-area: 3/4/4/5;
     background-color: #c69b24;

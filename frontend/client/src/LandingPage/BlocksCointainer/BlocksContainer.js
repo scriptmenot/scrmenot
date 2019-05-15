@@ -12,7 +12,7 @@ class BlocksContainer extends React.Component {
           <ul className="BlocksContainer">
             <AddDomain/>
             <SearchDomain {...this.props}/>
-            <TopDomains />
+            <TopDomains {...this.props}/>
             <BrowseCatalogue {...this.props}/>
           </ul>
       )

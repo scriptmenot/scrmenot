@@ -1,9 +1,36 @@
 import React from "react";
 import "./BlocksContainer.scss";
 import Slider from "react-slick";
+import '../../DomainDetails/DomainDetails.js';
 
 class TopDomains extends React.Component {
-  state = {};
+  state = {
+    domainsSafe: [], 
+    domainsDangerous: [],
+    dom: []
+  };
+
+  details(domain){
+    this.props.history.push({
+        pathname: '/details',
+        state: { dom: domain }
+      });
+  }
+
+  componentDidMount() {
+    fetch('https://fathomless-brushlands-42192.herokuapp.com/api/domain/topdomains?count=4&safe=true&time=10')
+   .then(resp => resp.json())
+     .then(resp => {
+       this.setState({domainsSafe: Array.from(resp)});
+     })
+
+     
+     fetch('https://fathomless-brushlands-42192.herokuapp.com/api/domain/topdomains?count=4&safe=false&time=10')
+   .then(resp => resp.json())
+     .then(resp => {
+       this.setState({domainsDangerous: Array.from(resp)});
+     })
+    }
 
   render() {
     const settings = {
@@ -27,21 +54,17 @@ class TopDomains extends React.Component {
             <div>
               <h3 className="topType">Dangerous:</h3>
               <ul>
-                <li>Domena 1</li>
-                <li>Domena 2</li>
-                <li>Domena 3</li>
-                <li>Domena 4</li>
-                <li>Domena 5</li>
+              {this.state.domainsDangerous.map((domain, i) => 
+              <li key={i} onClick={this.details.bind(this, domain)}>{domain.uri}</li>
+            )}
               </ul>
             </div>
             <div>
               <h3 className="topType">Safe:</h3>
               <ul>
-                <li>Domena 1</li>
-                <li>Domena 2</li>
-                <li>Domena 3</li>
-                <li>Domena 4</li>
-                <li>Domena 5</li>
+              {this.state.domainsSafe.map((domain, i) => 
+              <li key={i} onClick={this.details.bind(this, domain)}>{domain.uri}</li>
+            )}
               </ul>
             </div>
           </Slider>

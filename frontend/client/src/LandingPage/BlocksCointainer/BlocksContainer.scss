@@ -1,5 +1,6 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
+$gray: #c2c9bb;
 
 .BlocksContainer{
     grid-area: 3/2/4/3;
@@ -185,6 +186,12 @@
                 list-style-type: none;
                 text-align: center;
             }
+        }
+
+        li:hover {
+            color: $gray;
+            transition-duration: 0.1s;
+            cursor: pointer;
         }
     }
 
