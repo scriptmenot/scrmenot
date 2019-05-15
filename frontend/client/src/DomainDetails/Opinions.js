@@ -10,6 +10,7 @@ class Opinions extends React.Component{
       this.state = {    
         domainUri: this.props.location.state.dom.uri,
         domainId: this.props.location.state.dom.id,
+        domainSafety: this.props.location.state.dom.safety,
         opinions:[]
       };
     }
@@ -87,8 +88,12 @@ class Opinions extends React.Component{
     render() {
       return (
         <React.Fragment>
+        
           <h1>{this.state.domainUri}
           </h1>
+          <div className="Safety">
+          <span><p>Safety</p></span>
+          {this.state.domainSafety}</div>
           <div className="Opinions">
                 {this.state.opinions.length ?
                   this.state.opinions.map((opinion, index) => {
