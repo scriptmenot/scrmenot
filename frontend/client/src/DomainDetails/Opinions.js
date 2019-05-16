@@ -10,36 +10,52 @@ class Opinions extends React.Component{
       this.state = {    
         domainUri: this.props.location.state.dom.uri,
         domainId: this.props.location.state.dom.id,
-
         domainSafety: this.props.location.state.dom.safety,
         opinions:[],
+        commentsMap: new Map(),
         commentContent: "",
         isCommentClicked: false,
         selectedOpinionId: false
       };
     }
+
+    loadOpinionsAndComments(){
+        
+      fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/opinion/domain/${this.props.location.state.dom.id}`)
+        .then(resp => resp.json())
+          .then(resp => {
+            if (this._isMounted) {
+              this.setState({ opinions: Array.from(resp) });
+            }
+
+            let commentsArray = [];
+            this.state.opinions.forEach(opinion => {
+
+              fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/comment/opinion/${opinion.id}`)
+              .then(resp => resp.json())
+                .then(resp => {
+                  [...resp].forEach(el => {
+                    commentsArray.push({"content": el.content, "updatedAt": el.updatedAt});
+                  })
+
+                  if(commentsArray.length !== 0)
+                    this.state.commentsMap.set(opinion.id, commentsArray);
+                commentsArray = [];
+            });
+      });
+
+    });
+    }
   
     componentDidMount() {
   
       this._isMounted = true;
-  
-      fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/opinion/domain/${this.props.location.state.dom.id}`)
-     .then(resp => resp.json())
-       .then(resp => {
-        if (this._isMounted) {
-        this.setState({ opinions: Array.from(resp) });
-        }
-          });
+      this.loadOpinionsAndComments();
+
     }
   
     componentDidUpdate() {
-      fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/opinion/domain/${this.props.location.state.dom.id}`)
-     .then(resp => resp.json())
-       .then(resp => {
-        if (this._isMounted) {
-        this.setState({ opinions: Array.from(resp) });
-        }
-          });
+      this.loadOpinionsAndComments(); 
     }
   
     componentWillUnmount() {
@@ -47,7 +63,7 @@ class Opinions extends React.Component{
     }
   
     deleteOpinion(opinionId){
-      console.log(opinionId);
+      
       return fetch("https://fathomless-brushlands-42192.herokuapp.com/api/opinion/" + opinionId, {
         method: 'DELETE',
         headers: {
@@ -89,10 +105,15 @@ class Opinions extends React.Component{
     }
 
     addCommentField(opinionIndex){
+      if(this.state.isCommentClicked)
       this.setState({
-        isCommentClicked: true,
-        selectedOpinionId: opinionIndex
-      })
+        isCommentClicked: false})
+
+      else
+        this.setState({
+          isCommentClicked: true,
+          selectedOpinionId: opinionIndex
+        })
     }
 
     handleCommentContentChange(e) {
@@ -158,7 +179,18 @@ class Opinions extends React.Component{
                           
                         </div>
                         <div className="Comments">
-                          
+                       
+                          {
+                            Array.isArray(this.state.commentsMap.get(opinion.id)) ? 
+                            
+                            this.state.commentsMap.get(opinion.id).map(comment => 
+                            <div className="oneComment">
+                              <h5>{comment.updatedAt.slice(0,10)}</h5>
+                              <span className="commentContent"> {comment.content} </span>
+                            </div>
+                            )
+                             : <span></span>
+                          }
                         </div>
                         {
                             (this.state.isCommentClicked && this.state.selectedOpinionId === index) ?
@@ -167,13 +199,10 @@ class Opinions extends React.Component{
 
                               <h4>Type a comment</h4>
                               <textarea  id="opinionComment"  placeholder='Content' value={this.state.commentContent} onChange={this.handleCommentContentChange.bind(this)} required></textarea>
-                              
                               <input type="submit" value="Add" id="addCommentButton"/>
 
                             </form>
-
                             :
-
                             <div></div>
                           }
                         </div>

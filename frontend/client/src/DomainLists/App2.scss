@@ -10,13 +10,18 @@ body {
     height: 100vh;
     display: grid;
     grid-template-columns: 12% 76% 12%;
-      grid-template-rows: 4% 40% 80% 30%; 
+      grid-template-rows: 5% 40% 80% 30%; 
+
+    .NavBar{
+      grid-area: 1/2/2/3;
+    }
     .Footer {
         grid-area: 4/2/5/3;
     }
     .DescriptionBrowse {
       grid-area: 2/2/3/3;
     }
+    
     }
 }
 

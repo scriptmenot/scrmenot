@@ -45,8 +45,6 @@ class AddOpinion extends React.Component{
         "title": this.state.opinionTitle,
         "isSafe": this.state.isSafe
       };
-
-      console.log(data);
     
       fetch("https://fathomless-brushlands-42192.herokuapp.com/api/opinion", {
         method: 'POST',
@@ -136,7 +134,8 @@ class AddOpinion extends React.Component{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-           transform: 'translate(75%, 27%)'
+          transform: 'translate(75%, 29%)',
+          fontSize: '70%'
         }
   
         const submitStyles = {

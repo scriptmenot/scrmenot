@@ -6,6 +6,7 @@ import BrowseList from './BrowseList.js'
 import Footer from '../LandingPage/PageParts/Footer.js'
 import './App2.scss';
 
+
 class Browse extends React.Component {
     render() {
       return (
