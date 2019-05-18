@@ -111,7 +111,7 @@ class Opinions extends React.Component{
           {this.state.domainSafety}</div>
           <div className="Opinions">
                 {this.state.opinions.length ?
-                  this.state.opinions.map((opinion, index) => {
+                  this.state.opinions.slice(0).reverse().map((opinion, index) => {
                   return <div>
                           <div className="oneOpinion">
                           <img src={require('./user.png')} alt="user" />
