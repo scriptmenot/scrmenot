@@ -99,6 +99,24 @@ body {
                         margin-left: auto;
                         margin-right: auto;
                     }
+                    
+                    .opinionTitleEditMode{
+                        width: 40%;
+                        height: 3em;
+                    }
+
+                    .opinionContentEditMode{
+                        width: 60%;
+                        height: 5em;
+                        margin: 3% 0;
+                        line-height: 1.2em
+                        
+                    }
+                    .opinionButton{
+                     transform: translate(30%, -120%);
+                     padding: 0.7% 1.7%;
+                        
+                    }
                 }
                 
                 img {
@@ -110,7 +128,7 @@ body {
                 
                 
                 .editingOperations{
-                   transform: translateY(-62%);
+                   transform: translateY(-42%);
                     position: absolute;
                     display:flex;
                     flex-direction: column;

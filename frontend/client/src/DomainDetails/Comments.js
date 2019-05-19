@@ -97,10 +97,10 @@ class Comments extends React.Component{
                         {
                             Array.isArray(this.state.commentsMap.get(this.props.opinionId)) ? 
                             
-                            this.state.commentsMap.get(this.props.opinionId).slice(0).reverse().map(comment => 
-                            <div className="oneComment">
+                            this.state.commentsMap.get(this.props.opinionId).slice(0).reverse().map((comment, index) => 
+                            <div className="oneComment" key={index}>
                             <h5>{comment.updatedAt.slice(11,19)} <br/> {comment.updatedAt.slice(0,10)} </h5>
-                            <span className="commentContent"> {comment.content} </span>
+                            <span className="commentContent" > {comment.content} </span>
                             </div>
                             )
                             : <span></span>
