@@ -10,7 +10,7 @@ class Browse extends React.Component {
     render() {
       return (
         <div className="Browse">
-          <NavBar/>
+          <NavBar {...this.props}/>
           <DescriptionBrowse/>
           <BrowseList {...this.props}/>
           <Footer/>

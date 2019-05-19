@@ -8,7 +8,7 @@ class DomainDetails extends React.Component {
     render() {
       return (
         <div className="DomainDetails">
-          <NavBar/>
+          <NavBar {...this.props}/>
           <Details {...this.props}/>
           <Footer/>
         </div>
