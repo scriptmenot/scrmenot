@@ -10,7 +10,8 @@ class AddOpinion extends React.Component{
         opinionTitle: "",
         opinionContent: "",
         isSafe: false,
-        open: false
+        open: false,
+        disabled: false
       };
     }
     
@@ -38,6 +39,7 @@ class AddOpinion extends React.Component{
   
     handleAdding(e){
       e.preventDefault();
+      this.setState({disabled: true});
     
       const data = {
         "content": this.state.opinionContent,
@@ -58,12 +60,15 @@ class AddOpinion extends React.Component{
           console.log(data);
           this.setState({
             opinionTitle: "",
-          opinionContent: ""
+          opinionContent: "",
+          disabled: false
           });
           
           this.onCloseModal();
         })
         .catch(error => console.log(error));
+
+        return false;
     }
 
 
@@ -164,7 +169,7 @@ class AddOpinion extends React.Component{
                     <label><input type="radio" name="isSafe" value={false} onChange={this.handleSecurityLevel.bind(this)} checked={true}/> Dangerous</label>
                   
                   </div>
-                  <input type="submit" style={submitStyles} value="Add"/>
+                  <input type="submit" style={submitStyles} value="Add" disabled={this.state.disabled}/>
 
                 </form>
 

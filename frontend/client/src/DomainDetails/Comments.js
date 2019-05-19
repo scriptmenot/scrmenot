@@ -9,12 +9,13 @@ class Comments extends React.Component{
           commentsMap: new Map(),
           commentContent: "",
           isCommentClicked: this.props.isCommentClicked,
-          selectedOpinionId: this.props.selectedOpinionId
+          selectedOpinionId: this.props.selectedOpinionId,
+          disabled: false
         };
     }
 
     loadComments(){
-  
+        
         let commentsArray = [];
 
         fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/comment/opinion/${this.props.opinionId}`)
@@ -62,6 +63,7 @@ class Comments extends React.Component{
   
       handleCommentAdding(opinionId, e){
         e.preventDefault();
+        this.setState({disabled: true});
         
         const data = {
           "content": this.state.commentContent,
@@ -80,7 +82,8 @@ class Comments extends React.Component{
             console.log(data);
             this.setState({
               isCommentClicked: false,
-              commentContent: ""
+              commentContent: "",
+              disabled: false
             })
           })
           .catch(error => console.log(error));
@@ -110,7 +113,7 @@ class Comments extends React.Component{
 
                         <h4>Type a comment</h4>
                         <textarea  id="opinionComment"  placeholder='Content' value={this.state.commentContent} onChange={this.handleCommentContentChange.bind(this)} required></textarea>
-                        <input type="submit" value="Add" id="addCommentButton"/>
+                        <input type="submit" value="Add" id="addCommentButton" disabled={this.state.disabled}/>
 
                         </form>
                         :

@@ -6,7 +6,8 @@ class AddDomain extends React.Component {
   state = {
     open: false,
     name: "",
-    comment: ""
+    comment: "",
+    disabled: false
   };
 
   handleNameChange(e){
@@ -19,6 +20,7 @@ class AddDomain extends React.Component {
 
 handleAdding(e){
   e.preventDefault();
+  this.setState({disabled: true});
 
   const data = {"uri": this.state.name};
 
@@ -35,7 +37,8 @@ handleAdding(e){
 
       this.setState({
         name: "",
-        comment: ""
+        comment: "",
+        disabled: false
       });
       
       this.onCloseModal();
@@ -125,7 +128,7 @@ handleAdding(e){
               <input style={domainNameStyles} type="text" id="newDomainURL" value={this.state.name} onChange={this.handleNameChange.bind(this)} required/>
               <h4 style={secondHeaderStyles}>What do you find about it?</h4>
               <textarea  id="newDomainComment"  style={commentStyles} placeholder='Type some comment' value={this.state.comment} onChange={this.handleCommentChange.bind(this)} required></textarea>
-              <input type="submit" style={submitStyles} value="Add"/>
+              <input type="submit" style={submitStyles} value="Add" disabled={this.state.disabled}/>
 
             </form>
 
