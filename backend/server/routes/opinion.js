@@ -10,6 +10,6 @@ router.post('/vote', opinionController.vote);
 
 router.delete('/:id', opinionController.delete);
 
-router.put('/:id', opinionController.update)
+router.put('/:id', opinionController.update);
 
 module.exports = router;

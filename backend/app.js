@@ -9,7 +9,6 @@ var router = require('./server/routes/index');
 
 var app = express();
 
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
