@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "998935bd-8da5-4631-8f5a-d48c251f2655",
+		"_postman_id": "da8e62af-c17d-42e0-9f3c-f329399ff8a8",
 		"name": "ScriptMeNot Heroku",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -568,6 +568,75 @@
 								"api",
 								"comment",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "loginRegister",
+			"item": [
+				{
+					"name": "registerUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"another@testowy.com\",\n\t\"password\": \"asdf\",\n\t\"username\": \"crazyOne\"\n}"
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/register",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"another@testowy.com\",\n\t\"password\": \"asdf\"\n}"
+						},
+						"url": {
+							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/login",
+							"protocol": "https",
+							"host": [
+								"fathomless-brushlands-42192",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"login"
 							]
 						}
 					},
