@@ -3,16 +3,19 @@ const router = express.Router();
 
 const domainController = require('../controllers').Domain;
 
-router.get('/', domainController.retrieve);
-router.get('/topdomains', domainController.retrieveTop);
+function createDomainRouter(requireAuth) {
+    router.get('/', domainController.retrieve);
+    router.get('/topdomains', domainController.retrieveTop);
+    router.get('/uri/:uri', domainController.retrieveByUri);
+    router.get('/:id/', domainController.retrieveById);
 
-router.get('/uri/:uri', domainController.retrieveByUri);
-router.get('/:id/', domainController.retrieveById);
+    router.post('/', requireAuth, domainController.create);
 
-router.post('/', domainController.create);
+    router.put('/:id/', requireAuth, domainController.update);
 
-router.put('/:id/', domainController.update);
+    router.delete('/:id/', requireAuth, domainController.destroy);
 
-router.delete('/:id/', domainController.destroy);
+    return router;
+}
 
-module.exports = router;
+module.exports = createDomainRouter;
