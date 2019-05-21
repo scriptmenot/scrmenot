@@ -1,7 +1,8 @@
 import React from 'react';
 import './BrowseList.scss';
-import '../DomainDetails/DomainDetails.js'
+import '../DomainDetails/DomainDetails.js';
 import { withRouter } from "react-router";
+const moment = require('moment');
 
 class BrowseList extends React.Component {
  state = {
@@ -28,13 +29,23 @@ class BrowseList extends React.Component {
 
     
   render() {
+
     return (
       <div className="BrowseList">
         <ul className="DomainsList"> 
               {this.state.domains.map((domain, i) => 
-              <li key={i} onClick={this.details.bind(this, domain)}>{domain.uri}</li>
-            )}
-          </ul>
+               <div class="SummaryList">
+                  <div key={i} class="safety">
+                    <div class="mini-counts">{domain.safety}</div>
+                       <div>safety</div>
+                   </div>
+          <div class="Time">Added {moment(domain.createdAt).fromNow()}</div>
+          <div class="Name">
+            <li key={i} onClick={this.details.bind(this, domain)}>{domain.uri}</li>  
+          </div>   
+          </div>   
+      )}
+      </ul>
       </div>
     )
   }

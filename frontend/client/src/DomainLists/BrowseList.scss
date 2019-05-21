@@ -6,9 +6,56 @@
     display: grid;
     grid-area: 3/2/4/3;
     background-color: #F6FAF9;
+    box-sizing:border-box;
+
+ 
     .DomainsList{
      grid-area: 2/2/3/3;
-     text-align: center;
+     text-align: left;
+     padding-left: 12px;
+     padding-right: 12px; 
+    
+        .Name{
+        border-bottom: 1px solid #6a737c;
+        }
+        .Time{
+        line-height: 1;
+        width: auto;
+        height: auto;
+        border-radius: 3px;
+        min-width: auto;
+        text-align: right;
+        font-weight: bold;
+        
+        font-size: 12px;
+        margin-bottom: 0;
+        overflow: hidden;
+        color: #6a737c;
+        }
+        
+        .safety{
+        padding: 4px 0;
+        line-height: 1;
+        box-sizing: border-box;
+        width: auto;
+        height: auto;
+        border-radius: 3px;
+        min-width: auto;
+        text-align: left;
+        margin: 0 4px 0 0;
+        font-weight: bold;
+        display: inline-grid;
+        font-size: 12px;
+        margin-bottom: 0;
+        overflow: hidden;
+    
+        .mini-counts{
+        color: #6a737c;
+        display: inline;
+        
+    }
+    }
+        
     }
     
 
@@ -20,6 +67,7 @@ ul {
   padding: 0;
   
  li {
+    clear:both;
     margin: 0;
     margin-bottom: 5px;
     padding-left: 1.5em;
@@ -27,11 +75,6 @@ ul {
     text-transform: uppercase;
     font-weight: 600;
     background-color: transparent;
-    border: 3px solid #3D9970;
-    color: black;
-    border-radius: 50px;
-    -webkit-transition: all .15s ease-in-out;
-    transition: all .15s ease-in-out;
    
   }
   
@@ -48,10 +91,12 @@ li:hover {
     transform: scale(1);
   }
   70% {
-    transform: scale(.9);
+    transform: scale(.95);
   }
     100% {
     transform: scale(1);
   }
 }
+   
+    
 }
