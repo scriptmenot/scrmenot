@@ -7,6 +7,7 @@ Aplikacja działa na porcie 3030.
  - zaciągnięcie dependencji: npm install
  - sass: npm install node-sass
  - react-slick: npm install react-slick --save
+ - Moment.js : npm install moment --save
 
 ### Komendy
  - `npm start`
