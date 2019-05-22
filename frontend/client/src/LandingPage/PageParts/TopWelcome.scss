@@ -1,14 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:500&display=swap');
+
 $light-green: #4e987c;
 $green: #227e5b;
 
 .TopWelcome{
-<<<<<<< Updated upstream
     font-family: 'Raleway', serif;
-    grid-area: 2/2;
-=======
     grid-area: 2/1;
->>>>>>> Stashed changes
     z-index: 10;
     background-color: $green;
     display: grid;
@@ -21,7 +17,6 @@ $green: #227e5b;
     .logo {
         grid-area: 1/6/11/10;
         position: relative;
-        //height: 100%;
 
         img {
             position: absolute;
