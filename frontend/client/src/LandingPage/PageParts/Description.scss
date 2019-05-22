@@ -1,10 +1,10 @@
 $yellow: #fdedb3;
 
 .Description, .DescriptionBrowse{
-    grid-area: 3/2/4/3;
+    grid-area: 3/1/4/2;
     background-color: #F6FAF9;
     display: grid;
-    grid-template-columns: 1fr 4fr 4fr 1fr;
+    grid-template-columns: 2fr 4fr 4fr 2fr;
     grid-template-rows: 1fr 4fr 1fr;
     min-width: 0;
     min-height: 0;

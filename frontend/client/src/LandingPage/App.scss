@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+=======
+@import url('https://fonts.googleapis.com/css?family=Lato|Palanquin:100&display=swap');
+>>>>>>> Stashed changes
 *{
     padding: 0;
     margin: 0;
@@ -10,7 +14,7 @@ body{
     .App {
         height: 100vh;
         display: grid;
-        grid-template-columns:  12% 76% 12%;
-        grid-template-rows: 5% 60% 40% 90% 30% 30%;
+        grid-template-columns:  100%;
+        grid-template-rows: 5% 60% 45% 90% 30% 30%;
     }
 }
