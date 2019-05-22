@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:500&display=swap');
 $light-green: #4e987c;
 $green: #227e5b;
 
 .TopWelcome{
+    font-family: 'Raleway', serif;
     grid-area: 2/2;
     z-index: 10;
     background-color: $green;

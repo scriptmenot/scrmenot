@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway');
-
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 *{
     padding: 0;
     margin: 0;
@@ -7,7 +6,7 @@
 
 body{
     height: 100vh;
-    font-family: 'Raleway';
+    font-family: 'Lato', sans-serif;
     .App {
         height: 100vh;
         display: grid;
