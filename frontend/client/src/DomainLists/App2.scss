@@ -7,17 +7,22 @@ body {
   .Browse {
     height: 100vh;
     display: grid;
-    grid-template-columns: 12% 76% 12%;
-      grid-template-rows: 8% 40% 80% 30%; 
+
+    grid-template-columns: 100%;
+      grid-template-rows: 8% 45% 80% 30%; 
 
     .NavBar{
-      grid-area: 1/2/2/3;
+      grid-area: 1/1/2/2;
     }
     .Footer {
-        grid-area: 4/2/5/3;
+        grid-area: 4/1/5/2;
     }
     .DescriptionBrowse {
-      grid-area: 2/2/3/3;
+      grid-area: 2/1/3/2;
+      
+        img{
+          width:40%;
+        }
     }
     
     }
