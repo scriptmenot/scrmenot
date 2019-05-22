@@ -17,11 +17,11 @@ class NavBar extends React.Component {
     render() {
         return (
             <div className="NavBar">
-                <ul>
-                    <li className="btn-border-drawing" onClick={this.moveToLandingPage.bind(this)}>Home</li>
-                    <li className="btn-border-drawing" onClick={this.moveToDomainsList.bind(this)}>Domains</li>
-                    <li className="btn-border-drawing">Sign in</li>
-                    <li className="btn-border-drawing">Sign up</li>
+                <ul className="menu">
+                    <li onClick={this.moveToLandingPage.bind(this)}><p>Home</p></li>
+                    <li onClick={this.moveToDomainsList.bind(this)}><p>Domains</p></li>
+                    <li ><p>Sign in</p></li>
+                    <li ><p>Register</p></li>
                 </ul>
             </div>
         )
