@@ -1,6 +1,7 @@
 import React from 'react';
 import './DomainDetails.scss';
 import Comments from './Comments.js';
+import Loader from '../DomainLists/Loader.js';
 
 class Opinions extends React.Component{
 
@@ -17,7 +18,8 @@ class Opinions extends React.Component{
         selectedOpinionId: "",
         editOpinionMode: false,
         editedOpinionContent: "",
-        editedOpinionTitle: ""
+        editedOpinionTitle: "",
+        isLoading: false
       };
     }
 
@@ -27,7 +29,10 @@ class Opinions extends React.Component{
         .then(resp => resp.json())
           .then(resp => {
             if (this._isMounted) {
-              this.setState({ opinions: Array.from(resp) });
+              this.setState({ 
+                opinions: Array.from(resp),
+              isLoading: false 
+            });
             }
 
       });
@@ -36,6 +41,7 @@ class Opinions extends React.Component{
     componentDidMount() {
   
       this._isMounted = true;
+      this.setState({ isLoading: true });
       this.loadOpinions();
 
     }
@@ -167,7 +173,12 @@ class Opinions extends React.Component{
           <span><p>Safety</p></span>
           {this.state.domainSafety}</div>
           <div className="Opinions">
-                {this.state.opinions.length ?
+                {
+                  this.state.isLoading 
+                  ?
+                  <Loader/>
+                  :
+                  this.state.opinions.length ?
                   this.state.opinions.slice(0).reverse().map((opinion, index) => {
                   return <div>
                           <div className="oneOpinion">
