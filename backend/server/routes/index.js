@@ -5,7 +5,7 @@ require('../config/passport/passportConfiguration');
 const passport = require('passport');
 
 const requireAuth = passport.authenticate('jwt', {session: false});
-
+const requireUserToBeAuthor = require('../controllers/authorization/authorization');
 
 const loginRouter = require('./login');
 const createCommentRouter = require('./comment');
@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
 });
 
 router.use('/login', loginRouter);
-router.use('/comment', createCommentRouter(requireAuth));
+router.use('/comment', createCommentRouter(requireAuth, requireUserToBeAuthor));
 router.use('/domain', createDomainRouter(requireAuth));
 router.use('/opinion', opinionRouter);
 router.use('/register', registrationRouter);
