@@ -19,7 +19,7 @@ router.get('/', function(req, res) {
 
 router.use('/login', loginRouter);
 router.use('/comment', createCommentRouter(requireAuth, requireUserToBeAuthor));
-router.use('/domain', createDomainRouter(requireAuth));
+router.use('/domain', createDomainRouter(requireAuth, requireUserToBeAuthor));
 router.use('/opinion', opinionRouter);
 router.use('/register', registrationRouter);
 

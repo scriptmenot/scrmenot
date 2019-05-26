@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const domainController = require('../controllers').Domain;
+const Domain = require('../models/').domain;
 
-function createDomainRouter(requireAuth) {
+function createDomainRouter(requireAuth, requireUserToBeAuthor) {
     router.get('/', domainController.retrieve);
     router.get('/topdomains', domainController.retrieveTop);
     router.get('/uri/:uri', domainController.retrieveByUri);
@@ -11,9 +12,9 @@ function createDomainRouter(requireAuth) {
 
     router.post('/', requireAuth, domainController.create);
 
-    router.put('/:id/', requireAuth, domainController.update);
+    router.put('/:id/', requireAuth, requireUserToBeAuthor(Domain), domainController.update);
 
-    router.delete('/:id/', requireAuth, domainController.destroy);
+    router.delete('/:id/', requireAuth, requireUserToBeAuthor(Domain), domainController.destroy);
 
     return router;
 }

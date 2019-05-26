@@ -31,7 +31,8 @@ function includeSafetyToQueryResults(domains) {
 module.exports = {
     create(req, res) {
         const payload = req.body;
-        
+        const userId = req.user.id;
+
         return Domain
         .findAll({
             attributes: ['id'],
@@ -39,11 +40,12 @@ module.exports = {
         })
         .then(
             function(domains){
-                if(domains.length == 0){
+                if(domains.length === 0){
                     return Domain
                         .create({
                         'isAccepted': true, //TODO: when we will include voting for reliability, we should set it to false and start voting
-                        'uri': payload.uri
+                        'uri': payload.uri,
+                        'userId': userId
                          })
                         .then(obj => res.status(200).send(obj.dataValues))
                 }
