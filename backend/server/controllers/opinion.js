@@ -6,13 +6,15 @@ const OpinionRetriever = require('./helper/opinionRetriever');
 module.exports = {
     create(req, res) {
         const payload = req.body;
+        const userId = req.user.id;
 
         return Opinion
             .create({
                     'content': payload.content,
                     'domainId': payload.domainId,
                     'title': payload.title,
-                    'isSafe': payload.isSafe
+                    'isSafe': payload.isSafe,
+                    'userId': userId
                 })
             .then(obj => res.status(201).send(obj))
             .catch(err => res.status(400).send(err));
@@ -58,6 +60,7 @@ module.exports = {
     vote(req, res) {
         const isUpvote = req.body.isUpvote;
         const opinionId = req.body.opinionId;
+        const userId = req.user.id;
 
         let upvoteMultiplier;
 
@@ -71,7 +74,8 @@ module.exports = {
         return VoteOpinion
             .create({
                 'value': upvoteMultiplier * 1, //TODO: in future it will be somehow multiplied by user reputation
-                'opinionId': opinionId
+                'opinionId': opinionId,
+                'userId': userId
             })
             .then(obj => res.status(201).send(obj))
             .catch(err => res.status(400).send(err));

@@ -28,7 +28,14 @@ module.exports = (sequelize, DataTypes) => {
           as: 'domain',
           foreignKey: 'userId'
       });
-
+      User.hasMany(models.opinion, {
+          as: 'opinion',
+          foreignKey: 'userId'
+      });
+      User.hasMany(models.voteOpinion, {
+          as: 'voteOpinion',
+          foreignKey: 'userId'
+      })
   };
   return User;
 };

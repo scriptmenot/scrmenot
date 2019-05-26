@@ -7,10 +7,11 @@ const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', {session: false});
 const requireUserToBeAuthor = require('../controllers/authorization/authorization');
 
-const loginRouter = require('./login');
 const createCommentRouter = require('./comment');
 const createDomainRouter = require('./domain');
-const opinionRouter = require('./opinion');
+const createOpinionRouter = require('./opinion');
+
+const loginRouter = require('./login');
 const registrationRouter = require('./registration');
 
 router.get('/', function(req, res) {
@@ -20,7 +21,7 @@ router.get('/', function(req, res) {
 router.use('/login', loginRouter);
 router.use('/comment', createCommentRouter(requireAuth, requireUserToBeAuthor));
 router.use('/domain', createDomainRouter(requireAuth, requireUserToBeAuthor));
-router.use('/opinion', opinionRouter);
+router.use('/opinion', createOpinionRouter(requireAuth, requireUserToBeAuthor));
 router.use('/register', registrationRouter);
 
 module.exports = router;

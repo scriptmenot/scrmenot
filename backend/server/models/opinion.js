@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'domainId',
           onDelete: 'cascade'
       });
+      Opinion.belongsTo(models.user, {
+          foreignKey: 'userId',
+          onDelete: 'cascade'
+      });
       Opinion.hasMany(models.comment, {
           as: 'comment',
           foreignKey: 'opinionId'
@@ -31,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       Opinion.hasMany(models.voteOpinion, {
           as: 'voteOpinion',
           foreignKey: 'opinionId'
-      })
+      });
   };
   return Opinion;
 };
