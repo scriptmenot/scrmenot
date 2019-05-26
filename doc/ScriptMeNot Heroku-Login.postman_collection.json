@@ -11,6 +11,9 @@
 				{
 					"name": "getAllDomains",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -36,6 +39,9 @@
 				{
 					"name": "getMostDangerous",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -43,10 +49,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain/mostdangerous",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain/mostdangerous",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -62,6 +68,9 @@
 				{
 					"name": "getDomainByUri",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -69,10 +78,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain/uri/agh",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain/uri/agh",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -89,6 +98,9 @@
 				{
 					"name": "getDomainById",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -96,10 +108,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain/2",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain/2",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -115,6 +127,9 @@
 				{
 					"name": "getTopFiveSafest",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -122,10 +137,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/domain/topdomains?count=2&safe=true&time=10",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain/topdomains?count=2&safe=true&time=10",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -155,16 +170,6 @@
 				{
 					"name": "addDomain",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJjcmF6eU9uZSIsImVtYWlsIjoiYW5vdGhlckB0ZXN0b3d5LmNvbSIsInBhc3N3b3JkIjoiJDJiJDA4JE1PalZaaDBTQmRad1dScUlvcEdBWi5FS016ODcycGIxRi9UZ0hUL0hCdTFSTnFDdkZZZ3ZTIiwiY3JlYXRlZEF0IjoiMjAxOS0wNS0yMVQxNjoyMjozMi43NDFaIiwidXBkYXRlZEF0IjoiMjAxOS0wNS0yMVQxNjoyMjozMi43NDFaIiwiaWF0IjoxNTU4NDU1NzU1LCJleHAiOjE1NTg0NTkzNTV9.lqWpJ-Ek6P0_5MVwGY_P1c8HjfCrzStjSnb8iVyib84",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -260,6 +265,28 @@
 					},
 					"response": []
 				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "126589fc-1625-46ab-945b-49af0135456f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "36e3e98f-aa91-440a-8c6a-6331cfeec804",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -268,6 +295,9 @@
 				{
 					"name": "getOpinionByDomainId",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -275,10 +305,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion/domain/1",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion/domain/1",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -306,13 +336,13 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"content\": \"This site is quite safe in my opinion\",\n\t\"domainId\": 2,\n\t\"title\": \"Is not a treat\",\n\t\"isSafe\": true\n}"
+							"raw": "{\n\t\"content\": \"This site is quite safe in my opinion\",\n\t\"domainId\": 1,\n\t\"title\": \"Is not a treat\",\n\t\"isSafe\": true\n}"
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -341,10 +371,10 @@
 							"raw": "{\n\t\"content\": \"Spying content, hijacking\",\n\t\"domainId\": 3,\n\t\"title\": \"Do not allow!\",\n\t\"isSafe\": false\n}"
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -373,10 +403,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion/1",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion/1",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -405,10 +435,10 @@
 							"raw": "{\n\t\"title\" : \"edited title\",\n\t\"content\" : \"edited content\"\n}"
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion/1",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion/1",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -438,10 +468,10 @@
 							"raw": "{\n\t\"isUpvote\": true,\n\t\"opinionId\": 1\n}"
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/opinion/vote",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion/vote",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -454,6 +484,28 @@
 					},
 					"response": []
 				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c45a58fd-3621-40e2-b438-0065a615a261",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "533e60a9-50c7-4ba3-a0b5-ffbf2e168281",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -462,6 +514,9 @@
 				{
 					"name": "getCommentByOpinionId",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -469,10 +524,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/comment/opinion/3",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/comment/opinion/3",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -500,13 +555,13 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"content\": \"That's bollocks!\",\n\t\"opinionId\": 3\n}"
+							"raw": "{\n\t\"content\": \"That's bollocks!\",\n\t\"opinionId\": 1\n}"
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/comment",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/comment",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -534,10 +589,10 @@
 							"raw": "{\n\t\"content\": \"edited content\"\n}"
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/comment/1",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/comment/1",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -567,10 +622,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://fathomless-brushlands-42192.herokuapp.com/api/comment/1",
+							"raw": "https://scrmenotlogin.herokuapp.com/api/comment/1",
 							"protocol": "https",
 							"host": [
-								"fathomless-brushlands-42192",
+								"scrmenotlogin",
 								"herokuapp",
 								"com"
 							],
@@ -582,6 +637,28 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "90192cb3-b0e2-4106-aa08-9c8cea88f6d7",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "88f7c2b4-9f51-4806-9044-af97942e0b95",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -652,11 +729,39 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d4a8480d-9611-40a4-b6be-cd4ca757f97f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9d3a8e1a-b1ee-4ad9-8555-6ebf8a116ff0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
 			"name": "apiPlaceholder",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -664,10 +769,10 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://fathomless-brushlands-42192.herokuapp.com/api",
+					"raw": "https://scrmenotlogin.herokuapp.com/api",
 					"protocol": "https",
 					"host": [
-						"fathomless-brushlands-42192",
+						"scrmenotlogin",
 						"herokuapp",
 						"com"
 					],
@@ -677,6 +782,38 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJjcmF6eU9uZSIsImVtYWlsIjoiYW5vdGhlckB0ZXN0b3d5LmNvbSIsInBhc3N3b3JkIjoiJDJiJDA4JGQuSHYuYk1YYVpTaGxCblZXeE1XSE90V3dGS1hGUjJkcXpTcVFRTFNyeEJBeUI3S2ZZdzYuIiwiY3JlYXRlZEF0IjoiMjAxOS0wNS0yNlQyMDoxMjowOC42MTFaIiwidXBkYXRlZEF0IjoiMjAxOS0wNS0yNlQyMDoxMjowOC42MTFaIiwiaWF0IjoxNTU4OTAxNTMxLCJleHAiOjE1NTg5MDUxMzF9.pXea73okhQbbXVxQMCWhghLa7IhYv1hQW21p2_51i",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ecb044ec-42df-4875-a629-9041051676e0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8b755341-4512-4f9a-bf9d-9af86c146465",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
