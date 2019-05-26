@@ -3,11 +3,12 @@ const router = express.Router();
 
 require('../config/passport/passportConfiguration');
 const passport = require('passport');
+
 const requireAuth = passport.authenticate('jwt', {session: false});
 
 
 const loginRouter = require('./login');
-const commentRouter = require('./comment');
+const createCommentRouter = require('./comment');
 const createDomainRouter = require('./domain');
 const opinionRouter = require('./opinion');
 const registrationRouter = require('./registration');
@@ -17,7 +18,7 @@ router.get('/', function(req, res) {
 });
 
 router.use('/login', loginRouter);
-router.use('/comment', commentRouter);
+router.use('/comment', createCommentRouter(requireAuth));
 router.use('/domain', createDomainRouter(requireAuth));
 router.use('/opinion', opinionRouter);
 router.use('/register', registrationRouter);
