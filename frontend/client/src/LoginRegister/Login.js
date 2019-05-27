@@ -8,7 +8,8 @@ class Login extends Component {
         super(props);
         this.Auth = new AuthService();
         this.state = {  
-            open: true
+            open: true,
+            validCredentials: true
         }
     }
 
@@ -27,7 +28,7 @@ class Login extends Component {
             this.props.closeLoginModal();
         })
         .catch(err =>{
-            alert(err);
+            this.setState({ validCredentials: false });
         })
     }
 
@@ -70,12 +71,12 @@ class Login extends Component {
             <div><Modal open={open} onClose={this.onCloseModal.bind(this)}  styles={modalStyles2}>
                 <form className="loginForm" onSubmit={this.handleLogin.bind(this)} >
                     <label className="loginLabel">
-                        <input className="validLabelInput" type="text" name="email" onChange={this.handleChange.bind(this)} required />
-                        <div className="labelText">E-mail</div>
+                        <input className={this.state.validCredentials ? "validLabelInput" : "invalidLabelInput"} type="text" name="email" onChange={this.handleChange.bind(this)} required />
+                        <div className="labelText"> {this.state.validCredentials ? "E-mail" : <font color="red">Invalid</font>}</div>
                     </label>
                     <label className="loginLabel">
-                        <input className="validLabelInput" type="password" name="password" onChange={this.handleChange.bind(this)} required />
-                        <div className="labelText">Password</div>
+                        <input className={this.state.validCredentials ? "validLabelInput" : "invalidLabelInput"} type="password" name="password" onChange={this.handleChange.bind(this)} required />
+                        <div className="labelText">{this.state.validCredentials ? "Password" : <font color="red">Credentials</font>}</div>
                     </label>
                     <input type="submit" className="loginButton" value="Submit"/>
                 </form>

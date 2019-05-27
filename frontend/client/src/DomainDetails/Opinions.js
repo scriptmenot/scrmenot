@@ -197,7 +197,7 @@ class Opinions extends React.Component{
                             {this.state.editOpinionMode && this.state.selectedOpinionId === opinion.id
                             ?
                             <form onSubmit={this.handleEditedOpinionAdd.bind(this, opinion.title, opinion.content)}>
-                              <textarea className="opinionTitleEditMode" defaultValue={opinion.title} onChange={this.handleEditedOpinionTitleSave.bind(this)}></textarea><br/>
+                              <input className="opinionTitleEditMode" defaultValue={opinion.title} onChange={this.handleEditedOpinionTitleSave.bind(this)}/><br/>
                               <textarea className="opinionContentEditMode" defaultValue={opinion.content} onChange={this.handleEditedOpinionContentSave.bind(this)}></textarea>
                               <input type="submit" className="opinionButton" value="Save"/>
                             </form>
