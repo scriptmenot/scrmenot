@@ -1,14 +1,15 @@
 import React from 'react';
 import './NavBar.scss';
 import { Redirect } from 'react-router-dom';
-import Modal from 'react-responsive-modal';
 import Login from '../../LoginRegister/Login.js';
 import Register from '../../LoginRegister/Register.js';
+import AuthService from '../../AuthService/AuthService.js';
 
 class NavBar extends React.Component {
 
     constructor(props){
         super(props);
+        this.Auth = new AuthService();
         this.state = {  
             openLoginModal: false,
             openRegisterModal: false
@@ -32,11 +33,19 @@ class NavBar extends React.Component {
         this.setState({openLoginModal: false})
     }
 
+    getUsername(username){
+        this.setState({username: username})
+    }
+
     openRegisterModal(){
         this.setState({openRegisterModal: true})
     }
     closeRegisterModal(){
         this.setState({openRegisterModal: false})
+    }
+
+    handleLogOut(){
+        this.Auth.logout();
     }
 
     render() {
@@ -49,8 +58,12 @@ class NavBar extends React.Component {
                     <li onClick={this.moveToDomainsList.bind(this)}><p>Domains</p></li>
                     <li onClick={this.openLoginModal.bind(this)}><p>Sign in</p></li>
                     <li onClick={this.openRegisterModal.bind(this)}><p>Register</p></li>
+                    <li onClick={this.handleLogOut.bind(this)}><p>Log out</p></li>
+                    {this.Auth.loggedIn() ? <img id="userImage" src={require('../../DomainDetails/user.png')} alt="user" /> : null }   
+                    <div id="usernameLogin">{localStorage.getItem('username')}</div> 
                 </ul>
-                {this.state.openLoginModal ? <Login closeLoginModal={this.closeLoginModal.bind(this)}/> : <span></span>}
+                 
+                {this.state.openLoginModal ? <Login closeLoginModal={this.closeLoginModal.bind(this)} /> : <span></span>}
                 {this.state.openRegisterModal ? <Register closeRegisterModal={this.closeRegisterModal.bind(this)}/> : <span></span>}
             </div>
             </div>

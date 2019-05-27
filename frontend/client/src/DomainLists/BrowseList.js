@@ -47,13 +47,13 @@ class BrowseList extends React.Component {
           <Loader/>
           :
           this.state.domains.map((domain, i) => 
-            <div class="SummaryList">
-              <div key={i} class="safety">
-                <div class="mini-counts">{domain.safety}</div>
+            <div className="SummaryList">
+              <div key={i} className="safety">
+                <div className="mini-counts">{domain.safety}</div>
                     <div>safety</div>
                 </div>
-          <div class="Time">Added {moment(domain.createdAt).fromNow()}</div>
-          <div class="Name">
+          <div className="Time">Added {moment(domain.createdAt).fromNow()}</div>
+          <div className="Name">
             <li key={i} onClick={this.details.bind(this, domain)}>{domain.uri}</li>  
           </div>   
           </div>   

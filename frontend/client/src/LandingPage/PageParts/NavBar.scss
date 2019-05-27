@@ -11,12 +11,20 @@ $hover-color: #fff89e;
 
 .menu {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   list-style: none;
   margin: 0 auto;
   height: 100vh;
   padding-top: 10px; 
   
+  #userImage{
+    width: 3%;
+    height: 6%;
+    margin-left: auto;
+  }
+  #usernameLogin{
+    margin: 0.6% 5% 0 1.5%;
+  }
 }
 
 .menu li {

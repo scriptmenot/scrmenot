@@ -3,6 +3,34 @@ $tundora: #4A4A4A;
 $dustyGray: #9B9B9B;
 $gallery: #F0F0F0;
 
+@mixin labelInput{
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid $tundora;
+  color: white;
+  font-size: 25px;
+  letter-spacing: 1px;
+  outline: 0;
+  padding: 5px 20px;
+  text-align: center;
+  transition: all 0.3s;
+  width: 200px;
+
+  
+  &:focus {
+  
+    max-width: 100%;
+    width: 350px;
+  
+    & + .labelText {
+
+      color: $gallery;
+    }
+  }
+}
+
+
+
 .loginForm{
 
     text-align: center;
@@ -23,31 +51,13 @@ $gallery: #F0F0F0;
      transition: all 0.3s;
     }
       
-    .labelInput{
-  
-      background-color: transparent;
-      border: 0;
-      border-bottom: 2px solid $tundora;
-      color: white;
-      font-size: 25px;
-      letter-spacing: 1px;
-      outline: 0;
-      padding: 5px 20px;
-      text-align: center;
-     transition: all 0.3s;
-      width: 200px;
-      
-      &:focus {
-  
-        max-width: 100%;
-        width: 400px;
-      
-        & + .labelText {
-  
-          color: $gallery;
-        }
-      }
-      
+    .validLabelInput{
+      @include labelInput;     
+    }
+
+    .invalidLabelInput{
+      @include labelInput;
+      border-bottom: 1px solid red;
     }
         
     .loginButton{

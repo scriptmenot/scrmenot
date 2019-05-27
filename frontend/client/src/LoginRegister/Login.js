@@ -23,7 +23,8 @@ class Login extends Component {
         e.preventDefault();
         this.Auth.login(this.state.email,this.state.password)
         .then(res =>{
-           this.props.closeLoginModal();
+            localStorage.setItem('username', res.user.username);
+            this.props.closeLoginModal();
         })
         .catch(err =>{
             alert(err);
@@ -67,16 +68,16 @@ class Login extends Component {
         }
         return (
             <div><Modal open={open} onClose={this.onCloseModal.bind(this)}  styles={modalStyles2}>
-                <form className="loginForm">
+                <form className="loginForm" onSubmit={this.handleLogin.bind(this)} >
                     <label className="loginLabel">
-                        <input className="labelInput" type="text" name="email" onChange={this.handleChange.bind(this)} required />
+                        <input className="validLabelInput" type="text" name="email" onChange={this.handleChange.bind(this)} required />
                         <div className="labelText">E-mail</div>
                     </label>
                     <label className="loginLabel">
-                        <input className="labelInput" type="password" name="password" onChange={this.handleChange.bind(this)} required />
+                        <input className="validLabelInput" type="password" name="password" onChange={this.handleChange.bind(this)} required />
                         <div className="labelText">Password</div>
                     </label>
-                    <button className="loginButton" onClick={this.handleLogin.bind(this)}>Submit</button>
+                    <input type="submit" className="loginButton" value="Submit"/>
                 </form>
             </Modal>
         </div>

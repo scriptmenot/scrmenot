@@ -8,7 +8,9 @@ class Register extends Component {
         super(props);
         this.Auth = new AuthService();
         this.state = {  
-            open: true
+            open: true,
+            isEmailValid: true,
+            isConfirmPasswordValid: true
         }
     }
 
@@ -19,14 +21,66 @@ class Register extends Component {
         }
     }
 
+
+    validateEmail() 
+    {
+        var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if(typeof this.state.email !== "undefined" && this.state.email !== ""){
+
+            if (!mailFormat.test(this.state.email))
+               this.setState({isEmailValid: false});
+            else
+                this.setState({isEmailValid: true});
+        }
+        else
+        this.setState({isEmailValid: true});
+    }
+
+    validateInputData(){
+
+        if(this.state.isEmailValid && this.state.isConfirmPasswordValid)
+            return true;
+        return false;
+        
+    }
+
+    validateConfirmPassword(){
+        if(this.state.password === this.state.confirmPassword)
+            this.setState({isConfirmPasswordValid: true});
+        else
+            this.setState({isConfirmPasswordValid: false});
+    }
+
     handleRegistration(e){
         e.preventDefault();
-        this.props.closeRegisterModal();
+        const data = {
+            "email": this.state.email,
+            "password": this.state.password,
+            "username": this.state.username
+        }
+        console.log(data);
+        if(this.validateInputData()){
+
+            fetch("https://fathomless-brushlands-42192.herokuapp.com/api/register", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                  body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    this.props.closeRegisterModal();  
+                })
+                .catch(error => console.log(error));
+        }
+  
     }
 
     onCloseModal () {
-    this.setState({ open: false });
-    this.props.closeRegisterModal();
+        this.setState({ open: false });
+        this.props.closeRegisterModal();
     };
 
     handleChange(e){
@@ -62,24 +116,24 @@ class Register extends Component {
         return (
             <React.Fragment>
                 <Modal open={open} onClose={this.onCloseModal.bind(this)}  styles={modalStyles2}>
-                <form className="loginForm">
+                <form className="loginForm" onSubmit={this.handleRegistration.bind(this)} >
                     <label className="loginLabel">
-                        <input className="labelInput" type="text" name="email" onChange={this.handleChange.bind(this)} required />
-                        <div className="labelText">E-mail</div>
+                        <input className={this.state.isEmailValid ? "validLabelInput" : "invalidLabelInput"} type="text" name="email" onChange={this.handleChange.bind(this)} onBlur={this.validateEmail.bind(this)} required />
+                        <div className="labelText">{this.state.isEmailValid ? "E-mail" : <font color="red">Invalid e-mail address!</font>}</div>
                     </label>
                     <label className="loginLabel">
-                        <input className="labelInput" type="text" name="Login" onChange={this.handleChange.bind(this)} required />
+                        <input className="validLabelInput" type="text" name="username" onChange={this.handleChange.bind(this)} required />
                         <div className="labelText">Login</div>
                     </label>
                     <label className="loginLabel">
-                        <input className="labelInput" type="password" name="password" onChange={this.handleChange.bind(this)} required />
+                        <input className="validLabelInput" type="password" name="password" onChange={this.handleChange.bind(this)} required />
                         <div className="labelText">Password</div>
                     </label>
                     <label className="loginLabel">
-                        <input className="labelInput" type="password" name="confirmPassword" onChange={this.handleChange.bind(this)} required />
-                        <div className="labelText">Confirm password</div>
+                        <input className={this.state.isConfirmPasswordValid ? "validLabelInput" : "invalidLabelInput"} type="password" name="confirmPassword" onChange={this.handleChange.bind(this)} onBlur={this.validateConfirmPassword.bind(this)} required />
+                        <div className="labelText">{this.state.isConfirmPasswordValid ? "Confirm password" : <font color="red">Passwords don't match!</font>}</div>
                     </label>
-                    <button className="loginButton" onClick={this.handleRegistration.bind(this)}>Submit</button>
+                    <input type="submit" value="Submit" className="loginButton" />
                 </form>
             </Modal>
         </React.Fragment>
