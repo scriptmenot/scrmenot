@@ -26,6 +26,10 @@ class NavBar extends React.Component {
         return <Redirect to='/browse' />
       }
 
+     moveToUserPanel(){
+        this.props.history.push('/panel');
+        return <Redirect to='/panel' />
+      }
     openLoginModal(){
         this.setState({openLoginModal: true})
     }
@@ -46,6 +50,7 @@ class NavBar extends React.Component {
 
     handleLogOut(){
         this.Auth.logout();
+        this.props.history.replace('/');
     }
 
     render() {
@@ -59,8 +64,11 @@ class NavBar extends React.Component {
                     <li onClick={this.openLoginModal.bind(this)}><p>Sign in</p></li>
                     <li onClick={this.openRegisterModal.bind(this)}><p>Register</p></li>
                     <li onClick={this.handleLogOut.bind(this)}><p>Log out</p></li>
-                    {this.Auth.loggedIn() ? <img id="userImage" src={require('../../DomainDetails/user.png')} alt="user" /> : null }   
-                    <div id="usernameLogin">{localStorage.getItem('username')}</div> 
+                    
+                    
+                    {this.Auth.loggedIn() ? <img id="userImage" src={require('../../DomainDetails/user.png')} alt="user" onClick={this.moveToUserPanel.bind(this)}/> : null }   
+                    <div id="usernameLogin" onClick={this.moveToUserPanel.bind(this)}>{localStorage.getItem('username')}</div> 
+      
                 </ul>
                  
                 {this.state.openLoginModal ? <Login closeLoginModal={this.closeLoginModal.bind(this)} /> : <span></span>}

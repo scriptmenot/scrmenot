@@ -25,6 +25,9 @@ class Login extends Component {
         this.Auth.login(this.state.email,this.state.password)
         .then(res =>{
             localStorage.setItem('username', res.user.username);
+            localStorage.setItem('date', res.user.createdAt);
+            localStorage.setItem('dateActive', res.user.updatedAt);
+           
             this.props.closeLoginModal();
         })
         .catch(err =>{
