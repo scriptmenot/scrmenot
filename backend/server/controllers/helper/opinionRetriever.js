@@ -15,6 +15,7 @@ module.exports = {
                     'createdAt',
                     'updatedAt',
                     'domainId',
+                    'userId',
                     [Fn('SUM', Col('voteOpinion.value')), 'rate']
                 ],
                 where: {'domainId' : domainId},

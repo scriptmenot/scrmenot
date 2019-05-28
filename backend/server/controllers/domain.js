@@ -8,7 +8,8 @@ const retrieveDomainQuery = {
     attributes: ['id',
         'isAccepted',
         'uri',
-        'createdAt'],
+        'createdAt',
+        'userId'],
     order: [['createdAt', 'DESC']]
 };
 
