@@ -3,7 +3,7 @@
   "version": "0.0.5",
   "main": "app.js",
   "engines": {
-    "node": "11.x"
+    "node": "^10.x"
   },
   "private": true,
   "scripts": {
