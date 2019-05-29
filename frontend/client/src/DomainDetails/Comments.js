@@ -26,12 +26,13 @@ class Comments extends React.Component{
             .then(resp => {
                 
             [...resp].forEach(el => {
-                //console.log(el.content);
                 commentsArray.push({"id": el.id, "content": el.content, "updatedAt": el.updatedAt});
             })
 
-            if(commentsArray.length !== 0)
-                this.state.commentsMap.set(this.props.opinionId, commentsArray);
+            if(commentsArray.length === 0)
+              commentsArray = [];
+
+            this.state.commentsMap.set(this.props.opinionId, commentsArray);
             commentsArray = [];
         });
 

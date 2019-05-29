@@ -119,7 +119,7 @@ class Register extends Component {
                 <form className="loginForm" onSubmit={this.handleRegistration.bind(this)} >
                     <label className="loginLabel">
                         <input className={this.state.isEmailValid ? "validLabelInput" : "invalidLabelInput"} type="text" name="email" onChange={this.handleChange.bind(this)} onBlur={this.validateEmail.bind(this)} required />
-                        <div className="labelText">{this.state.isEmailValid ? "E-mail" : <font color="red">Invalid e-mail address!</font>}</div>
+                        <div className="labelText">{this.state.isEmailValid ? "E-mail" : <font color="red">Invalid e-mail format!</font>}</div>
                     </label>
                     <label className="loginLabel">
                         <input className="validLabelInput" type="text" name="username" onChange={this.handleChange.bind(this)} required />

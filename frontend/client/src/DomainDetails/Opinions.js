@@ -210,7 +210,7 @@ class Opinions extends React.Component{
                           </div>
                           
                         </div>
-                        <Comments opinionId={opinion.id}  addCommentField={this.addCommentField.bind(this)} isCommentClicked={this.state.isCommentClicked} selectedOpinionId={this.state.selectedOpinionId}/>
+                          <Comments opinionId={opinion.id}  addCommentField={this.addCommentField.bind(this)} isCommentClicked={this.state.isCommentClicked} selectedOpinionId={this.state.selectedOpinionId}/>
                         </div>
                         
                 }) :
