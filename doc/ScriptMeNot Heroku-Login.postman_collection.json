@@ -838,6 +838,36 @@
 			]
 		},
 		{
+			"name": "user",
+			"item": [
+				{
+					"name": "getAllUsers",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_address}}/api/user",
+							"host": [
+								"{{api_address}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "apiPlaceholder",
 			"request": {
 				"auth": {
@@ -899,7 +929,7 @@
 	],
 	"variable": [
 		{
-			"id": "9a14ab63-ef80-444c-a5be-b253b8ccb431",
+			"id": "92b566fc-1f12-463b-b1e1-6f2ee5eab5ba",
 			"key": "api_address",
 			"value": "https://scrmenotlogin.herokuapp.com",
 			"type": "string"
