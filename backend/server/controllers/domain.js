@@ -2,7 +2,7 @@ const Models = require('../models/');
 const Domain = Models.domain;
 const Op = require('sequelize').Op; //TODO: might be useful to think of way to import it to every controller at once
 const SafetyCalculator = require('./helper/safetyCalculator');
-
+const VoteDomain = Models.VoteDomain;
 
 const retrieveDomainQuery = {
     attributes: ['id',
@@ -153,5 +153,25 @@ module.exports = {
                 }
             })  
             .catch(err => res.status(400).send(err))
+    },
+    vote(req, res) {
+        const isUpvote = req.body.isUpvote;
+        const domainId = req.body.domainId;
+        let upvoteMultiplier;
+
+        if(isUpvote) {
+            upvoteMultiplier = 1;
+        }
+        else {
+            upvoteMultiplier = -1;
+        }
+
+        return VoteDomain
+            .create({
+                //'value': upvoteMultiplier * 1, //TODO: in future it will be somehow multiplied by user reputation
+                //'domainId': domainId
+            })
+            .then(obj => res.status(201).send(obj))
+            .catch(err => res.status(400).send(err));
     }
 };

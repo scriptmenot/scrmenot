@@ -10,6 +10,8 @@ router.get('/uri/:uri', domainController.retrieveByUri);
 router.get('/:id/', domainController.retrieveById);
 
 router.post('/', domainController.create);
+router.post('/vote', domainController.vote);
+
 
 router.put('/:id/', domainController.update);
 
