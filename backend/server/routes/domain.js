@@ -9,6 +9,7 @@ function createDomainRouter(requireAuth, requireUserToBeAuthor) {
     router.get('/topdomains', domainController.retrieveTop);
     router.get('/uri/:uri', domainController.retrieveByUri);
     router.get('/:id/', domainController.retrieveById);
+    router.get('/user/:userId/', domainController.retrieveRelatedToUser);
 
     router.post('/', requireAuth, domainController.create);
 

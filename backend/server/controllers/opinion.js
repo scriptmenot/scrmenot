@@ -43,6 +43,13 @@ module.exports = {
             .catch(error => res.status(400).send(error));
 
     },
+    retrieveRelatedToUser(req, res) {
+        const userIdParams = req.params.userId;
+        return OpinionRetriever.retrieveByUserId(userIdParams)
+            .then(opinions => res.status(200).send(opinions))
+            .catch(error => res.status(400).send(error));
+
+    },
     update(req, res, next) { 
         Opinion.update(
             {

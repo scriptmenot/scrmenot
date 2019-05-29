@@ -6,6 +6,7 @@ const Opinion = require('../models/').opinion;
 
 function createOpinionRouter(requireAuth, requireUserToBeAuthor) {
     router.get('/domain/:domainId', opinionController.retrieveRelatedToDomain);
+    router.get('/user/:userId', opinionController.retrieveRelatedToUser);
 
     router.post('/', requireAuth, opinionController.create);
     router.post('/vote', requireAuth, opinionController.vote);

@@ -25,6 +25,18 @@ module.exports = {
             .then(comments => res.status(200).send(comments))
             .catch(error => res.status(400).send(error));
     },
+    retrieveRelatedToUser(req, res) {
+        const userIdParams = req.params.userId;
+
+        return Comment
+            .findAll({
+                where: {'userId' : userIdParams},
+                order: [['createdAt', 'DESC']]
+            })
+            .then(comments => res.status(200).send(comments))
+            .catch(error => res.status(400).send(error));
+
+    },
     update(req, res, next) {
 
         Comment.update(

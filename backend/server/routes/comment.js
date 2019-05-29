@@ -6,6 +6,7 @@ const Comment = require('../models/').comment;
 
 function createCommentRouter(requireAuth, requireUserToBeAuthor) {
     router.get('/opinion/:opinionId', commentController.retrieveRelatedToOpinion);
+    router.get('/user/:userId', commentController.retrieveRelatedToUser);
 
     router.post('/', requireAuth, commentController.create);
 

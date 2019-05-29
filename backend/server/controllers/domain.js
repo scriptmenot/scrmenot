@@ -93,6 +93,21 @@ module.exports = {
             .catch(error => res.status(400).send(error));
     },
 
+    retrieveRelatedToUser(req, res) {
+        const userIdParams = req.params.userId;
+
+        return Domain
+            .findAll({
+                ...retrieveDomainQuery,
+                where: {
+                    userId: userIdParams
+                }
+            })
+            .then(includeSafetyToQueryResults)
+            .then(domains => res.status(200).send(domains))
+            .catch(error => res.status(400).send(error));
+    },
+
     retrieveTop(req, res){
         function GetSortOrder(prop) {  
             return function(a, b) {  
