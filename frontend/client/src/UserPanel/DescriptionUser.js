@@ -1,12 +1,102 @@
 import React from 'react';
 import '../LandingPage/PageParts/DescriptionUser.scss';
+import Loader from '../DomainLists/Loader.js';
 import { withRouter } from "react-router";
+import Modal from 'react-responsive-modal';
 const moment = require('moment');
 
-class DescriptionUser extends React.Component {
 
-    
+class DescriptionUser extends React.Component {
+state = {
+      domains: [], 
+      opinions: [],
+      dom: [],
+      isLoading: false
+  };
+
+  details(domain){
+   
+    this.props.history.push({
+        pathname: '/details',
+        state: { dom: domain }
+      });
+
+  }
+ 
+
+    componentDidMount() {
+
+     this.setState({ isLoading: true });
+
+     fetch('https://fathomless-brushlands-42192.herokuapp.com/api/domain')
+    .then(resp => resp.json())
+      .then(resp => {
+        this.setState({
+          domains: Array.from(resp), 
+          isLoading: false
+        });
+      })
+        
+    fetch('https://fathomless-brushlands-42192.herokuapp.com/api/opinion/domain/2')
+    .then(resp => resp.json())
+      .then(resp => {
+        this.setState({
+          opinions: Array.from(resp), 
+          isLoading: false
+        });
+      })
+        
+  }
+
+domainByID(domainId){
+    fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/domain/${domainId}`)
+    .then(resp => resp.json())
+      .then(resp => {
+        this.props.history.push({
+        pathname: '/details',
+        state: { dom: resp }
+      });
+      })
+}
+
+
+  onOpenModal1(){
+    this.setState({ open1: true });
+  };
+
+  onCloseModal1(){
+    this.setState({ open1: false });
+  };
+
+ onOpenModal2(){
+    this.setState({ open2: true });
+  };
+
+  onCloseModal2(){
+    this.setState({ open2: false });
+  };
   render() {
+      let lgClose = () => this.setState({ lgShow: false });
+       const modalStyles2 = {
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.75)'
+          },
+          modal: {
+            border: 'none',
+            background: '#333333',
+            width: '200vw',
+            height: '45vh',
+            textAlign: 'left',
+            fontSize: '1.5vw',
+            position: 'absolute',
+            top: '10px',
+            left: '22%'
+          },
+          closeIcon: {
+              cursor:'pointer',
+              outline: 'none'
+            }
+        }
     return (
 <div className="DescriptionUser">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
@@ -49,14 +139,64 @@ class DescriptionUser extends React.Component {
             </div>            
             <div class="col-xs-12 divider text-center">
                 <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong> 0 </strong></h2>                    
+                    <h2><strong> {this.state.domains.length} </strong></h2>                    
                     <p><small>Added domains</small></p>
-                    <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Show domains </button>
+                    <button class="btn btn-success" onClick={this.onOpenModal1.bind(this)}><span class="fa fa-plus-circle" ></span> Show domains </button>
+<Modal open={this.state.open1} onClose={this.onCloseModal1.bind(this)}   styles={modalStyles2}>
+                          
+    <div className="browseList">
+        <ul className="domainsList">
+        {
+          this.state.isLoading 
+          ?
+          <Loader/>
+          :
+          this.state.domains.map((domain, i) => 
+            <div className="summaryList">
+              <div key={i} className="safety">
+                <div className="mini-counts">{domain.safety}</div>
+                    <div>safety</div>
                 </div>
+          <div className="Time">Added {moment(domain.createdAt).fromNow()}</div>
+          <div className="Name">
+            <li key={i} onClick={this.details.bind(this, domain)}>{domain.uri}</li>  
+          </div>   
+          </div>   
+      )}
+      </ul>
+      </div>
+</Modal>
+</div>
                 <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>0</strong></h2>                    
+                    <h2><strong>{this.state.opinions.length}</strong></h2>                    
                     <p><small>Added opinions</small></p>
-                    <button class="btn btn-info btn-block"><span class="fa fa-plus-circle"></span> Show opinions </button>
+                    <button class="btn btn-info btn-block" onClick={this.onOpenModal2.bind(this)}><span class="fa fa-plus-circle" ></span> Show opinions </button>
+    <Modal open={this.state.open2} onClose={this.onCloseModal2.bind(this)}   styles={modalStyles2}>
+                          
+    <div className="browseList">
+        <ul className="domainsList">
+        {
+          this.state.isLoading 
+          ?
+          <Loader/>
+          :
+          this.state.opinions.map((opinion, i) => 
+            <div className="summaryOpinionList">
+            <div key={i} className="safety">
+                <div className="mini-counts">{opinion.rate}</div>
+                    <div>Rate</div>
+                <div className="opinion"></div>
+                </div>
+
+          <div className="Time">Added {moment(opinion.createdAt).fromNow()}</div>
+          <div className="opinionContent">
+            <li key={i} onClick={this.domainByID.bind(this, opinion.domainId)}>{opinion.content}</li>  
+          </div>   
+          </div>   
+      )}
+      </ul>
+      </div>
+</Modal>
                 </div>
                 <div class="col-xs-12 col-sm-4 emphasis">
                     <h2><strong>0</strong></h2>                    

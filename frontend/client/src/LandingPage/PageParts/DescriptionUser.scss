@@ -2,6 +2,7 @@
 body
 {
     font-family: 'Lato', 'sans-serif';
+    overflow-x: hidden;
     
     
     .Browse {
@@ -105,3 +106,115 @@ span.tags
     margin-left: -10px;
     z-index: 10;
     }
+
+.browseList{
+    grid-template-columns: 2% 86% 2%;
+    grid-template-rows: fit-content(auto);
+    
+    resize: vertical;
+    display: grid;
+    grid-area: 3/1/4/2;
+    background-color: #F6FAF9;
+    box-sizing: border-box;
+    margin: 0;
+
+ 
+    .domainsList{
+     grid-area: 2/2/3/3;
+     text-align: left;
+     padding-left: 2px;
+     padding-right: 2px; 
+
+    
+    
+        .Name{
+        border-bottom: 1px solid #6a737c;
+        width: 600px;
+        }
+        
+        .Time{
+        line-height: 1;
+        width: auto;
+        height: auto;
+        margin-right: -70px;
+        min-width: auto;
+        text-align: right;
+        font-weight: bold;
+        
+        font-size: 12px;
+        margin-bottom: 0;
+        overflow: hidden;
+        color: #6a737c;
+        }
+        
+        .safety{
+        padding: 4px 0;
+        line-height: 1;
+        box-sizing: border-box;
+        width: auto;
+        height: auto;
+        border-radius: 3px;
+        min-width: auto;
+        text-align: left;
+        margin: 0 4px 0 0;
+        font-weight: bold;
+        display: inline-grid;
+        font-size: 12px;
+        margin-bottom: 0;
+        overflow: hidden;
+    
+        .mini-counts{
+        color: #6a737c;
+        display: inline;
+        
+    }
+    }
+        
+    }
+    
+ .opinionContent{
+        border-bottom: 1px solid #6a737c;
+        width: 600px;
+        font-size: 0.8em;
+        font-weight: 200;
+}
+ul {
+  font-family: monospace;
+  font-size: 1.4em;
+  list-style: none;
+  margin: 2em;
+  padding: 0;
+  
+ li {
+    clear:both;
+    margin: 0;
+    margin-bottom: 5px;
+    padding-left: 1.5em;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: 600;
+    background-color: transparent;    
+   
+  }
+  
+}
+
+li:hover {
+  animation: pulse 1s infinite;
+  transition: .3s;
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(.95);
+  }
+    100% {
+    transform: scale(1);
+  }
+}  
+    
+}
