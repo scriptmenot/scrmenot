@@ -1,27 +1,27 @@
 import React from 'react';
 import './DomainDetails.scss';
 import Modal from 'react-responsive-modal';
+import AuthService from '../AuthService/AuthService.js';
+import Login from '../LoginRegister/Login.js';
+import Register from '../LoginRegister/Register.js';
 
 class AddOpinion extends React.Component{
     constructor(props) {
       super(props);
+      this.Auth = new AuthService();
       this.state = {  
         domainId: this.props.location.state.dom.id,
         opinionTitle: "",
         opinionContent: "",
         isSafe: false,
         open: false,
-        disabled: false
+        open2: false,
+        disabled: false,
+        openLoginModal: false,
+        openRegisterModal: false
       };
     }
-    
-    onOpenModal() {
-      this.setState({ open: true });
-    };
   
-    onCloseModal () {
-      this.setState({ open: false });
-    };
   
     handleOpinionTitleChange(e){
       this.setState({opinionTitle: e.target.value});
@@ -48,7 +48,7 @@ class AddOpinion extends React.Component{
         "isSafe": this.state.isSafe
       };
     
-      fetch("https://fathomless-brushlands-42192.herokuapp.com/api/opinion", {
+      fetch("https://scrmenotlogin.herokuapp.com/api/opinion", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -79,6 +79,31 @@ class AddOpinion extends React.Component{
    handleCommentChange(e){
     this.setState({comment: e.target.value});
   };
+
+  openLoginModal(){
+    this.setState({openLoginModal: true,  open2: false})
+  }
+  closeLoginModal(){
+    this.setState({openLoginModal: false})
+  }
+  
+  openRegisterModal(){
+    this.setState({openRegisterModal: true,  open2: false})
+  }
+  closeRegisterModal(){
+    this.setState({openRegisterModal: false})
+  }
+  
+  onOpenModal(){
+    if(this.Auth.loggedIn())
+      this.setState({ open: true });
+    else
+      this.setState({ open2: true });
+  };
+  
+  onCloseModal(){
+    this.setState({ open: false, open2: false});
+  };
   
   
       render() {
@@ -93,6 +118,22 @@ class AddOpinion extends React.Component{
             background: '#297058',
             width: '700vw',
             height: '50vh',
+            textAlign: 'center',
+            fontSize: '1.5vw',
+            position: 'relative',
+          },
+          closeIcon: {cursor:'pointer'}
+        }
+
+        const modalStyles2 = {
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.75)'
+          },
+          modal: {
+            border: 'none',
+            background: '#297058',
+            width: '50vw',
+            height: '30vh',
             textAlign: 'center',
             fontSize: '1.5vw',
             position: 'relative',
@@ -174,6 +215,19 @@ class AddOpinion extends React.Component{
                 </form>
 
               </Modal>
+              <Modal open={this.state.open2} onClose={this.onCloseModal.bind(this)} styles={modalStyles2} little>
+                <div className="notLoggedIn">
+                  <p>You should be logged in to add a new domain!</p>
+                  <div className="loginRegisterButtons">
+                  <input type="button" className="loginRegisterButton" onClick={this.openLoginModal.bind(this)} value="Log in"/>
+                  <p>Don't have an account? Register right now!</p>
+                  <input type="button" className="loginRegisterButton" onClick={this.openRegisterModal.bind(this)} value="Register"/>
+                  </div>
+                </div>
+              </Modal>
+              {this.state.openLoginModal ? <Login closeLoginModal={this.closeLoginModal.bind(this)} /> : <span></span>}
+              {this.state.openRegisterModal ? <Register closeRegisterModal={this.closeRegisterModal.bind(this)}/> : <span></span>}
+              
             </div>
           )
       }

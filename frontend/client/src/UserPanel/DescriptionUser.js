@@ -1,7 +1,6 @@
 import React from 'react';
 import '../LandingPage/PageParts/DescriptionUser.scss';
 import Loader from '../DomainLists/Loader.js';
-import { withRouter } from "react-router";
 import Modal from 'react-responsive-modal';
 const moment = require('moment');
 
@@ -76,7 +75,6 @@ domainByID(domainId){
     this.setState({ open2: false });
   };
   render() {
-      let lgClose = () => this.setState({ lgShow: false });
        const modalStyles2 = {
           overlay: {
             backgroundColor: 'rgba(0, 0, 0, 0.75)'

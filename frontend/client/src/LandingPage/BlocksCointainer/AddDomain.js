@@ -1,14 +1,24 @@
 import React from 'react';
 import './BlocksContainer.scss';
 import Modal from 'react-responsive-modal';
+import AuthService from '../../AuthService/AuthService.js';
+import Login from '../../LoginRegister/Login.js';
+import Register from '../../LoginRegister/Register.js';
 
 class AddDomain extends React.Component {
-  state = {
-    open: false,
-    name: "",
-    comment: "",
-    disabled: false
-  };
+  constructor(props){
+    super(props);
+    this.Auth = new AuthService();
+    this.state = {
+      open: false,
+      open2: false,
+      name: "",
+      comment: "",
+      disabled: false,
+      openLoginModal: false,
+      openRegisterModal: false
+    };
+  }
 
   handleNameChange(e){
     this.setState({name: e.target.value});
@@ -18,41 +28,61 @@ class AddDomain extends React.Component {
   this.setState({comment: e.target.value});
 };
 
+openLoginModal(){
+  this.setState({openLoginModal: true,  open2: false})
+}
+closeLoginModal(){
+  this.setState({openLoginModal: false})
+}
+
+openRegisterModal(){
+  this.setState({openRegisterModal: true,  open2: false})
+}
+closeRegisterModal(){
+  this.setState({openRegisterModal: false})
+}
+
+onOpenModal(){
+  if(this.Auth.loggedIn())
+    this.setState({ open: true });
+  else
+    this.setState({ open2: true });
+};
+
+onCloseModal(){
+  this.setState({ open: false, open2: false});
+};
+
 handleAdding(e){
   e.preventDefault();
   this.setState({disabled: true});
 
   const data = {"uri": this.state.name};
 
-  fetch("https://fathomless-brushlands-42192.herokuapp.com/api/domain", {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-})
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-
-      this.setState({
-        name: "",
-        comment: "",
-        disabled: false
-      });
-      
-      this.onCloseModal();
-    })
-    .catch(error => console.log(error));
+    fetch("https://scrmenotlogin.herokuapp.com/api/domain", {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.Auth.getToken()
+      },
+      body: JSON.stringify(data)
+  })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+  
+        this.setState({
+          name: "",
+          comment: "",
+          disabled: false
+        });
+        
+        this.onCloseModal();
+      })
+      .catch(error => console.log(error));
 }
 
-  onOpenModal(){
-    this.setState({ open: true });
-  };
 
-  onCloseModal(){
-    this.setState({ open: false });
-  };
     render() {
       const { open } = this.state;
       const modalStyles = {
@@ -64,6 +94,22 @@ handleAdding(e){
           background: '#297058',
           width: '70vw',
           height: '50vh',
+          textAlign: 'center',
+          fontSize: '1.5vw',
+          position: 'relative',
+        },
+        closeIcon: {cursor:'pointer'}
+      }
+
+      const modalStyles2 = {
+        overlay: {
+          backgroundColor: 'rgba(0, 0, 0, 0.75)'
+        },
+        modal: {
+          border: 'none',
+          background: '#297058',
+          width: '50vw',
+          height: '30vh',
           textAlign: 'center',
           fontSize: '1.5vw',
           position: 'relative',
@@ -133,6 +179,18 @@ handleAdding(e){
             </form>
 
           </Modal>
+          <Modal open={this.state.open2} onClose={this.onCloseModal.bind(this)} styles={modalStyles2} little>
+            <div className="notLoggedIn">
+              <p>You should be logged in to add a new domain!</p>
+              <div className="loginRegisterButtons">
+              <input type="button" className="loginRegisterButton" onClick={this.openLoginModal.bind(this)} value="Log in"/>
+              <p>Don't have an account? Register right now!</p>
+              <input type="button" className="loginRegisterButton" onClick={this.openRegisterModal.bind(this)} value="Register"/>
+              </div>
+            </div>
+          </Modal>
+          {this.state.openLoginModal ? <Login closeLoginModal={this.closeLoginModal.bind(this)} /> : <span></span>}
+          {this.state.openRegisterModal ? <Register closeRegisterModal={this.closeRegisterModal.bind(this)}/> : <span></span>}
           
         </React.Fragment>
       )

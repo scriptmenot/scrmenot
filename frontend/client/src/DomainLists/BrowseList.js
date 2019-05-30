@@ -25,7 +25,7 @@ class BrowseList extends React.Component {
 
      this.setState({ isLoading: true });
 
-     fetch('https://fathomless-brushlands-42192.herokuapp.com/api/domain')
+     fetch('https://scrmenotlogin.herokuapp.com/api/domain')
     .then(resp => resp.json())
       .then(resp => {
         this.setState({

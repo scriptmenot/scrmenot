@@ -25,7 +25,7 @@ class Opinions extends React.Component{
 
     loadOpinions(){
         
-      fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/opinion/domain/${this.props.location.state.dom.id}`)
+      fetch(`https://scrmenotlogin.herokuapp.com/api/opinion/domain/${this.props.location.state.dom.id}`)
         .then(resp => resp.json())
           .then(resp => {
             if (this._isMounted) {
