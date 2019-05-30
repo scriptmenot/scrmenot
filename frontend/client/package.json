@@ -12,6 +12,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "react-slick": "^0.24.0",
+    "react-visibility-sensor": "^5.0.2",
     "slick-carousel": "^1.8.1"
   },
   "scripts": {
