@@ -280,7 +280,7 @@ class Opinions extends React.Component{
                           <Comments opinionId={opinion.id}  addCommentField={this.addCommentField.bind(this)} isCommentClicked={this.state.isCommentClicked} selectedOpinionId={this.state.selectedOpinionId}/>
                           <Modal open={this.state.open} onClose={this.onCloseModal.bind(this)} styles={modalStyles} little>
                             <div className="notLoggedIn">
-                              <p>You should be logged in to add a new domain!</p>
+                              <p>You should be logged in to add a new comment!</p>
                               <div className="loginRegisterButtons">
                               <input type="button" className="loginRegisterButton" onClick={this.openLoginModal.bind(this)} value="Log in"/>
                               <p>Don't have an account? Register right now!</p>
