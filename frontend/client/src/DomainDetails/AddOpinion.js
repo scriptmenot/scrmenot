@@ -134,7 +134,7 @@ class AddOpinion extends React.Component{
             border: 'none',
             background: '#297058',
             width: '50vw',
-            height: '30vh',
+            height: '40vh',
             textAlign: 'center',
             fontSize: '1.5vw',
             position: 'relative',
