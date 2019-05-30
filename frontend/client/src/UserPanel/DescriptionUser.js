@@ -129,8 +129,7 @@ domainByID(domainId){
                 <div class="col-xs-12 col-sm-8">
                     <h2>{localStorage.getItem('username')}</h2>
                     <p><strong>Joined: </strong> {moment(localStorage.getItem('date')).fromNow()} </p>
-                    <p><strong>Latest activity: </strong> {moment(localStorage.getItem('dateActive')).fromNow()} </p>
-                </div>             
+                      </div>             
                 <div class="col-xs-12 col-sm-4 text-center">
                     <figure>
                         <figcaption class="ratings">
@@ -201,7 +200,7 @@ domainByID(domainId){
           this.state.opinions.map((opinion, i) => 
             <div className="summaryOpinionList">
             <div key={i} className="safety">
-                <div className="mini-counts">{opinion.rate}</div>
+                <div className="mini-counts">{opinion.rate ? opinion.rate : 0}</div>
                     <div>Rate</div>
                 <div className="opinion"></div>
                 </div>
@@ -217,7 +216,7 @@ domainByID(domainId){
 </Modal>
                 </div>
                 <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>0</strong></h2>                    
+                    <h2><strong>{this.state.comments.length}</strong></h2>                    
                     <p><small>Added comments</small></p>
                     <div class="btn-group dropup btn-block">
                       <button type="button" class="btn btn-info btn-block" onClick={this.onOpenModal3.bind(this)}><span class="fa fa-plus-circle"></span> Show comments </button>
