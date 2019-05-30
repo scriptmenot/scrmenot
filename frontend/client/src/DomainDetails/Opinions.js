@@ -186,7 +186,8 @@ class Opinions extends React.Component{
         fetch(`https://scrmenotlogin.herokuapp.com/api/opinion/${this.state.selectedOpinionId}`, {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this.Auth.getToken()
           },
           body: JSON.stringify(data)
         })

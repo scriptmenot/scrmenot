@@ -218,7 +218,7 @@ class AddOpinion extends React.Component{
               </Modal>
               <Modal open={this.state.open2} onClose={this.onCloseModal.bind(this)} styles={modalStyles2} little>
                 <div className="notLoggedIn">
-                  <p>You should be logged in to add a new domain!</p>
+                  <p>You should be logged in to add a new opinion!</p>
                   <div className="loginRegisterButtons">
                   <input type="button" className="loginRegisterButton" onClick={this.openLoginModal.bind(this)} value="Log in"/>
                   <p>Don't have an account? Register right now!</p>
