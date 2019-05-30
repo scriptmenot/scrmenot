@@ -28,6 +28,7 @@ class Login extends Component {
             localStorage.setItem('username', res.user.username);
             localStorage.setItem('date', res.user.createdAt);
             localStorage.setItem('dateActive', res.user.updatedAt);
+            localStorage.setItem('id', res.user.id);
            
             this.props.closeLoginModal();
         })

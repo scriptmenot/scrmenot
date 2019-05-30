@@ -70,7 +70,9 @@ body {
                         flex-direction: column;
                         right: 0;
                         left: 90%;
-                        top: 10%;
+                        top: 25%;
+                        font-size: 1.1em;
+                        font-weight: 600;
                         .voteSign{
                             width: 30%;
                             padding-left: 30%;
@@ -263,5 +265,21 @@ body {
 
             
     }
+}
+    
+    
+
+.s-btn__unset, .s-btn__unset:hover, .s-btn__unset:active {
+    padding: 0;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: inherit;
+    background: none;
+    box-shadow: none;
+    cursor: default;
+}
+.fc-black-500 {
+    color: #6a737c !important;
 }
 }

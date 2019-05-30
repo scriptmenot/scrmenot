@@ -9,6 +9,7 @@ class DescriptionUser extends React.Component {
 state = {
       domains: [], 
       opinions: [],
+      comments: [],
       dom: [],
       isLoading: false
   };
@@ -27,7 +28,7 @@ state = {
 
      this.setState({ isLoading: true });
 
-     fetch('https://fathomless-brushlands-42192.herokuapp.com/api/domain')
+     fetch(`https://scrmenotlogin.herokuapp.com/api/domain/user/${localStorage.getItem('id')}`)
     .then(resp => resp.json())
       .then(resp => {
         this.setState({
@@ -36,7 +37,7 @@ state = {
         });
       })
         
-    fetch('https://fathomless-brushlands-42192.herokuapp.com/api/opinion/domain/2')
+    fetch(`https://scrmenotlogin.herokuapp.com/api/opinion/user/${localStorage.getItem('id')}`)
     .then(resp => resp.json())
       .then(resp => {
         this.setState({
@@ -44,11 +45,20 @@ state = {
           isLoading: false
         });
       })
+          
+    fetch(`https://scrmenotlogin.herokuapp.com/api/comment/user/${localStorage.getItem('id')}`)
+    .then(resp => resp.json())
+      .then(resp => {
+        this.setState({
+          comments: Array.from(resp), 
+          isLoading: false
+        });
+      })
         
   }
 
 domainByID(domainId){
-    fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/domain/${domainId}`)
+    fetch(`https://scrmenotlogin.herokuapp.com/api/domain/${domainId}`)
     .then(resp => resp.json())
       .then(resp => {
         this.props.history.push({
@@ -73,6 +83,14 @@ domainByID(domainId){
 
   onCloseModal2(){
     this.setState({ open2: false });
+  };
+
+ onOpenModal3(){
+    this.setState({ open3: true });
+  };
+
+  onCloseModal3(){
+    this.setState({ open3: false });
   };
   render() {
        const modalStyles2 = {
@@ -109,8 +127,7 @@ domainByID(domainId){
                 <div class="col-xs-12 col-sm-8">
                     <h2>{localStorage.getItem('username')}</h2>
                     <p><strong>Joined: </strong> {moment(localStorage.getItem('date')).fromNow()} </p>
-                    <p><strong>Latest activity: </strong> {moment(localStorage.getItem('dateActive')).fromNow()} </p>
-                </div>             
+                      </div>             
                 <div class="col-xs-12 col-sm-4 text-center">
                     <figure>
                         <figcaption class="ratings">
@@ -181,7 +198,7 @@ domainByID(domainId){
           this.state.opinions.map((opinion, i) => 
             <div className="summaryOpinionList">
             <div key={i} className="safety">
-                <div className="mini-counts">{opinion.rate}</div>
+                <div className="mini-counts">{opinion.rate ? opinion.rate : 0}</div>
                     <div>Rate</div>
                 <div className="opinion"></div>
                 </div>
@@ -197,10 +214,32 @@ domainByID(domainId){
 </Modal>
                 </div>
                 <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>0</strong></h2>                    
+                    <h2><strong>{this.state.comments.length}</strong></h2>                    
                     <p><small>Added comments</small></p>
                     <div class="btn-group dropup btn-block">
-                      <button type="button" class="btn btn-info btn-block"><span class="fa fa-plus-circle"></span> Show comments </button>
+                      <button type="button" class="btn btn-info btn-block" onClick={this.onOpenModal3.bind(this)}><span class="fa fa-plus-circle"></span> Show comments </button>
+                          
+                          <Modal open={this.state.open3} onClose={this.onCloseModal3.bind(this)}   styles={modalStyles2}>
+                          
+    <div className="browseList">
+        <ul className="domainsList">
+        {
+          this.state.isLoading 
+          ?
+          <Loader/>
+          :
+          this.state.comments.map((comment, i) => 
+            <div className="summaryOpinionList">
+
+          <div className="Time">Added {moment(comment.createdAt).fromNow()}</div>
+          <div className="opinionContent">
+            <li key={i}>{comment.content}</li>  
+          </div>   
+          </div>   
+      )}
+      </ul>
+      </div>
+</Modal>
                     
                       <ul class="dropdown-menu text-left" role="menu">
                         <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>

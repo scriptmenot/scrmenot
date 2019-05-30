@@ -52,6 +52,7 @@ export default class AuthService {
         localStorage.removeItem('username');
         localStorage.removeItem('date');
         localStorage.removeItem('dateActive');
+        localStorage.removeItem('id');
     }
 
     getProfile() {
