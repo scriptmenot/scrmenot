@@ -1,5 +1,50 @@
 .GradeDomain{
-    grid-area: 2/1/6/2;
+    grid-area: 5/1/6/2;
     background-color: #F6FAF9;
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 15px;
+    min-width: 0;
+    min-height: 0;
+
+    .CountUpOne {
+        grid-area: 1/2/2/3;
+
+        .GrowOne {
+            text-align: center;
+            font-size: 35px;
+
+            .title1 {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .CountUpTwo {
+        grid-area: 1/3/2/4;
+
+        .GrowTwo {
+            text-align: center;
+            font-size: 35px;
+
+            .title1 {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .CountUpThree {
+        grid-area: 1/4/2/5;
+
+        .GrowThree {
+            text-align: center;
+            font-size: 35px;
+
+            .title1 {
+                font-size: 16px;
+            }
+        }
+    }
 }
 
