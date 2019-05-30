@@ -10,7 +10,7 @@ class SearchDomain extends React.Component {
   
     getSearchedNames() {
   
-      fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/domain/uri/${this.state.name}`)
+      fetch(`https://scrmenotlogin.herokuapp.com/api/domain/uri/${this.state.name}`)
       .then(resp => resp.json())
         .then(resp => {
           this.setState({domains: Array.from(resp)});

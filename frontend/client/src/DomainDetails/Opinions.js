@@ -87,7 +87,7 @@ class Opinions extends React.Component{
     
     sendVote(voteData){
   
-      fetch("https://fathomless-brushlands-42192.herokuapp.com/api/opinion/vote", {
+      fetch("https://scrmenotlogin.herokuapp.com/api/opinion/vote", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -182,7 +182,7 @@ class Opinions extends React.Component{
         "content": this.state.editedOpinionContent !== oldOpinionContent && this.state.editedOpinionContent !== "" ? this.state.editedOpinionContent : oldOpinionContent
       };
 
-        fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/opinion/${this.state.selectedOpinionId}`, {
+        fetch(`https://scrmenotlogin.herokuapp.com/api/opinion/${this.state.selectedOpinionId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'

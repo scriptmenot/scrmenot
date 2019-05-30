@@ -18,14 +18,14 @@ class TopDomains extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://fathomless-brushlands-42192.herokuapp.com/api/domain/topdomains?count=5&safe=true&time=10')
+    fetch('https://scrmenotlogin.herokuapp.com/api/domain/topdomains?count=5&safe=true&time=10')
    .then(resp => resp.json())
      .then(resp => {
        this.setState({domainsSafe: Array.from(resp)});
      })
 
      
-     fetch('https://fathomless-brushlands-42192.herokuapp.com/api/domain/topdomains?count=5&safe=false&time=10')
+     fetch('https://scrmenotlogin.herokuapp.com/api/domain/topdomains?count=5&safe=false&time=10')
    .then(resp => resp.json())
      .then(resp => {
        this.setState({domainsDangerous: Array.from(resp)});
