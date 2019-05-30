@@ -61,7 +61,7 @@ class Register extends Component {
         console.log(data);
         if(this.validateInputData()){
 
-            fetch("https://fathomless-brushlands-42192.herokuapp.com/api/register", {
+            fetch("https://scrmenotlogin.herokuapp.com/api/register", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

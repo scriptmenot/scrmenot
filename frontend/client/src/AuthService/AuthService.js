@@ -8,7 +8,7 @@ export default class AuthService {
     }
 
     login(email, password) {
-        return this.fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/login`, {
+        return this.fetch(`https://scrmenotlogin.herokuapp.com/api/login`, {
             method: 'POST',
             body: JSON.stringify({
                 email,

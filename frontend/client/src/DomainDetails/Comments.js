@@ -7,6 +7,7 @@ class Comments extends React.Component{
     constructor(props) {
         super(props);
         this.Auth = new AuthService();
+        this.isCommentAuthor = this.isCommentAuthor.bind(this);
         this.state = {  
           commentsMap: new Map(),
           commentContent: "",
@@ -23,12 +24,12 @@ class Comments extends React.Component{
         
         let commentsArray = [];
 
-        fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/comment/opinion/${this.props.opinionId}`)
+        fetch(`https://scrmenotlogin.herokuapp.com/api/comment/opinion/${this.props.opinionId}`)
         .then(resp => resp.json())
             .then(resp => {
                 
             [...resp].forEach(el => {
-                commentsArray.push({"id": el.id, "content": el.content, "updatedAt": el.updatedAt});
+                commentsArray.push({"id": el.id, "content": el.content, "updatedAt": el.updatedAt, "userId": el.userId});
             })
 
             if(commentsArray.length === 0)
@@ -78,10 +79,11 @@ class Comments extends React.Component{
           "opinionId": opinionId,
         };
         
-        fetch("https://fathomless-brushlands-42192.herokuapp.com/api/comment", {
+        fetch("https://scrmenotlogin.herokuapp.com/api/comment", {
           method: 'POST',
           headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + this.Auth.getToken()
           },
           body: JSON.stringify(data)
         })
@@ -99,10 +101,11 @@ class Comments extends React.Component{
       }
 
       deleteComment(commentId){
-        return fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/comment/${commentId}`, {
+        return fetch(`https://scrmenotlogin.herokuapp.com/api/comment/${commentId}`, {
             method: 'DELETE',
             headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this.Auth.getToken()
             },
         })
         .then((res) => res.text())
@@ -140,10 +143,11 @@ class Comments extends React.Component{
           "content": this.state.editedCommentContent !== oldCommentContent && this.state.editedCommentContent !== "" && typeof this.state.editedCommentContent !== "undefined" ? this.state.editedCommentContent : oldCommentContent
         };
         if(data.content !== oldCommentContent){
-          fetch(`https://fathomless-brushlands-42192.herokuapp.com/api/comment/${this.state.selectedCommentId}`, {
+          fetch(`https://scrmenotlogin.herokuapp.com/api/comment/${this.state.selectedCommentId}`, {
             method: 'PUT',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + this.Auth.getToken()
             },
             body: JSON.stringify(data)
           })
@@ -158,6 +162,10 @@ class Comments extends React.Component{
         
       }
 
+      isCommentAuthor(commentAuthorId){
+        return commentAuthorId == localStorage.getItem('userId');
+      }
+
     render() {
         return (
                 <React.Fragment>
@@ -167,7 +175,7 @@ class Comments extends React.Component{
                             ? 
                             this.state.commentsMap.get(this.props.opinionId).slice(0).reverse().map((comment, index) => 
                             <div className="oneComment" key={index}>
-                            {this.Auth.loggedIn()
+                            {this.Auth.loggedIn() && this.isCommentAuthor(comment.userId)
                                 ?
                                 <div className="editingOperationsComments">
                                     <img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAzMDAgMzAwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAzMDAgMzAwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4Ij4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNMTQ5Ljk5NiwwQzY3LjE1NywwLDAuMDAxLDY3LjE2MSwwLjAwMSwxNDkuOTk3UzY3LjE1NywzMDAsMTQ5Ljk5NiwzMDBzMTUwLjAwMy02Ny4xNjMsMTUwLjAwMy0xNTAuMDAzICAgIFMyMzIuODM1LDAsMTQ5Ljk5NiwweiBNMjIxLjMwMiwxMDcuOTQ1bC0xNC4yNDcsMTQuMjQ3bC0yOS4wMDEtMjguOTk5bC0xMS4wMDIsMTEuMDAybDI5LjAwMSwyOS4wMDFsLTcxLjEzMiw3MS4xMjYgICAgbC0yOC45OTktMjguOTk2TDg0LjkyLDE4Ni4zMjhsMjguOTk5LDI4Ljk5OWwtNy4wODgsNy4wODhsLTAuMTM1LTAuMTM1Yy0wLjc4NiwxLjI5NC0yLjA2NCwyLjIzOC0zLjU4MiwyLjU3NWwtMjcuMDQzLDYuMDMgICAgYy0wLjQwNSwwLjA5MS0wLjgxNywwLjEzNS0xLjIyNCwwLjEzNWMtMS40NzYsMC0yLjkxLTAuNTgxLTMuOTczLTEuNjQ3Yy0xLjM2NC0xLjM1OS0xLjkzMi0zLjMyMi0xLjUxMi01LjIwM2w2LjAyNy0yNy4wMzUgICAgYzAuMzQtMS41MTcsMS4yODYtMi43OTgsMi41NzgtMy41ODJsLTAuMTM3LTAuMTM3TDE5Mi4zLDc4Ljk0MWMxLjY3OC0xLjY3NSw0LjQwNC0xLjY3NSw2LjA4MiwwLjAwNWwyMi45MjIsMjIuOTE3ICAgIEMyMjIuOTgyLDEwMy41NDEsMjIyLjk4MiwxMDYuMjY3LDIyMS4zMDIsMTA3Ljk0NXoiIGZpbGw9IiMwMDAwMDAiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" alt="edit" id="edit" onClick={this.editComment.bind(this, comment.id)}/>
