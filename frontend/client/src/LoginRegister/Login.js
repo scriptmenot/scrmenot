@@ -24,6 +24,7 @@ class Login extends Component {
         e.preventDefault();
         this.Auth.login(this.state.email,this.state.password)
         .then(res =>{
+            localStorage.setItem('userId', res.user.id);
             localStorage.setItem('username', res.user.username);
             localStorage.setItem('date', res.user.createdAt);
             localStorage.setItem('dateActive', res.user.updatedAt);
