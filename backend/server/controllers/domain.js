@@ -145,6 +145,10 @@ module.exports = {
             })
             .catch(error => res.status(400).send(error));
     },
+    count(req, res) {
+        return Domain.count()
+            .then(domainCount => res.status(200).send({count: domainCount}));
+    },
     update(req, res, next) { 
         Domain.update(
             {

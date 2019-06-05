@@ -5,6 +5,8 @@ const domainController = require('../controllers').Domain;
 const Domain = require('../models/').domain;
 
 function createDomainRouter(requireAuth, requireUserToBeAuthor) {
+    router.get('/count', domainController.count);
+
     router.get('/', domainController.retrieve);
     router.get('/topdomains', domainController.retrieveTop);
     router.get('/uri/:uri', domainController.retrieveByUri);
