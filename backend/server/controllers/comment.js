@@ -37,6 +37,10 @@ module.exports = {
             .catch(error => res.status(400).send(error));
 
     },
+    count(req, res) {
+        return Comment.count()
+            .then(commentCount => res.status(200).send({count: commentCount}));
+    },
     update(req, res, next) {
 
         Comment.update(
