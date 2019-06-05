@@ -3,11 +3,13 @@ const Comment = require('../models/').comment;
 module.exports = {
     create(req, res) {
         const payload = req.body;
+        const userId = req.user.id;
 
         return Comment
             .create({
                 'content': payload.content,
-                'opinionId': payload.opinionId
+                'opinionId': payload.opinionId,
+                'userId': userId
             })
             .then(obj => res.status(201).send(obj))
             .catch(err => res.status(400).send(err));
@@ -23,7 +25,20 @@ module.exports = {
             .then(comments => res.status(200).send(comments))
             .catch(error => res.status(400).send(error));
     },
-    update(req, res, next) { 
+    retrieveRelatedToUser(req, res) {
+        const userIdParams = req.params.userId;
+
+        return Comment
+            .findAll({
+                where: {'userId' : userIdParams},
+                order: [['createdAt', 'DESC']]
+            })
+            .then(comments => res.status(200).send(comments))
+            .catch(error => res.status(400).send(error));
+
+    },
+    update(req, res, next) {
+
         Comment.update(
             {
                 "content": req.body.content
@@ -36,6 +51,7 @@ module.exports = {
             .catch(err => res.status(400).send(err))
     },
     destroy(req, res, next) {
+
         Comment.
             destroy({where: {id: req.params.id}})
             .then(function(rowsDeleted) {
@@ -48,6 +64,4 @@ module.exports = {
             })  
             .catch(err => res.status(400).send(err))
     }
-
-    
 };

@@ -28,7 +28,17 @@ module.exports = {
           },
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE'
-      }
+      },
+        userId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'users',
+                key: 'id'
+            },
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
+        }
     });
   },
   down: (queryInterface, Sequelize) => {

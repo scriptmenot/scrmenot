@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       Domain.hasMany(models.opinion, {
           as: 'opinion',
           foreignKey: 'domainId'
+      });
+      Domain.belongsTo(models.user, {
+          foreignKey: 'userId',
+          onDelete: 'cascade'
       })
   };
   return Domain;

@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define('user', {
+  const User = sequelize.define('user', {
       id: {
           type: DataTypes.INTEGER,
           primaryKey: true,
@@ -19,7 +19,23 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false
       },
   }, {});
-  user.associate = function(models) {
+  User.associate = function(models) {
+      User.hasMany(models.comment, {
+          as: 'comment',
+          foreignKey: 'userId'
+      });
+      User.hasMany(models.domain, {
+          as: 'domain',
+          foreignKey: 'userId'
+      });
+      User.hasMany(models.opinion, {
+          as: 'opinion',
+          foreignKey: 'userId'
+      });
+      User.hasMany(models.voteOpinion, {
+          as: 'voteOpinion',
+          foreignKey: 'userId'
+      })
   };
-  return user;
+  return User;
 };

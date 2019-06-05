@@ -1,11 +1,17 @@
 const express = require('express');
 const router = express.Router();
+
 require('../config/passport/passportConfiguration');
+const passport = require('passport');
+
+const requireAuth = passport.authenticate('jwt', {session: false});
+const requireUserToBeAuthor = require('../controllers/authorization/authorization');
+
+const createCommentRouter = require('./comment');
+const createDomainRouter = require('./domain');
+const createOpinionRouter = require('./opinion');
 
 const loginRouter = require('./login');
-const commentRouter = require('./comment');
-const domainRouter = require('./domain');
-const opinionRouter = require('./opinion');
 const registrationRouter = require('./registration');
 
 router.get('/', function(req, res) {
@@ -13,9 +19,9 @@ router.get('/', function(req, res) {
 });
 
 router.use('/login', loginRouter);
-router.use('/comment', commentRouter);
-router.use('/domain', domainRouter);
-router.use('/opinion', opinionRouter);
+router.use('/comment', createCommentRouter(requireAuth, requireUserToBeAuthor));
+router.use('/domain', createDomainRouter(requireAuth, requireUserToBeAuthor));
+router.use('/opinion', createOpinionRouter(requireAuth, requireUserToBeAuthor));
 router.use('/register', registrationRouter);
 
 module.exports = router;

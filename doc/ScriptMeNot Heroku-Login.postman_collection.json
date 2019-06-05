@@ -1,0 +1,908 @@
+{
+	"info": {
+		"_postman_id": "7999e4dc-b697-4c57-bc5f-c18d7b32f4f8",
+		"name": "ScriptMeNot Heroku Login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "domain",
+			"item": [
+				{
+					"name": "getAllDomains",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMostDangerous",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain/mostdangerous",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"mostdangerous"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDomainByUri",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain/uri/agh",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"uri",
+								"agh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDomainById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain/2",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDomainByUserId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_address}}/api/domain/user/1",
+							"host": [
+								"{{api_address}}"
+							],
+							"path": [
+								"api",
+								"domain",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTopFiveSafest",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain/topdomains?count=2&safe=true&time=10",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"topdomains"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "2"
+								},
+								{
+									"key": "safe",
+									"value": "true"
+								},
+								{
+									"key": "time",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addDomain",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"uri\": \"agh.edu.pl\"\n}"
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editDomainById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"uri\": \"updateUri\",\n\t\"isAccepted\": false\n}"
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain/1",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDomainById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/domain/1",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"domain",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "126589fc-1625-46ab-945b-49af0135456f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "36e3e98f-aa91-440a-8c6a-6331cfeec804",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "opinion",
+			"item": [
+				{
+					"name": "getOpinionByDomainId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion/domain/1",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"opinion",
+								"domain",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOpinionByUserId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_address}}/api/opinion/user/2",
+							"host": [
+								"{{api_address}}"
+							],
+							"path": [
+								"api",
+								"opinion",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOpinionSafeSite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"This site is quite safe in my opinion\",\n\t\"domainId\": 1,\n\t\"title\": \"Is not a treat\",\n\t\"isSafe\": true\n}"
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"opinion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOpinionDangerousSite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"Spying content, hijacking\",\n\t\"domainId\": 3,\n\t\"title\": \"Do not allow!\",\n\t\"isSafe\": false\n}"
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"opinion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOpinionById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion/1",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"opinion",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editOpinionById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\" : \"edited title\",\n\t\"content\" : \"edited content\"\n}"
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion/1",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"opinion",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vote",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isUpvote\": true,\n\t\"opinionId\": 1\n}"
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/opinion/vote",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"opinion",
+								"vote"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c45a58fd-3621-40e2-b438-0065a615a261",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "533e60a9-50c7-4ba3-a0b5-ffbf2e168281",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "getCommentByOpinionId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/comment/opinion/3",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"comment",
+								"opinion",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCommentByUserId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_address}}/api/comment/user/2",
+							"host": [
+								"{{api_address}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addComment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"That's bollocks!\",\n\t\"opinionId\": 1\n}"
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/comment",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editCommentById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"edited content\"\n}"
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/comment/1",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"comment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCommentById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/comment/1",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"comment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "90192cb3-b0e2-4106-aa08-9c8cea88f6d7",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "88f7c2b4-9f51-4806-9044-af97942e0b95",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "loginRegister",
+			"item": [
+				{
+					"name": "registerUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"another@testowy.com\",\n\t\"password\": \"asdf\",\n\t\"username\": \"crazyOne\"\n}"
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/register",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"another@testowy.com\",\n\t\"password\": \"asdf\"\n}"
+						},
+						"url": {
+							"raw": "https://scrmenotlogin.herokuapp.com/api/login",
+							"protocol": "https",
+							"host": [
+								"scrmenotlogin",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d4a8480d-9611-40a4-b6be-cd4ca757f97f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9d3a8e1a-b1ee-4ad9-8555-6ebf8a116ff0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "apiPlaceholder",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://scrmenotlogin.herokuapp.com/api",
+					"protocol": "https",
+					"host": [
+						"scrmenotlogin",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJjcmF6eU9uZSIsImVtYWlsIjoiYW5vdGhlckB0ZXN0b3d5LmNvbSIsInBhc3N3b3JkIjoiJDJiJDA4JGQuSHYuYk1YYVpTaGxCblZXeE1XSE90V3dGS1hGUjJkcXpTcVFRTFNyeEJBeUI3S2ZZdzYuIiwiY3JlYXRlZEF0IjoiMjAxOS0wNS0yNlQyMDoxMjowOC42MTFaIiwidXBkYXRlZEF0IjoiMjAxOS0wNS0yNlQyMDoxMjowOC42MTFaIiwiaWF0IjoxNTU5MTUyNTY0LCJleHAiOjE1NTkxNTYxNjR9.-qX_p3Q-AIrpmS1DoVujyOFHEJNuFhTALnAmAjpQd94",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ecb044ec-42df-4875-a629-9041051676e0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8b755341-4512-4f9a-bf9d-9af86c146465",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "9a14ab63-ef80-444c-a5be-b253b8ccb431",
+			"key": "api_address",
+			"value": "https://scrmenotlogin.herokuapp.com",
+			"type": "string"
+		}
+	]
+}
