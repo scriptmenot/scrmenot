@@ -9,6 +9,32 @@
 			"name": "domain",
 			"item": [
 				{
+					"name": "count",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_address}}/api/domain/count",
+							"host": [
+								"{{api_address}}"
+							],
+							"path": [
+								"api",
+								"domain",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getAllDomains",
 					"request": {
 						"auth": {
@@ -566,6 +592,29 @@
 			"name": "comment",
 			"item": [
 				{
+					"name": "count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_address}}/api/comment/count",
+							"host": [
+								"{{api_address}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getCommentByOpinionId",
 					"request": {
 						"auth": {
@@ -841,6 +890,29 @@
 			"name": "user",
 			"item": [
 				{
+					"name": "count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_address}}/api/user/count",
+							"host": [
+								"{{api_address}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getAllUsers",
 					"request": {
 						"auth": {
@@ -929,7 +1001,7 @@
 	],
 	"variable": [
 		{
-			"id": "92b566fc-1f12-463b-b1e1-6f2ee5eab5ba",
+			"id": "8ce2207b-34c5-4bbd-9a87-46803fefb767",
 			"key": "api_address",
 			"value": "https://scrmenotlogin.herokuapp.com",
 			"type": "string"
