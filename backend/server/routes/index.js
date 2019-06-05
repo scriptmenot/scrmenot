@@ -13,6 +13,7 @@ const createOpinionRouter = require('./opinion');
 
 const loginRouter = require('./login');
 const registrationRouter = require('./registration');
+const userRouter = require('./user');
 
 router.get('/', function(req, res) {
         res.status(200).send({message: 'Api placeholder'});
@@ -23,5 +24,6 @@ router.use('/comment', createCommentRouter(requireAuth, requireUserToBeAuthor));
 router.use('/domain', createDomainRouter(requireAuth, requireUserToBeAuthor));
 router.use('/opinion', createOpinionRouter(requireAuth, requireUserToBeAuthor));
 router.use('/register', registrationRouter);
+router.use('/user', userRouter);
 
 module.exports = router;

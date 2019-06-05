@@ -1,6 +1,6 @@
 const OpinionRetriever = require('./opinionRetriever');
 
-
+//TODO: use opinionValueCalculator instead
 const calculateOpinionReliability = function(rate) {
     return 1 + rate * 0.01;
 };
