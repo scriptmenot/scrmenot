@@ -1,5 +1,4 @@
 const OpinionRetriever = require('./opinionRetriever');
-const OpinionValueCalculator = require('./opinionValueCalculator');
 const CommentCalculator = require('./commentCalculator');
 
 module.exports = {
@@ -11,8 +10,7 @@ module.exports = {
 
                 opinions.forEach(opinion => {
                     const rate = OpinionRetriever.retrieveOpinionRate(opinion);
-                    const opinionReliability = OpinionValueCalculator.calculateOpinionReliability(rate);
-                    reputationSum += opinionReliability;
+                    reputationSum += rate;
                 });
 
                 return reputationSum;

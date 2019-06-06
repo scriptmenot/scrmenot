@@ -9,16 +9,18 @@ module.exports = {
         const payload = req.body;
         const userId = req.user.id;
 
-        return Opinion
+        return ReputationCalculator.calculateReputationByUserId(userId)
+            .then(reputation => Opinion
             .create({
                     'content': payload.content,
                     'domainId': payload.domainId,
                     'title': payload.title,
                     'isSafe': payload.isSafe,
+                    'value': reputation,
                     'userId': userId
                 })
             .then(obj => res.status(201).send(obj))
-            .catch(err => res.status(400).send(err));
+            .catch(err => res.status(400).send(err)));
     },
     delete(req, res) {
         const opinionId = req.params.id;
@@ -79,13 +81,24 @@ module.exports = {
             upvoteMultiplier = -1;
         }
 
-        return ReputationCalculator.calculateReputationByUserId(userId)
-            .then(reputation => VoteOpinion.create({
+        function createVote(reputation) {
+            if(reputation < 0 ) {
+                reputation = 0.1;
+            }
+            else if(reputation < 1) {
+                reputation = 1
+            }
+
+            VoteOpinion.create({
                 'value': upvoteMultiplier * reputation,
                 'opinionId': opinionId,
                 'userId': userId
             })
-            .then(obj => res.status(201).send(obj))
-            .catch(err => res.status(400).send(err)));
+                .then(obj => res.status(201).send(obj))
+                .catch(err => res.status(400).send(err))
+        }
+
+        return ReputationCalculator.calculateReputationByUserId(userId)
+            .then(createVote);
     }
 };
