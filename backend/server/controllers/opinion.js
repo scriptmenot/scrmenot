@@ -2,6 +2,7 @@ const Models = require('../models/');
 const Opinion = Models.opinion;
 const VoteOpinion = Models.voteOpinion;
 const OpinionRetriever = require('./helper/opinionRetriever');
+const ReputationCalculator = require('./helper/reputationCalculator');
 
 module.exports = {
     create(req, res) {
@@ -78,13 +79,13 @@ module.exports = {
             upvoteMultiplier = -1;
         }
 
-        return VoteOpinion
-            .create({
-                'value': upvoteMultiplier * 1, //TODO: in future it will be somehow multiplied by user reputation
+        return ReputationCalculator.calculateReputationByUserId(userId)
+            .then(reputation => VoteOpinion.create({
+                'value': upvoteMultiplier * reputation,
                 'opinionId': opinionId,
                 'userId': userId
             })
             .then(obj => res.status(201).send(obj))
-            .catch(err => res.status(400).send(err));
+            .catch(err => res.status(400).send(err)));
     }
 };
