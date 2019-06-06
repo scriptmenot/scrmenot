@@ -12,16 +12,19 @@ module.exports = {
                 opinions.forEach(opinion => {
                     const opinionPayload = opinion.get({plain: true});
                     const isSafe = opinionPayload.isSafe;
-                    let rate = parseInt(opinionPayload.rate);
+                    const opinionAuthorReliability = opinionPayload.value;
+                    const opinionAuthorValue = OpinionValueCalculator.calculateOpinionAuthorValue(opinionAuthorReliability, isSafe);
 
-                    if(isNaN(rate)) {
-                        rate = 0;
+                    let usersRate = parseInt(opinionPayload.rate);
+                    if(isNaN(usersRate)) {
+                        usersRate = 0;
                     }
 
-                    const opinionReliability = OpinionValueCalculator.calculateOpinionReliability(rate);
-                    const opinionValue = OpinionValueCalculator.calculateOpinionValue(opinionReliability, isSafe);
+                    //TODO: if userRates is way below zero author value shouldnt be included(consider case when theres no votes)
+                    const userRatesOpinionValue = OpinionValueCalculator.calculateOpinionValue(usersRate, isSafe);
+                    const finalOpinionValue = userRatesOpinionValue + opinionAuthorValue;
 
-                    safetySum += opinionValue;
+                    safetySum += finalOpinionValue;
                 });
 
                 let siteSafety = Math.round(safetySum * 1000) / 1000;

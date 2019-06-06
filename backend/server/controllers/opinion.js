@@ -2,22 +2,25 @@ const Models = require('../models/');
 const Opinion = Models.opinion;
 const VoteOpinion = Models.voteOpinion;
 const OpinionRetriever = require('./helper/opinionRetriever');
+const ReputationCalculator = require('./helper/reputationCalculator');
 
 module.exports = {
     create(req, res) {
         const payload = req.body;
         const userId = req.user.id;
 
-        return Opinion
+        return ReputationCalculator.calculateReputationByUserId(userId)
+            .then(reputation => Opinion
             .create({
                     'content': payload.content,
                     'domainId': payload.domainId,
                     'title': payload.title,
                     'isSafe': payload.isSafe,
+                    'value': reputation,
                     'userId': userId
                 })
             .then(obj => res.status(201).send(obj))
-            .catch(err => res.status(400).send(err));
+            .catch(err => res.status(400).send(err)));
     },
     delete(req, res) {
         const opinionId = req.params.id;
@@ -78,13 +81,24 @@ module.exports = {
             upvoteMultiplier = -1;
         }
 
-        return VoteOpinion
-            .create({
-                'value': upvoteMultiplier * 1, //TODO: in future it will be somehow multiplied by user reputation
+        function createVote(reputation) {
+            if(reputation < 0 ) {
+                reputation = 0.1;
+            }
+            else if(reputation < 1) {
+                reputation = 1
+            }
+
+            VoteOpinion.create({
+                'value': upvoteMultiplier * reputation,
                 'opinionId': opinionId,
                 'userId': userId
             })
-            .then(obj => res.status(201).send(obj))
-            .catch(err => res.status(400).send(err));
+                .then(obj => res.status(201).send(obj))
+                .catch(err => res.status(400).send(err))
+        }
+
+        return ReputationCalculator.calculateReputationByUserId(userId)
+            .then(createVote);
     }
 };

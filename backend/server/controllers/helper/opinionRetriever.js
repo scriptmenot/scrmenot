@@ -9,6 +9,7 @@ const retrieveSettings = {
         'title',
         'content',
         'isSafe',
+        'value',
         'createdAt',
         'updatedAt',
         'domainId',
