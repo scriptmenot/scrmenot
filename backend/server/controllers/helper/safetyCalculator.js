@@ -1,20 +1,5 @@
 const OpinionRetriever = require('./opinionRetriever');
-
-//TODO: use opinionValueCalculator instead
-const calculateOpinionReliability = function(rate) {
-    return 1 + rate * 0.01;
-};
-
-const calculateOpinionValue = function(reliability, isSafe) {
-    const safetyMultiplier = isSafe ? 1 : -1;
-
-    if(reliability < 0) {
-        return 0;
-    }
-    else {
-        return reliability * safetyMultiplier;
-    }
-};
+const OpinionValueCalculator = require('./opinionValueCalculator');
 
 module.exports = {
     appendSafetyToDomain(domain) {
@@ -33,8 +18,8 @@ module.exports = {
                         rate = 0;
                     }
 
-                    const opinionReliability = calculateOpinionReliability(rate);
-                    const opinionValue = calculateOpinionValue(opinionReliability, isSafe);
+                    const opinionReliability = OpinionValueCalculator.calculateOpinionReliability(rate);
+                    const opinionValue = OpinionValueCalculator.calculateOpinionValue(opinionReliability, isSafe);
 
                     safetySum += opinionValue;
                 });

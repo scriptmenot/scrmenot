@@ -1,6 +1,6 @@
 module.exports = {
     calculateOpinionReliability(rate) {
-        return 1 + rate * 0.01;
+        return 1 + rate;
     },
     calculateOpinionValue(reliability, isSafe) {
         const safetyMultiplier = isSafe ? 1 : -1;
