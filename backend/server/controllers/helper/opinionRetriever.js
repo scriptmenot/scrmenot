@@ -41,6 +41,16 @@ module.exports = {
                 ...retrieveSettings,
                 where: {'userId' : userId}
             });
+    },
+    retrieveOpinionRate(opinion) {
+        const opinionPayload = opinion.get({plain: true});
+        let rate = parseInt(opinionPayload.rate);
+
+        if(isNaN(rate)) {
+            rate = 0;
+        }
+
+        return rate;
     }
 
 };
