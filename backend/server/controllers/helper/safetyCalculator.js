@@ -20,6 +20,7 @@ module.exports = {
                         usersRate = 0;
                     }
 
+                    //TODO: if userRates is way below zero author value shouldnt be included(consider case when theres no votes)
                     const userRatesOpinionValue = OpinionValueCalculator.calculateOpinionValue(usersRate, isSafe);
                     const finalOpinionValue = userRatesOpinionValue + opinionAuthorValue;
 
