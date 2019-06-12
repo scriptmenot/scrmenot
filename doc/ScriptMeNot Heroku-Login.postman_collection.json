@@ -947,7 +947,15 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": ""
+							"raw": "{{api_address}}/api/user/1",
+							"host": [
+								"{{api_address}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"1"
+							]
 						}
 					},
 					"response": []
