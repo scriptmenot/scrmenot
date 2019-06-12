@@ -52,10 +52,14 @@ const localLogin =  new LocalStrategy(localStrategyOptions, function(req, email,
 
 const localRegister = new LocalStrategy(localStrategyOptions, function(req, email, password, done) {
     const generateHash = password => bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+    const username = req.body.username;
 
     User.findOne({where: {email: email}})
         .then(function(user) {
             if(user) {
+                if(user.username === username) {
+                    return done(null, false, 'That username is already taken');
+                }
                 return done(null, false, 'That email is already taken');
             }
             else {
