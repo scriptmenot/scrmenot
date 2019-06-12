@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7999e4dc-b697-4c57-bc5f-c18d7b32f4f8",
+		"_postman_id": "fb2be803-267b-4b42-8baf-96d9ad657b17",
 		"name": "ScriptMeNot Heroku Login",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -932,6 +932,29 @@
 							"path": [
 								"api",
 								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_address}}/api/user/1",
+							"host": [
+								"{{api_address}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"1"
 							]
 						}
 					},

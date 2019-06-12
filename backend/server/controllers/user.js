@@ -1,6 +1,7 @@
 const User = require('../models/').user;
 const ReputationCalculator = require('./helper/reputationCalculator');
 
+
 function appendReputationToUser(user) {
     const userId = user.id;
 
@@ -8,15 +9,19 @@ function appendReputationToUser(user) {
         .then(reputationSum => {return {...user.get({plain: true}), reputation: reputationSum}});
 }
 
-function includeReputationToQueryResults(domains) {
+function includeReputationToQueryResults(users) {
     let promisesToAwait = [];
 
-    domains.forEach(user => {
+    users.forEach(user => {
         let promise = appendReputationToUser(user);
         promisesToAwait.push(promise);
     });
 
     return Promise.all(promisesToAwait);
+}
+function includeReputationToQueryResults(user){
+     let promise = appendReputationToUser(user);
+     return Promise.resolve(promise);
 }
 
 module.exports = {
@@ -35,5 +40,17 @@ module.exports = {
     count(req, res) {
         return User.count()
             .then(userCount => res.status(200).send({count: userCount}));
+    },
+    
+    retrieveById(req, res) {
+        const userId = req.params.id;
+        return User.findByPk(userId, {
+                attributes: ['id',
+                    'username',
+                    'createdAt'],
+            })
+            .then(includeReputationToQueryResults)
+            .then(user => res.status(200).send(user))
+            .catch(error => res.status(400).send(error));
     }
 };
