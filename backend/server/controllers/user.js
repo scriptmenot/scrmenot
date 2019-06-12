@@ -19,7 +19,7 @@ function includeReputationToQueryResults(users) {
 
     return Promise.all(promisesToAwait);
 }
-function includeReputationToQueryResults(user){
+function includeReputationToQueryResult(user){
      let promise = appendReputationToUser(user);
      return Promise.resolve(promise);
 }
@@ -49,7 +49,7 @@ module.exports = {
                     'username',
                     'createdAt'],
             })
-            .then(includeReputationToQueryResults)
+            .then(includeReputationToQueryResult)
             .then(user => res.status(200).send(user))
             .catch(error => res.status(400).send(error));
     }
