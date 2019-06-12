@@ -6,6 +6,11 @@ module.exports = (sequelize, DataTypes) => {
           primaryKey: true,
           autoIncrement: true
       },
+      isUpvote: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false
+      }
+      ,
       value: {
         type: DataTypes.DOUBLE,
         allowNull: false

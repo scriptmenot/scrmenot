@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      isUpvote: {
+          allowNull: false,
+          type: Sequelize.BOOLEAN
+      },
       value: {
         allowNull: false,
         type: Sequelize.DOUBLE
