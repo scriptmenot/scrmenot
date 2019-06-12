@@ -43,6 +43,12 @@ sequelize help:model:create
 utworzenie nowego modelu:
 sequelize model:create --name ModelName --attributes attribute1:data_type, attribute2:data_type
 
+cofnięcie modelu:
+sequelize db:migrate:undo 20190529210828-create-vote-opinion.js
+
+drop bazy:
+sequelize db:drop
+
 opis typów danych w Sequelize:
 http://docs.sequelizejs.com/variable/index.html#static-variable-DataTypes
 
