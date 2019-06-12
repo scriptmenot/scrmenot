@@ -19,6 +19,10 @@ function includeReputationToQueryResults(users) {
 
     return Promise.all(promisesToAwait);
 }
+function includeReputationToQueryResults(user){
+     let promise = appendReputationToUser(user);
+     return Promise.resolve(promise);
+}
 
 module.exports = {
     retrieve(req, res) {
@@ -39,16 +43,13 @@ module.exports = {
     },
     
     retrieveById(req, res) {
-        return User.findAll({
+        const userId = req.params.id;
+        return User.findByPk(userId, {
                 attributes: ['id',
                     'username',
-                    'email',
                     'createdAt'],
-                where :  {id : req.params.id},
-                order: [['createdAt', 'DESC']]
             })
             .then(includeReputationToQueryResults)
-            .then(user => user[0])
             .then(user => res.status(200).send(user))
             .catch(error => res.status(400).send(error));
     }
